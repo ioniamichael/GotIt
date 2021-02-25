@@ -4,10 +4,12 @@ import {StyleSheet, View, Text} from 'react-native';
 export const SignUpScreen = ({}) => {
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>SignUpScreen</Text>
         </View>
     );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {flex: 1},
+});
