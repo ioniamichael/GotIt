@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchUserDetails} from '../store/actions/UserAction';
 
-export const SplashScreen = ({}) => {
+export const SplashScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
     const userDetails = useSelector(state => state.UserReducer.userDetails);
@@ -11,8 +11,6 @@ export const SplashScreen = ({}) => {
     useEffect(() => {
         dispatch(fetchUserDetails());
     }, []);
-
-    console.log(userDetails);
 
     return (
         <View>
