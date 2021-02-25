@@ -2,13 +2,18 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
 } from 'react-native';
+
+import {Provider} from 'react-redux';
+import store from './src/store';
+import {SplashScreen} from './src/screens/SplashScreen';
 
 const App = () => {
   return (
       <View style={styles.container}>
-        <Text>Misha</Text>
+        <Provider store={store}>
+          <SplashScreen/>
+        </Provider>
       </View>
   );
 };
