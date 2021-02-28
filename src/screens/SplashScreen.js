@@ -15,7 +15,7 @@ export const SplashScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Text>{userDetails.userName}</Text>
+            <Text>{userDetails.userEmail}</Text>
         </View>
     );
 };

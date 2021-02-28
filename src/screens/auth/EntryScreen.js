@@ -36,18 +36,18 @@ export const EntryScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '100%',
+        width: layout.width,
+        height: layout.height,
         backgroundColor: colors.WHITE,
         paddingHorizontal: 30,
         flex: 1,
     },
     topContainer: {
-        height: '50%',
-        justifyContent: 'center',
+        height: layout.height *0.5,
+        paddingTop: 80
     },
     bottomContainer: {
-        height: '50%',
+        height: layout.height *0.5,
         alignItems: 'center',
     },
     entryTitle: {
