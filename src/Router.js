@@ -1,4 +1,4 @@
-import {createStackNavigator} from 'react-navigation-stack';
+import {createStackNavigator, TransitionPresets} from 'react-navigation-stack';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {LoginScreen} from './screens/auth/LoginScreen';
 import {SignUpScreen} from './screens/auth/SignUpScreen';
@@ -11,9 +11,10 @@ const AuthStack = createStackNavigator({
     LoginScreen,
     SignUpScreen,
 }, {
-    defaultNavigationOptions:{
-        headerShown: false
-    }
+    defaultNavigationOptions: {
+        headerShown: false,
+        ...TransitionPresets.SlideFromRightIOS,
+    },
 });
 
 const HomeStack = createStackNavigator({
