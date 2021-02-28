@@ -5,12 +5,11 @@ import colors from '../../constants/colors';
 import string from '../../constants/strings';
 import layout from '../../constants/layout';
 import assets from '../../constants/assets';
-import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export const EntryScreen = ({navigation}) => {
 
-     const navigateToLoginScreen = () => navigation.navigate('LoginScreen');
-     const navigateToSignUpScreen = () => navigation.navigate('SignUpScreen');
+    const navigateToLoginScreen = () => navigation.navigate('LoginScreen');
+    const navigateToSignUpScreen = () => navigation.navigate('SignUpScreen');
 
     return (
         <ImageBackground style={styles.container} source={assets.BACKGROUND_IMAGE}>
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     },
     topContainer: {
         height: '50%',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     bottomContainer: {
         height: '50%',

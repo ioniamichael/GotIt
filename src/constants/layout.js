@@ -11,5 +11,6 @@ export default {
         color: colors.TEXT_COLOR,
         fontFamily: 'Montserrat-Bold'
     },
-    activeOpacity: 0.8
+    activeOpacity: 0.8,
+    defaultIconSize: 24
 };
