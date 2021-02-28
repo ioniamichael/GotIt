@@ -4,16 +4,27 @@ import {Dimensions} from 'react-native';
 export default {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-    regularTextBase:{
+    regularTextBase: {
         fontSize: 16,
         color: colors.TEXT_COLOR,
-        fontFamily: 'Montserrat-Regular'
+        fontFamily: 'Montserrat-Regular',
     },
-    boldTextBase:{
+    boldTextBase: {
         fontSize: 18,
         color: colors.TEXT_COLOR,
-        fontFamily: 'Montserrat-Bold'
+        fontFamily: 'Montserrat-Bold',
+    },
+    shadowBase: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     activeOpacity: 0.8,
-    defaultIconSize: 24
+    defaultIconSize: 24,
 };

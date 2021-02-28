@@ -19,7 +19,9 @@ export const CustomInputText = ({value, onChangeText, placeholder, icon, isSecur
                 keyboardType={keyboardType}
                 onChangeText={onChangeText}
                 placeholder={placeholder}
+                placeholderStyle={styles.textInputStyle}
                 value={value}
+
             />
         </View>
     );
@@ -37,5 +39,5 @@ const styles = StyleSheet.create({
         width: layout.width * 0.75,
     },
     iconStyle: {alignSelf: 'center', marginEnd: 15},
-    textInputStyle: {flex: 1},
+    textInputStyle: {flex: 1, ...layout.regularTextBase, fontSize: 14},
 });

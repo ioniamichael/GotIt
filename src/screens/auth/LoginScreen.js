@@ -53,7 +53,7 @@ export const LoginScreen = ({}) => {
                 <View>
                     <TouchableOpacity style={styles.forgotPasswordContainer} activeOpacity={layout.activeOpacity}
                                       onPress={onForgotPasswordPressed}>
-                        <Text>{string.FORGOT_PASSWORD}</Text>
+                        <Text style={{...layout.regularTextBase}}>{string.FORGOT_PASSWORD}</Text>
                     </TouchableOpacity>
                     <YellowButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
                 </View>

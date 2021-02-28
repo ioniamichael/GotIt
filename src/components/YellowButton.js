@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         width: layout.width * 0.75,
         justifyContent: 'center',
         alignItems: 'center',
+        ...layout.shadowBase,
         borderRadius: 50,
     },
     textInButton: {
