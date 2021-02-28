@@ -5,6 +5,7 @@ import colors from '../../constants/colors';
 import string from '../../constants/strings';
 import layout from '../../constants/layout';
 import assets from '../../constants/assets';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export const EntryScreen = ({navigation}) => {
 
@@ -17,6 +18,7 @@ export const EntryScreen = ({navigation}) => {
             <View style={styles.topContainer}>
                 <Text style={styles.entryTitle}>{string.ENTRY_TITLE}</Text>
                 <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
+
             </View>
 
             <View style={styles.bottomContainer}>
