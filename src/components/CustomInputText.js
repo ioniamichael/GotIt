@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Platform} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import layout from '../constants/layout';
 import color from '../constants/colors';
@@ -30,6 +30,7 @@ export const CustomInputText = ({value, onChangeText, placeholder, icon, isSecur
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
+        paddingVertical: Platform.OS === 'ios' ? 10 : 0,
         borderRadius: 100,
         borderColor: color.YELLOW,
         paddingHorizontal: 20,
@@ -38,6 +39,13 @@ const styles = StyleSheet.create({
         backgroundColor: color.WHITE,
         width: layout.width * 0.75,
     },
-    iconStyle: {alignSelf: 'center', marginEnd: 15},
-    textInputStyle: {flex: 1, ...layout.regularTextBase, fontSize: 14},
+    iconStyle: {
+        alignSelf: 'center',
+        marginEnd: 15,
+    },
+    textInputStyle: {
+        flex: 1,
+        ...layout.regularTextBase,
+        fontSize: 14,
+    },
 });
