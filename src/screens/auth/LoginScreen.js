@@ -4,37 +4,38 @@ import {CustomInputText} from '../../components/CustomInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {isValidEmail, isValidPassword} from '../../utils';
 import {login} from '../../services/userService';
-import {PopUp} from '../../components/PopUp';
+import {setShowLoader} from '../../store/actions/GeneralActions';
+import {Loader} from '../../components/Loader';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
+import appConfig from '../../constants/appConfig';
+import {useDispatch, useSelector} from 'react-redux';
 
 const INITIAL_STATE = {
     userEmail: '',
     userPassword: '',
-    showPopUp: false,
-    errorMessage: '',
 };
 
 export const LoginScreen = ({navigation}) => {
 
+    const dispatch = useDispatch();
     const [state, setState] = useState(INITIAL_STATE);
+    const isLoaderShown = useSelector(state => state.GeneralReducer.toShowLoader);
 
     const onLoginButtonPressed = async () => {
         if (isValidEmail(state.userEmail) && isValidPassword(state.userPassword)) {
+            dispatch(setShowLoader(true));
             try {
                 await login(state.userEmail, state.userPassword);
+                dispatch(setShowLoader(false));
                 // navigation.navigate('SplashScreen')
             } catch (e) {
-                console.log(e);
-                setState((prevState) => ({...prevState, showPopUp: true}));
-                setState((prevState) => ({...prevState, errorMessage: e.toString()}));
                 setTimeout(() => {
-                    setState((prevState) => ({...prevState, showPopUp: false}));
-                    setState((prevState) => ({...prevState, errorMessage: ''}));
-                }, 3000);
+                    dispatch(setShowLoader(false));
+                }, appConfig.MODAL_VISIBILITY_TIME_IN_MILLISECONDS);
             }
         }
     };
@@ -51,7 +52,7 @@ export const LoginScreen = ({navigation}) => {
     return (
         <ImageBackground style={styles.container} source={assets.LOGIN_BACKGROUND_IMAGE}>
 
-            {state.showPopUp && <PopUp errorMessage={state.errorMessage} />}
+            <Loader isVisible={isLoaderShown}/>
 
             <View style={styles.topContainer}>
                 <Text style={styles.entryTitle}>{string.LOGIN_SCREEN_TITLE}</Text>

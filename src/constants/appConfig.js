@@ -1,0 +1,3 @@
+export default {
+    MODAL_VISIBILITY_TIME_IN_MILLISECONDS: 2000,
+}
