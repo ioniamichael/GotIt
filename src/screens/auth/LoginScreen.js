@@ -1,28 +1,44 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import {CustomInputText} from '../../components/CustomInputText';
+import {YellowButton} from '../../components/YellowButton';
+import {isValidEmail, isValidPassword} from '../../utils';
+import {login} from '../../services/userService';
+import {PopUp} from '../../components/PopUp';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
-import {YellowButton} from '../../components/YellowButton';
+
 const INITIAL_STATE = {
     userEmail: '',
     userPassword: '',
+    showPopUp: false,
+    errorMessage: '',
 };
 
-export const LoginScreen = ({}) => {
+export const LoginScreen = ({navigation}) => {
 
     const [state, setState] = useState(INITIAL_STATE);
 
-    const onLoginButtonPressed = () => {
-        if (state.userEmail && state.userPassword) {
-            console.log('login pressed');
-        } else {
-            alert('Please check you email/password.');
+    const onLoginButtonPressed = async () => {
+        if (isValidEmail(state.userEmail) && isValidPassword(state.userPassword)) {
+            try {
+                await login(state.userEmail, state.userPassword);
+                // navigation.navigate('SplashScreen')
+            } catch (e) {
+                console.log(e);
+                setState((prevState) => ({...prevState, showPopUp: true}));
+                setState((prevState) => ({...prevState, errorMessage: e.toString()}));
+                setTimeout(() => {
+                    setState((prevState) => ({...prevState, showPopUp: false}));
+                    setState((prevState) => ({...prevState, errorMessage: ''}));
+                }, 3000);
+            }
         }
     };
+
 
     const onForgotPasswordPressed = () => {
         if (state.userEmail) {
@@ -34,6 +50,8 @@ export const LoginScreen = ({}) => {
 
     return (
         <ImageBackground style={styles.container} source={assets.LOGIN_BACKGROUND_IMAGE}>
+
+            {state.showPopUp && <PopUp errorMessage={state.errorMessage} />}
 
             <View style={styles.topContainer}>
                 <Text style={styles.entryTitle}>{string.LOGIN_SCREEN_TITLE}</Text>

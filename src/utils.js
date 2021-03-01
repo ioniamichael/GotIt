@@ -9,7 +9,7 @@ export const isValidEmail = (email) => {
 };
 
 export const isValidPassword = (password) => {
-    return password.length > 6;
+    return password.length > 5;
 };
 
 export const isPasswordRepeatedRight = (password, repeatedPassword) => {

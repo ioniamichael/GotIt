@@ -23,6 +23,7 @@ const HomeStack = createStackNavigator({
 
 const AppNavigator = createSwitchNavigator(
     {
+        SplashScreen,
         AuthStack,
         HomeStack,
     },
