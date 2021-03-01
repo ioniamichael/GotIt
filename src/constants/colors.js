@@ -3,4 +3,5 @@ export default {
     TEXT_COLOR: 'black',
     GREY: '#f5f8fb',
     WHITE: '#fff',
+    TRANSPARENT_WHITE: '#ffffff99',
 }

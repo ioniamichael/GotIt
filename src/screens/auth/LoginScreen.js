@@ -7,7 +7,6 @@ import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import {YellowButton} from '../../components/YellowButton';
-
 const INITIAL_STATE = {
     userEmail: '',
     userPassword: '',
@@ -41,8 +40,12 @@ export const LoginScreen = ({}) => {
             </View>
 
             <View style={styles.bottomContainer}>
-                <CustomInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'} value={state.userEmail}
-                                 onChangeText={userEmail => setState((prevState) => ({...prevState, userEmail: userEmail}))}
+                <CustomInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
+                                 value={state.userEmail}
+                                 onChangeText={userEmail => setState((prevState) => ({
+                                     ...prevState,
+                                     userEmail: userEmail,
+                                 }))}
                                  placeholder={string.PLACEHOLDER_EMAIL}/>
 
                 <CustomInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
@@ -50,13 +53,13 @@ export const LoginScreen = ({}) => {
                                  onChangeText={userPassword => setState((prevState) => ({...prevState, userPassword}))}
                                  placeholder={string.PLACEHOLDER_PASSWORD}/>
 
-                <View>
-                    <TouchableOpacity style={styles.forgotPasswordContainer} activeOpacity={layout.activeOpacity}
-                                      onPress={onForgotPasswordPressed}>
-                        <Text style={{...layout.regularTextBase}}>{string.FORGOT_PASSWORD}</Text>
-                    </TouchableOpacity>
-                    <YellowButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
-                </View>
+
+                <TouchableOpacity style={styles.forgotPasswordContainer} activeOpacity={layout.activeOpacity}
+                                  onPress={onForgotPasswordPressed}>
+                    <Text style={{...layout.regularTextBase}}>{string.FORGOT_PASSWORD}</Text>
+                </TouchableOpacity>
+                <YellowButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
+
 
             </View>
 

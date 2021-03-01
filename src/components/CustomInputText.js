@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         borderColor: color.YELLOW,
         paddingHorizontal: 20,
         marginVertical: 7.5,
+        backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
-        backgroundColor: color.WHITE,
         width: layout.width * 0.75,
     },
     iconStyle: {
