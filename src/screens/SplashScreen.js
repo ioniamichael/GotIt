@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchUserDetails} from '../store/actions/UserAction';
 import colors from '../constants/colors';
 import auth from '@react-native-firebase/auth';
+import {fetchUserDetails} from '../store/actions/UserAction';
 
 export const SplashScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
-    const userDetails = useSelector(state => state.UserReducer.userDetails);
     let unsubscribe;
 
 
@@ -16,8 +15,8 @@ export const SplashScreen = ({navigation}) => {
         try {
             unsubscribe = auth().onAuthStateChanged(async (user) => {
                 if (user) {
+                    await dispatch(fetchUserDetails());
                     navigation.navigate('HomeScreen');
-
                 } else {
                     navigation.navigate('EntryScreen');
                 }
@@ -28,10 +27,7 @@ export const SplashScreen = ({navigation}) => {
     };
 
     useEffect(() => {
-
         checkUserState();
-        dispatch(fetchUserDetails());
-
         return () => {
             unsubscribe();
         };
@@ -39,7 +35,7 @@ export const SplashScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Text>{userDetails.userEmail}</Text>
+            <Text>Loading</Text>
         </View>
     );
 };

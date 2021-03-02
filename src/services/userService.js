@@ -2,18 +2,6 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 import firebaseRefs from '../constants/firebaseRefs';
 
-export const fetUserDetailsService = () => {
-
-    const userDetails = auth().currentUser;
-
-    return {
-        name: userDetails.displayName,
-        email: userDetails.email,
-        photoURL: userDetails.photoURL,
-        userID: userDetails.uid
-    };
-};
-
 export const login = (email, password) => new Promise(async (resolve, reject) => {
     try {
         await auth().signInWithEmailAndPassword(email, password);

@@ -6,6 +6,8 @@ export const HomeScreen = ({}) => {
 
     const userDetails = useSelector(state => state.UserReducer.userDetails);
 
+    console.log(userDetails.name);
+
     return (
         <View>
             <Text>{userDetails.name}</Text>
