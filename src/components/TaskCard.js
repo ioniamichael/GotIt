@@ -21,7 +21,7 @@ export const TaskCard = ({data, index}) => {
                         return (
                             <View style={styles.subTasks}>
                                 <Text style={[{...layout.regularTextBase}, {fontSize: 12}]}>*</Text>
-                                <Text style={[{...layout.regularTextBase}, {fontSize: 12, marginStart: 5}]}>{item}</Text>
+                                <Text numberOfLines={2} style={[{...layout.regularTextBase}, {fontSize: 12, marginStart: 5}]}>{item}</Text>
                             </View>
                         );
                     }}
@@ -49,7 +49,10 @@ export const TaskCard = ({data, index}) => {
 
             <Ionicons name={icon.TASK_STATUS_ICON} size={20} color={isFinished ? color.YELLOW : 'grey'}/>
             <TouchableOpacity style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]} onPress={renderBorderRadiusPosition}>
-                <Text style={[{...layout.boldTextBase}, {fontSize: 14}]}>{data.taskTitle}</Text>
+                <View style={styles.titleContainer}>
+                    <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 14, width: '75%'}]}>{data.taskTitle}</Text>
+                    <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>{data.taskEndDate}</Text>
+                </View>
                 {renderSubTasks()}
             </TouchableOpacity>
 
@@ -70,6 +73,11 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         flex: 1,
         backgroundColor: color.YELLOW,
+    },
+    titleContainer:{
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row'
     },
     subTasksContainer: {
         marginTop: 5,

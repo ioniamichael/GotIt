@@ -9,8 +9,7 @@ export const HomeScreen = ({}) => {
     const userDetails = useSelector(state => state.UserReducer.userDetails);
     const tasks = useSelector(state => state.GeneralReducer.taskList);
 
-    console.log(userDetails.name);
-    console.log(tasks.length);
+
 
     return (
         <View style={styles.container}>
