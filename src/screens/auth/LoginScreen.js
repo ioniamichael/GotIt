@@ -21,8 +21,8 @@ const INITIAL_STATE = {
 
 export const LoginScreen = ({navigation}) => {
 
-    const dispatch = useDispatch();
     const [state, setState] = useState(INITIAL_STATE);
+    const dispatch = useDispatch();
     const isLoaderShown = useSelector(state => state.GeneralReducer.toShowLoader);
 
     const onLoginButtonPressed = async () => {
@@ -31,7 +31,7 @@ export const LoginScreen = ({navigation}) => {
             try {
                 await login(state.userEmail, state.userPassword);
                 dispatch(setShowLoader(false));
-                // navigation.navigate('SplashScreen')
+                navigation.navigate('SplashScreen')
             } catch (e) {
                 setTimeout(() => {
                     dispatch(setShowLoader(false));

@@ -1,4 +1,4 @@
-import React, {useState ,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchUserDetails} from '../store/actions/UserAction';
@@ -16,10 +16,9 @@ export const SplashScreen = ({navigation}) => {
         try {
             unsubscribe = auth().onAuthStateChanged(async (user) => {
                 if (user) {
-                    console.log('::SPLASH logged in ', user);
+                    navigation.navigate('HomeScreen');
 
                 } else {
-                    console.log('::SPLASH logged out ');
                     navigation.navigate('EntryScreen');
                 }
             });

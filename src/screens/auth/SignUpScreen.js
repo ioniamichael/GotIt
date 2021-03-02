@@ -3,11 +3,15 @@ import {StyleSheet, View, Text, ImageBackground, TouchableOpacity} from 'react-n
 import {CustomInputText} from '../../components/CustomInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
+import {createAccount, setUserDataToDB} from '../../services/userService';
+import {Loader} from '../../components/Loader';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
+import {useDispatch, useSelector} from 'react-redux';
+import {setShowLoader} from '../../store/actions/GeneralActions';
 
 const INITIAL_STATE = {
     userEmail: '',
@@ -18,20 +22,28 @@ const INITIAL_STATE = {
 
 };
 
-export const SignUpScreen = ({}) => {
+export const SignUpScreen = ({navigation}) => {
 
     const [state, setState] = useState(INITIAL_STATE);
+    const dispatch = useDispatch();
+    const isLoaderShown = useSelector(state => state.GeneralReducer.toShowLoader);
 
-    const onSignUpButtonPressed = () => {
-        if (state.userEmail && state.userPassword) {
-            console.log('signup pressed');
-        } else {
-            alert('Please check you email/password.');
+    const onSignUpButtonPressed = async () => {
+        dispatch(setShowLoader(true));
+        try {
+            await createAccount(state.userEmail, state.userPassword, state.userName);
+            dispatch(setShowLoader(false));
+            navigation.navigate('SplashScreen')
+        } catch (e) {
+            console.log(e);
+            dispatch(setShowLoader(false));
         }
     };
 
     return (
         <ImageBackground style={styles.container} source={assets.LOGIN_BACKGROUND_IMAGE}>
+
+            <Loader isVisible={isLoaderShown}/>
 
             <View style={styles.topContainer}>
                 <Text style={styles.entryTitle}>{string.LOGIN_SCREEN_TITLE}</Text>
@@ -105,7 +117,7 @@ const styles = StyleSheet.create({
         marginEnd: 20,
         alignSelf: 'flex-end',
     },
-    yellowButtonContainer:{
-        marginVertical: 10
-    }
+    yellowButtonContainer: {
+        marginVertical: 10,
+    },
 });
