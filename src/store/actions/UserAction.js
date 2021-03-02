@@ -4,7 +4,6 @@ import auth from '@react-native-firebase/auth';
 export const fetchUserDetails = () => (dispatch) => new Promise(async (resolve, reject) => {
     try {
         const user = await auth().currentUser;
-        console.log(user);
         if (user) {
             const userData = {
                 name: user.displayName,

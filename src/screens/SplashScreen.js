@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import colors from '../constants/colors';
-import auth from '@react-native-firebase/auth';
+import {StyleSheet, View} from 'react-native';
 import {fetchUserDetails} from '../store/actions/UserAction';
+import LottieView from 'lottie-react-native';
+import {useDispatch} from 'react-redux';
+import auth from '@react-native-firebase/auth';
+import assets from '../constants/assets';
+import color from '../constants/colors';
+import {fetchTasks} from '../store/actions/GeneralActions';
 
 export const SplashScreen = ({navigation}) => {
 
@@ -16,7 +19,11 @@ export const SplashScreen = ({navigation}) => {
             unsubscribe = auth().onAuthStateChanged(async (user) => {
                 if (user) {
                     await dispatch(fetchUserDetails());
-                    navigation.navigate('HomeScreen');
+                    dispatch(fetchTasks());
+                    setTimeout(() => {
+                        navigation.navigate('HomeScreen');
+                    }, 3000);
+
                 } else {
                     navigation.navigate('EntryScreen');
                 }
@@ -35,13 +42,18 @@ export const SplashScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Text>Loading</Text>
+            <LottieView style={styles.lottie} source={assets.APP_LOADER} autoPlay loop/>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.WHITE,
+    container:{
+        flex: 1,
+        backgroundColor: color.YELLOW,
+        justifyContent:'center',
+        alignItems: 'center',
+    },
+    lottie: {
     },
 });

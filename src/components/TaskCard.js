@@ -1,0 +1,81 @@
+import React from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import color from '../constants/colors';
+import layout from '../constants/layout';
+import icon from '../constants/icons';
+
+export const TaskCard = ({data, index}) => {
+
+    const isFinished = data.isFinished;
+    const hasSubTasks = data.subTasks.length;
+
+    const renderSubTasks = () => {
+        if (hasSubTasks) {
+            return (
+                <FlatList
+                    data={data.subTasks}
+                    style={styles.subTasksContainer}
+                    keyExtractor={(subTask, index) => 'D' + index.toString()}
+                    renderItem={({item}) => {
+                        return (
+                            <View style={styles.subTasks}>
+                                <Text style={[{...layout.regularTextBase}, {fontSize: 12}]}>*</Text>
+                                <Text style={[{...layout.regularTextBase}, {fontSize: 12, marginStart: 5}]}>{item}</Text>
+                            </View>
+                        );
+                    }}
+                />
+            );
+        }
+    };
+
+    const renderBorderRadiusPosition = () => {
+        if (index % 2 == 0){
+            return{
+                borderRadius: 20,
+                borderBottomEndRadius: 0
+            }
+        }else {
+            return{
+                borderRadius: 20,
+                borderTopEndRadius: 0
+            }
+        }
+    };
+
+    return (
+        <View style={styles.mainContainer}>
+
+            <Ionicons name={icon.TASK_STATUS_ICON} size={20} color={isFinished ? color.YELLOW : 'grey'}/>
+            <TouchableOpacity style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]} onPress={renderBorderRadiusPosition}>
+                <Text style={[{...layout.boldTextBase}, {fontSize: 14}]}>{data.taskTitle}</Text>
+                {renderSubTasks()}
+            </TouchableOpacity>
+
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flexDirection: 'row',
+        marginVertical: 5,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    taskContainer: {
+        marginStart: 20,
+        paddingHorizontal: 30,
+        paddingVertical: 20,
+        flex: 1,
+        backgroundColor: color.YELLOW,
+    },
+    subTasksContainer: {
+        marginTop: 5,
+        marginHorizontal: 10,
+    },
+    subTasks:{
+        flexDirection: 'row'
+    }
+});
