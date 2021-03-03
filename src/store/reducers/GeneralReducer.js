@@ -1,4 +1,4 @@
-import {FETCH_TASKS, SHOW_LOADER, SHOW_POPUP} from '../types';
+import {DELETE_TASK, FETCH_TASKS, SHOW_LOADER, SHOW_POPUP} from '../types';
 
 const INITIAL_STATE = {
     toShowPopUp: false,
@@ -25,9 +25,22 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 taskList: action.payload,
             };
+        case DELETE_TASK:
+            console.log(state.taskList)
+            return {
+                ...state,
+                taskList: state.taskList.filter(t => t.taskCreationDate !== action.payload),
+            };
         default:
             return state;
     }
 };
+
+// case REMOVE_TASK:
+//     return {
+//         ...state,
+//         taskList: state.taskList.filter(t => t.taskID !== action.payload),
+//     };
+
 
 export default GeneralReducer;

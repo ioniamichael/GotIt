@@ -5,7 +5,7 @@ import color from '../constants/colors';
 import layout from '../constants/layout';
 import icon from '../constants/icons';
 
-export const TaskCard = ({data, index}) => {
+export const TaskCard = ({data, index, onTaskPress}) => {
 
     const isFinished = data.isFinished;
     const hasSubTasks = data.subTasks.length;
@@ -48,7 +48,7 @@ export const TaskCard = ({data, index}) => {
         <View style={styles.mainContainer}>
 
             <Ionicons name={icon.TASK_STATUS_ICON} size={20} color={isFinished ? color.YELLOW : 'grey'}/>
-            <TouchableOpacity style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]} onPress={renderBorderRadiusPosition}>
+            <TouchableOpacity style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]} onPress={() => onTaskPress(data)}>
                 <View style={styles.titleContainer}>
                     <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 14, width: '75%'}]}>{data.taskTitle}</Text>
                     <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>{data.taskEndDate}</Text>

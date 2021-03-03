@@ -5,13 +5,13 @@ import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createAccount, setUserDataToDB} from '../../services/userService';
 import {Loader} from '../../components/Loader';
+import {setShowLoader} from '../../store/actions/GeneralActions';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import {useDispatch, useSelector} from 'react-redux';
-import {setShowLoader} from '../../store/actions/GeneralActions';
 
 const INITIAL_STATE = {
     userEmail: '',

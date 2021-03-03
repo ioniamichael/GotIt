@@ -5,6 +5,7 @@ import {SignUpScreen} from './screens/auth/SignUpScreen';
 import {SplashScreen} from './screens/SplashScreen';
 import {HomeScreen} from './screens/main/HomeScreen';
 import {EntryScreen} from './screens/auth/EntryScreen';
+import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 
 const AuthStack = createStackNavigator({
     EntryScreen,
@@ -19,6 +20,7 @@ const AuthStack = createStackNavigator({
 
 const HomeStack = createStackNavigator({
     HomeScreen,
+    TaskDetailsScreen,
 });
 
 const AppNavigator = createSwitchNavigator(
