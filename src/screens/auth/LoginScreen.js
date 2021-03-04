@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, ImageBackground, TouchableOpacity} from 'react-native';
-import {CustomInputText} from '../../components/CustomInputText';
+import {LoginInputText} from '../../components/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {isValidEmail, isValidPassword} from '../../utils';
 import {login} from '../../services/userService';
@@ -59,18 +59,18 @@ export const LoginScreen = ({navigation}) => {
             </View>
 
             <View style={styles.bottomContainer}>
-                <CustomInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
-                                 value={state.userEmail}
-                                 onChangeText={userEmail => setState((prevState) => ({
+                <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
+                                value={state.userEmail}
+                                onChangeText={userEmail => setState((prevState) => ({
                                      ...prevState,
                                      userEmail: userEmail,
                                  }))}
-                                 placeholder={string.PLACEHOLDER_EMAIL}/>
+                                placeholder={string.PLACEHOLDER_EMAIL}/>
 
-                <CustomInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
-                                 value={state.userPassword}
-                                 onChangeText={userPassword => setState((prevState) => ({...prevState, userPassword}))}
-                                 placeholder={string.PLACEHOLDER_PASSWORD}/>
+                <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
+                                value={state.userPassword}
+                                onChangeText={userPassword => setState((prevState) => ({...prevState, userPassword}))}
+                                placeholder={string.PLACEHOLDER_PASSWORD}/>
 
 
                 <TouchableOpacity style={styles.forgotPasswordContainer} activeOpacity={layout.activeOpacity}

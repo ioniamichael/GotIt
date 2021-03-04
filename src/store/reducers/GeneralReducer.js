@@ -1,10 +1,11 @@
-import {DELETE_TASK, FETCH_TASKS, SHOW_LOADER, SHOW_POPUP} from '../types';
+import {DELETE_TASK, FETCH_TASKS, SET_SHOW_CREATE_TASK_MODAL, SHOW_LOADER, SHOW_POPUP} from '../types';
 
 const INITIAL_STATE = {
     toShowPopUp: false,
     toShowLoader: false,
     errorMessage: '',
     taskList: [],
+    isCreateTaskModalVisible: false
 };
 
 const GeneralReducer = (state = INITIAL_STATE, action) => {
@@ -26,10 +27,14 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
                 taskList: action.payload,
             };
         case DELETE_TASK:
-            console.log(state.taskList)
             return {
                 ...state,
                 taskList: state.taskList.filter(t => t.taskCreationDate !== action.payload),
+            };
+        case SET_SHOW_CREATE_TASK_MODAL:
+            return{
+                ...state,
+                isCreateTaskModalVisible: action.payload
             };
         default:
             return state;

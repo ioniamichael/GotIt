@@ -1,57 +1,91 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Modal, TextInput} from 'react-native';
-import {CustomInputText} from './CustomInputText';
-import {getCurrentDateInTimestamp} from '../utils';
+import {StyleSheet, View, Modal, ScrollView, FlatList, TouchableOpacity, Image, Text} from 'react-native';
+import {CustomTextInput} from '../components/CustomTextInput';
 import {YellowButton} from './YellowButton';
+import {getCurrentDateInTimestamp} from '../utils';
+import {createNewTask} from '../services/userService';
+import {fetchTasks, setShowCreateTaskModal} from '../store/actions/GeneralActions';
+import {useDispatch} from 'react-redux';
 import layout from '../constants/layout';
 import color from '../constants/colors';
+import assets from '../constants/assets';
 
-const INITIAL_STATE = {
-    icon: 'pencil-outline',
-    taskTitle: '',
-    taskCreationDate: getCurrentDateInTimestamp().toString(),
-    taskEndDate: '',
-    subTasks: [
-        'Sub task 1',
-        'Sub task 2',
-    ],
-    isExpired: false,
-    isFinished: false,
-};
+export const CreateTaskModal = ({isVisible, onClose}) => {
 
-export const CreateTaskModal = ({isVisible, onClose, onCreatePressed}) => {
+    const dispatch = useDispatch();
 
-    const [state, setState] = useState(INITIAL_STATE);
+    const [taskType, setTaskType] = useState('');
+    const [taskTitle, setTaskTitle] = useState('');
+    const [taskCreationDate, setTaskCreationDate] = useState(() => getCurrentDateInTimestamp().toString());
+    const [taskEndDate, setTaskEndDate] = useState(() => new Date().toDateString());
+    const [subTasks, setSubTasks] = useState([]);
+    const [isExpired, setIsExpired] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
+
+    const createTask = async () => {
+
+        setTaskCreationDate(getCurrentDateInTimestamp().toString());
+        setTaskEndDate(new Date().toDateString());
+
+        const task = {
+            taskType,
+            taskTitle,
+            taskCreationDate,
+            taskEndDate,
+            subTasks,
+            isExpired,
+            isFinished,
+        };
+
+        try {
+            await createNewTask(task);
+            dispatch(setShowCreateTaskModal(false));
+            dispatch(fetchTasks());
+        } catch (e) {
+            console.log('::CREATE TASK ', e);
+        }
+    };
+
 
     return (
+
         <Modal
+            onRequestClose={onClose}
             visible={isVisible}
             animationType='slide'
-            transparent onRequestClose={() => {
-            onClose(!isVisible);
-        }}>
-            <View style={styles.container}>
+            transparent>
 
-                <CustomInputText
-                    placeholder={'Title'} value={state.taskTitle}
-                    onChangeText={taskTitle => setState((prevState) => ({
-                        ...prevState,
-                        taskTitle: taskTitle,
-                    }))}/>
+            <ScrollView style={styles.container}>
+                <View style={styles.innerContainer}>
 
-                <CustomInputText
-                    placeholder={'Task end date'} value={state.taskEndDate}
-                    onChangeText={taskEndDate => setState((prevState) => ({
-                        ...prevState,
-                        taskEndDate: taskEndDate,
-                    }))}/>
+                    <Text style={styles.screenTitle}>Let's create new task</Text>
 
-                <YellowButton buttonTitle={'Create'} onButtonPressed={() => {
-                    onCreatePressed(state);
-                    setState({...state, INITIAL_STATE});
-                    setState({...state, taskCreationDate: getCurrentDateInTimestamp().toString()});
-                }}/>
-            </View>
+                    <FlatList
+                        style={styles.typesContainerStyle}
+                        data={assets.PICKER}
+                        showsHorizontalScrollIndicator={false}
+                        horizontal
+                        keyExtractor={(type, index) => 'D' + index.toString()}
+                        renderItem={({item}) => {
+                            return (
+                                <TouchableOpacity onPress={setTaskType(item.TYPE)} style={styles.pickerContainerStyle}>
+                                    <Image source={item.IMAGE} style={styles.pickerImageStyles}/>
+                                </TouchableOpacity>
+                            );
+                        }}
+                    />
+
+                    <CustomTextInput
+                        placeholder={'Title'} value={taskTitle}
+                        onChangeText={setTaskTitle}/>
+
+                    <CustomTextInput
+                        placeholder={'Task end date'} value={taskEndDate}
+                        onChangeText={setTaskEndDate}/>
+
+                    <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
+                </View>
+            </ScrollView>
         </Modal>
     );
 };
@@ -59,14 +93,33 @@ export const CreateTaskModal = ({isVisible, onClose, onCreatePressed}) => {
 const styles = StyleSheet.create({
     container: {
         bottom: 0,
-        borderWidth: 1,
-        borderTopStartRadius: 50,
-        borderTopEndRadius: 50,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        ...layout.shadowBase,
         position: 'absolute',
         width: layout.width,
         height: layout.height * 0.7,
+        backgroundColor: color.WHITE,
+    },
+    innerContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: color.WHITE,
+        borderTopStartRadius: 50,
+        borderTopEndRadius: 50,
+    },
+    screenTitle:{
+        ...layout.boldTextBase,
+        marginTop: 30,
+        marginBottom: 30,
+    },
+    typesContainerStyle:{
+        marginBottom: 30,
+    },
+    pickerContainerStyle: {
+        marginHorizontal: 10,
+    },
+    pickerImageStyles: {
+        width: 50,
+        height: 50,
     },
 });

@@ -4,3 +4,5 @@ export const SHOW_POPUP = 'SHOW_POPUP';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const FETCH_TASKS = 'FETCH_TASKS';
 export const DELETE_TASK = 'DELETE_TASK';
+export const SET_SHOW_CREATE_TASK_MODAL= 'SET_SHOW_CREATE_TASK_MODAL';
+

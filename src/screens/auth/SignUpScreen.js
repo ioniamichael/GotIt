@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, ImageBackground, TouchableOpacity} from 'react-native';
-import {CustomInputText} from '../../components/CustomInputText';
+import {LoginInputText} from '../../components/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createAccount, setUserDataToDB} from '../../services/userService';
@@ -50,37 +50,37 @@ export const SignUpScreen = ({navigation}) => {
             </View>
 
             <View style={styles.bottomContainer}>
-                <CustomInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
-                                 value={state.userEmail}
-                                 onChangeText={userEmail => setState((prevState) => ({
+                <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
+                                value={state.userEmail}
+                                onChangeText={userEmail => setState((prevState) => ({
                                      ...prevState,
                                      userEmail,
                                  }))}
-                                 placeholder={string.PLACEHOLDER_EMAIL}/>
+                                placeholder={string.PLACEHOLDER_EMAIL}/>
 
-                <CustomInputText icon={icon.ICON_NAME} isSecure={false} keyboardType={'default'}
-                                 value={state.userName}
-                                 onChangeText={userName => setState((prevState) => ({
+                <LoginInputText icon={icon.ICON_NAME} isSecure={false} keyboardType={'default'}
+                                value={state.userName}
+                                onChangeText={userName => setState((prevState) => ({
                                      ...prevState,
                                      userName,
                                  }))}
-                                 placeholder={string.PLACEHOLDER_NAME}/>
+                                placeholder={string.PLACEHOLDER_NAME}/>
 
-                <CustomInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
-                                 value={state.userPassword}
-                                 onChangeText={userPassword => setState((prevState) => ({
+                <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
+                                value={state.userPassword}
+                                onChangeText={userPassword => setState((prevState) => ({
                                      ...prevState,
                                      userPassword,
                                  }))}
-                                 placeholder={string.PLACEHOLDER_PASSWORD}/>
+                                placeholder={string.PLACEHOLDER_PASSWORD}/>
 
-                <CustomInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
-                                 value={state.userRepeatPassword}
-                                 onChangeText={userRepeatPassword => setState((prevState) => ({
+                <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
+                                value={state.userRepeatPassword}
+                                onChangeText={userRepeatPassword => setState((prevState) => ({
                                      ...prevState,
                                      userRepeatPassword,
                                  }))}
-                                 placeholder={string.PLACEHOLDER_REPEAT_PASSWORD}/>
+                                placeholder={string.PLACEHOLDER_REPEAT_PASSWORD}/>
 
                 <View style={styles.yellowButtonContainer}>
                     <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>

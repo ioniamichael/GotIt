@@ -6,6 +6,7 @@ export const TaskList = ({data, onTaskPress}) => {
     return(
         <FlatList
             data={data}
+            showsVerticalScrollIndicator={false}
             keyExtractor={(task, index) => 'D' + index.toString()}
             renderItem={({item, index}) => {
                 return(

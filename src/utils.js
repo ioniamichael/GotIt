@@ -19,3 +19,45 @@ export const isPasswordRepeatedRight = (password, repeatedPassword) => {
 export const isEmptyField = (fieldString) => {
     return fieldString.toString().length > 0;
 };
+
+export const getTaskImageByType = (type) => {
+    switch (type) {
+        case 'TYPE 1':
+            return(
+                require('./assets/pickerImages/icon1.png')
+            );
+        case 'TYPE 2':
+            return(
+                require('./assets/pickerImages/icon2.png')
+            );
+        case 'TYPE 3':
+            return(
+                require('./assets/pickerImages/icon3.png')
+            );
+        case 'TYPE 4':
+            return(
+                require('./assets/pickerImages/icon1.png')
+            );
+        case 'TYPE 5':
+            return(
+                require('./assets/pickerImages/icon2.png')
+            );
+        case 'TYPE 6':
+            return(
+                require('./assets/pickerImages/icon3.png')
+            );
+        case 'TYPE 7':
+            return(
+                require('./assets/pickerImages/icon1.png')
+            );
+        case 'TYPE 8':
+            return(
+                require('./assets/pickerImages/icon2.png')
+            );
+        case 'TYPE 9':
+            return(
+                require('./assets/pickerImages/icon3.png')
+            );
+
+    }
+};

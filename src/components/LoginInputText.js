@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import layout from '../constants/layout';
 import color from '../constants/colors';
 
-export const CustomInputText = ({value, onChangeText, placeholder, icon, isSecure, keyboardType}) => {
+export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure, keyboardType}) => {
     return (
         <View style={styles.container}>
 
