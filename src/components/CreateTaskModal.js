@@ -1,18 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Modal, ScrollView, Button, FlatList, TouchableOpacity, Image, Text} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Modal, ScrollView, FlatList, TouchableOpacity, Image, Text} from 'react-native';
 import {CustomTextInput} from '../components/CustomTextInput';
 import {YellowButton} from './YellowButton';
 import {getCurrentDateInTimestamp} from '../utils';
 import {createNewTask} from '../services/userService';
 import {fetchTasks, setShowCreateTaskModal} from '../store/actions/GeneralActions';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {SubTasksView} from './SubTasksView';
 import {useDispatch} from 'react-redux';
 import layout from '../constants/layout';
 import color from '../constants/colors';
 import assets from '../constants/assets';
-import {SubTasksView} from './SubTasksView';
 
-export const CreateTaskModal = ({isVisible, onClose}) => {
+export const CreateTaskModal = ({isVisible}) => {
 
     const dispatch = useDispatch();
 
@@ -23,7 +22,8 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
     const [subTasks, setSubTasks] = useState([]);
     const [isExpired, setIsExpired] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
-    const [subTaskValue, setSubTaskValue] =useState();
+    const [subTaskValue, setSubTaskValue] = useState();
+    const [taskTypeTitle, setTaskTypeTitle] = useState('');
 
     const cleanState = () => {
         setTaskType('');
@@ -32,6 +32,7 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
         setTaskEndDate(new Date().toDateString());
         setSubTasks([]);
         setSubTaskValue('');
+        setTaskTypeTitle('');
     };
 
     const closeModal = () => {
@@ -67,27 +68,24 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
     };
 
     const renderSelectedTypeStyle = (type) => {
-        if (type == taskType){
-            return{
+        if (type === taskType) {
+            return {
                 backgroundColor: color.YELLOW,
                 borderRadius: 10,
-                width: 60,
-                height: 60,
-                tintColor: color.WHITE,
-            }
+                width: 50,
+                height: 50,
+            };
         } else {
-            return{
-                backgroundColor: color.GREY,
+            return {
                 borderRadius: 10,
-                tintColor: color.YELLOW,
-            }
+            };
         }
     };
 
     const addSubTaskToList = () => {
         if (subTaskValue.length) {
-            setSubTasks([...subTasks, subTaskValue])
-            setSubTaskValue('')
+            setSubTasks([...subTasks, subTaskValue]);
+            setSubTaskValue('');
         }
     };
 
@@ -108,7 +106,7 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
                 <View style={styles.innerContainer}>
 
                     <Text style={styles.screenTitle}>Let's create new task</Text>
-                    <Text style={{...layout.regularTextBase, marginBottom: 5}} >First pick your task type.</Text>
+                    <Text style={{...layout.regularTextBase, marginBottom: 20}}>First pick your task type.</Text>
 
                     <FlatList
                         style={styles.typesContainerStyle}
@@ -118,12 +116,19 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
                         keyExtractor={(type, index) => 'D' + index.toString()}
                         renderItem={({item}) => {
                             return (
-                                <TouchableOpacity onPress={() => setTaskType(item.TYPE)} style={styles.pickerContainerStyle}>
-                                    <Image source={item.IMAGE} style={[styles.pickerImageStyles, renderSelectedTypeStyle(item.TYPE)]}/>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setTaskType(item.TYPE);
+                                        setTaskTypeTitle(item.title)
+                                    }}
+                                    style={[styles.pickerContainerStyle, renderSelectedTypeStyle(item.TYPE)]}>
+                                    <Image source={item.IMAGE} style={styles.pickerImageStyles}/>
                                 </TouchableOpacity>
                             );
                         }}
                     />
+
+                    <Text style={{...layout.regularTextBase, marginBottom: 20}}>{taskTypeTitle}</Text>
 
                     <CustomTextInput
                         placeholder={'Title'} value={taskTitle}
@@ -166,21 +171,21 @@ const styles = StyleSheet.create({
         borderTopStartRadius: 50,
         borderTopEndRadius: 50,
     },
-    screenTitle:{
+    screenTitle: {
         ...layout.boldTextBase,
         marginTop: 30,
         marginBottom: 30,
     },
-    typesContainerStyle:{
-        marginBottom: 30,
+    typesContainerStyle: {
+        marginBottom: 10,
     },
     pickerContainerStyle: {
+        alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 10,
     },
     pickerImageStyles: {
-        tintColor: color.YELLOW,
-        width: 50,
-        height: 50,
+        width: 30,
+        height: 30,
     },
 });

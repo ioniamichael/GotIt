@@ -21,6 +21,11 @@ const AuthStack = createStackNavigator({
 const HomeStack = createStackNavigator({
     HomeScreen,
     TaskDetailsScreen,
+},{
+    defaultNavigationOptions: {
+        headerShown: true,
+        ...TransitionPresets.SlideFromRightIOS,
+    },
 });
 
 const AppNavigator = createSwitchNavigator(

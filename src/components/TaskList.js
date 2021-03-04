@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, View, StyleSheet} from 'react-native';
+import {FlatList, View, StyleSheet} from 'react-native';
 import {TaskCard} from './TaskCard';
 
 export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {

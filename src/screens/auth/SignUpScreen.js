@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, ImageBackground} from 'react-native';
 import {LoginInputText} from '../../components/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
-import {createAccount, setUserDataToDB} from '../../services/userService';
+import {createAccount} from '../../services/userService';
 import {Loader} from '../../components/Loader';
 import {setShowLoader} from '../../store/actions/GeneralActions';
 import string from '../../constants/strings';

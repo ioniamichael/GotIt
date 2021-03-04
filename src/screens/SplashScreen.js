@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {fetchUserDetails} from '../store/actions/UserAction';
+import {fetchTasks} from '../store/actions/GeneralActions';
 import LottieView from 'lottie-react-native';
 import {useDispatch} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import assets from '../constants/assets';
 import color from '../constants/colors';
-import {fetchTasks} from '../store/actions/GeneralActions';
 
 export const SplashScreen = ({navigation}) => {
 

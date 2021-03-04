@@ -1,11 +1,10 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Animated} from 'react-native';
+import React from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
+import {getTaskImageByType} from '../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../constants/colors';
 import layout from '../constants/layout';
 import icon from '../constants/icons';
-import {getTaskImageByType} from '../utils';
-import {QuickActions} from './QuickActions';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
@@ -36,7 +35,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     };
 
     const renderBorderRadiusPosition = () => {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
             return {
                 borderRadius: 20,
                 borderBottomEndRadius: 0,
@@ -52,14 +51,18 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     return (
         <View style={styles.mainContainer}>
 
+
             <Ionicons name={icon.TASK_STATUS_ICON} size={20} color={isFinished ? color.YELLOW : 'grey'}/>
+
             <TouchableOpacity
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
                 onLongPress={() => onTaskLongPress(data)}
             >
                 <View style={styles.titleContainer}>
-                    <Image source={getTaskImageByType(data.taskType)} style={{width: 30, height: 30, marginEnd: 10}}/>
+                    <View style={styles.typeImageContainer}>
+                        <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
+                    </View>
                     <Text numberOfLines={1}
                           style={[{...layout.boldTextBase}, {fontSize: 14, width: '69%'}]}>{data.taskTitle}</Text>
                     <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>7:00am</Text>
@@ -79,6 +82,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    typeImageContainer:{
+        backgroundColor: color.GREY,
+        marginEnd: 10,
+        padding:5,
+        borderRadius: 10,
+    },
+    typeImageStyle: {
+        width: 20,
+        height: 20,
+    },
     taskContainer: {
         marginStart: 20,
         paddingHorizontal: 15,
@@ -92,11 +105,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     subTasksContainer: {
+        marginStart: 60,
         marginTop: 5,
         marginHorizontal: 10,
     },
     subTasks: {
-        marginStart: 30,
         flexDirection: 'row',
     },
 });

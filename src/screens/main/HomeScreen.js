@@ -1,18 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Button} from 'react-native';
 import {TaskList} from '../../components/TaskList';
 import {CreateTaskModal} from '../../components/CreateTaskModal';
-import {createNewTask, removeTaskFromDB} from '../../services/userService';
-import {
-    deleteTask,
-    fetchTasks,
-    setShowCreateTaskModal,
-    setShowQuickActionsModal,
-} from '../../store/actions/GeneralActions';
+import {setShowCreateTaskModal, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
+import {QuickActions} from '../../components/QuickActions';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
-import {QuickActions} from '../../components/QuickActions';
 
 export const HomeScreen = ({navigation}) => {
 

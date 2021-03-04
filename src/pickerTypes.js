@@ -1,0 +1,9 @@
+export const BABY = 'BABY';
+export const BAR = 'BAR';
+export const BIRTHDAY = 'BIRTHDAY';
+export const CALL = 'CALL';
+export const GYM = 'GYM';
+export const MONEY = 'MONEY';
+export const SCHOOL = 'SCHOOL';
+export const SUPERMARKET = 'SUPERMARKET';
+export const WORK = 'WORK';

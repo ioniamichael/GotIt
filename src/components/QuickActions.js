@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Modal} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Modal} from 'react-native';
 import {deleteTask, fetchTasks, setShowQuickActionsModal} from '../store/actions/GeneralActions';
 import {removeTaskFromDB, setTaskAsFinished} from '../services/userService';
 import Ionicons from 'react-native-vector-icons/Ionicons';
