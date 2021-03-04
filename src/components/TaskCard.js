@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     subTasks:{
+        marginStart: 30,
         flexDirection: 'row'
     }
 });

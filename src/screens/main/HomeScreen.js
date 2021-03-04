@@ -40,7 +40,7 @@ export const HomeScreen = ({navigation}) => {
             <Button title={'create'} onPress={openCreateTaskModal}/>
             <TaskList data={tasks} onTaskPress={onTaskPressHandler}/>
             <CreateTaskModal isVisible={isCreateTaskModalVisible} onClose={onRequestCloseModal}/>
-            {showModal && <View style={styles.overlay}/>}
+            {isCreateTaskModalVisible && <View style={styles.overlay}/>}
         </View>
     );
 };

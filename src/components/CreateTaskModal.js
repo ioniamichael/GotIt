@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Modal, ScrollView, FlatList, TouchableOpacity, Image, Text} from 'react-native';
+import {StyleSheet, View, Modal, ScrollView, Button, FlatList, TouchableOpacity, Image, Text} from 'react-native';
 import {CustomTextInput} from '../components/CustomTextInput';
 import {YellowButton} from './YellowButton';
 import {getCurrentDateInTimestamp} from '../utils';
 import {createNewTask} from '../services/userService';
 import {fetchTasks, setShowCreateTaskModal} from '../store/actions/GeneralActions';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {useDispatch} from 'react-redux';
 import layout from '../constants/layout';
 import color from '../constants/colors';
 import assets from '../constants/assets';
+import {SubTasksView} from './SubTasksView';
 
 export const CreateTaskModal = ({isVisible, onClose}) => {
 
@@ -21,28 +23,71 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
     const [subTasks, setSubTasks] = useState([]);
     const [isExpired, setIsExpired] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
+    const [subTaskValue, setSubTaskValue] =useState();
+
+    const cleanState = () => {
+        setTaskType('');
+        setTaskTitle('');
+        setTaskCreationDate(getCurrentDateInTimestamp().toString());
+        setTaskEndDate(new Date().toDateString());
+        setSubTasks([]);
+        setSubTaskValue('');
+    };
+
+    const closeModal = () => {
+        cleanState();
+        dispatch(setShowCreateTaskModal(false));
+    }
 
     const createTask = async () => {
 
-        setTaskCreationDate(getCurrentDateInTimestamp().toString());
-        setTaskEndDate(new Date().toDateString());
+        if (taskType.length && taskTitle.length) {
 
-        const task = {
-            taskType,
-            taskTitle,
-            taskCreationDate,
-            taskEndDate,
-            subTasks,
-            isExpired,
-            isFinished,
-        };
+            setTaskCreationDate(getCurrentDateInTimestamp().toString());
+            setTaskEndDate(new Date().toDateString());
 
-        try {
-            await createNewTask(task);
-            dispatch(setShowCreateTaskModal(false));
-            dispatch(fetchTasks());
-        } catch (e) {
-            console.log('::CREATE TASK ', e);
+            const task = {
+                taskType,
+                taskTitle,
+                taskCreationDate,
+                taskEndDate,
+                subTasks,
+                isExpired,
+                isFinished,
+            };
+
+            try {
+                await createNewTask(task);
+                closeModal();
+                dispatch(fetchTasks());
+            } catch (e) {
+                console.log('::CREATE TASK ', e);
+            }
+        }
+    };
+
+    const renderSelectedTypeStyle = (type) => {
+        if (type == taskType){
+            return{
+                backgroundColor: color.YELLOW,
+                borderRadius: 10,
+                width: 60,
+                height: 60,
+                tintColor: color.WHITE,
+            }
+        } else {
+            return{
+                backgroundColor: color.GREY,
+                borderRadius: 10,
+                tintColor: color.YELLOW,
+            }
+        }
+    };
+
+    const addSubTaskToList = () => {
+        if (subTaskValue.length) {
+            setSubTasks([...subTasks, subTaskValue])
+            setSubTaskValue('')
         }
     };
 
@@ -50,7 +95,7 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
     return (
 
         <Modal
-            onRequestClose={onClose}
+            onRequestClose={() => closeModal()}
             visible={isVisible}
             animationType='slide'
             transparent>
@@ -59,6 +104,7 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
                 <View style={styles.innerContainer}>
 
                     <Text style={styles.screenTitle}>Let's create new task</Text>
+                    <Text style={{...layout.regularTextBase, marginBottom: 5}} >First pick your task type.</Text>
 
                     <FlatList
                         style={styles.typesContainerStyle}
@@ -68,8 +114,8 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
                         keyExtractor={(type, index) => 'D' + index.toString()}
                         renderItem={({item}) => {
                             return (
-                                <TouchableOpacity onPress={setTaskType(item.TYPE)} style={styles.pickerContainerStyle}>
-                                    <Image source={item.IMAGE} style={styles.pickerImageStyles}/>
+                                <TouchableOpacity onPress={() => setTaskType(item.TYPE)} style={styles.pickerContainerStyle}>
+                                    <Image source={item.IMAGE} style={[styles.pickerImageStyles, renderSelectedTypeStyle(item.TYPE)]}/>
                                 </TouchableOpacity>
                             );
                         }}
@@ -79,11 +125,14 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
                         placeholder={'Title'} value={taskTitle}
                         onChangeText={setTaskTitle}/>
 
+                    <SubTasksView subTasks={subTasks} onAddSubTask={addSubTaskToList} setSubTaskValue={setSubTaskValue} subTaskValue={subTaskValue}/>
+
                     <CustomTextInput
                         placeholder={'Task end date'} value={taskEndDate}
                         onChangeText={setTaskEndDate}/>
 
                     <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
+
                 </View>
             </ScrollView>
         </Modal>
@@ -92,10 +141,10 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
 
 const styles = StyleSheet.create({
     container: {
+        ...layout.shadowBase,
         bottom: 0,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
-        ...layout.shadowBase,
         position: 'absolute',
         width: layout.width,
         height: layout.height * 0.7,
@@ -116,9 +165,11 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     pickerContainerStyle: {
+        justifyContent: 'center',
         marginHorizontal: 10,
     },
     pickerImageStyles: {
+        tintColor: color.YELLOW,
         width: 50,
         height: 50,
     },
