@@ -68,6 +68,15 @@ export const fetchAllTasksFromDB = () => new Promise(async (resolve, reject) => 
     }
 });
 
+export const setTaskAsFinished = (task) => new Promise(async (resolve, reject) => {
+    try {
+        await database().ref('tasks').child(auth().currentUser.uid).child(task.taskCreationDate.toString()).child('isFinished').set(!task.isFinished);
+        resolve();
+    }catch (e) {
+        reject(e);
+    }
+});
+
 export const removeTaskFromDB = (taskID) => new Promise(async (resolve, reject) => {
     try {
         await database().ref('tasks').child(auth().currentUser.uid).child(taskID).remove();

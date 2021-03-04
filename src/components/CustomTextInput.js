@@ -13,7 +13,7 @@ export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecur
 
             <TextInput
                 style={styles.textInputStyle}
-                autoCapitalize={'none'}
+
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 secureTextEntry={isSecure}
@@ -24,7 +24,7 @@ export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecur
                 value={value}
 
             />
-            
+
         </View>
     );
 };

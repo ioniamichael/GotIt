@@ -3,10 +3,16 @@ import {StyleSheet, View, Text, Button} from 'react-native';
 import {TaskList} from '../../components/TaskList';
 import {CreateTaskModal} from '../../components/CreateTaskModal';
 import {createNewTask, removeTaskFromDB} from '../../services/userService';
-import {deleteTask, fetchTasks, setShowCreateTaskModal} from '../../store/actions/GeneralActions';
+import {
+    deleteTask,
+    fetchTasks,
+    setShowCreateTaskModal,
+    setShowQuickActionsModal,
+} from '../../store/actions/GeneralActions';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
+import {QuickActions} from '../../components/QuickActions';
 
 export const HomeScreen = ({navigation}) => {
 
@@ -14,33 +20,30 @@ export const HomeScreen = ({navigation}) => {
     const userDetails = useSelector(state => state.UserReducer.userDetails);
     const tasks = useSelector(state => state.GeneralReducer.taskList);
     const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
-    const [showModal, setShowModal] = useState(false);
+    const isQuickActionsModalVisible = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
 
-    const onTaskPressHandler = async (task) => {
-        try {
-            await removeTaskFromDB(task.taskCreationDate);
-            dispatch(deleteTask(task.taskCreationDate));
-        } catch (e) {
-            console.log(e);
-        }
-        // navigation.navigate('TaskDetailsScreen', {task});
+    const [quickActionsTask, setQuickActionsTask] = useState({});
+
+    const onTaskPressHandler = (task) => {
+        navigation.navigate('TaskDetailsScreen', {task});
     };
 
     const openCreateTaskModal = () => {
-        // setShowModal(true);
-        dispatch(setShowCreateTaskModal(true))
+        dispatch(setShowCreateTaskModal(true));
     };
 
-    const onRequestCloseModal = () => {
-        dispatch(setShowCreateTaskModal(false));
+    const openQuickActionsModal = (data) => {
+        setQuickActionsTask(data);
+        dispatch(setShowQuickActionsModal(true));
     };
 
     return (
         <View style={styles.container}>
             <Button title={'create'} onPress={openCreateTaskModal}/>
-            <TaskList data={tasks} onTaskPress={onTaskPressHandler}/>
-            <CreateTaskModal isVisible={isCreateTaskModalVisible} onClose={onRequestCloseModal}/>
-            {isCreateTaskModalVisible && <View style={styles.overlay}/>}
+            <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
+            <CreateTaskModal isVisible={isCreateTaskModalVisible}/>
+            <QuickActions isVisible={isQuickActionsModalVisible} data={quickActionsTask} navigation={navigation}/>
+            {isCreateTaskModalVisible || isQuickActionsModalVisible && <View style={styles.overlay}/>}
         </View>
     );
 };

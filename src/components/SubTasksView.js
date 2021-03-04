@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, TextInput, Platform} from 'react-native';
-import {CustomTextInput} from './CustomTextInput';
 import layout from '../constants/layout';
 import color from '../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskValue}) => {
+export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {
+
+
     return (
         <View>
             <View style={styles.textInputContainerStyle}>
@@ -22,11 +23,13 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
             </View>
 
 
-            {subTasks.map(subTask => {
+            {subTasks.map((subTask, index) => {
                 return (
-                    <View style={styles.subTasksContainer}>
-                        <Text style={styles.subTaskText} key={subTask}>{subTask}</Text>
-                        <Ionicons name={'trash-outline'} size={30} color={color.BLACK} />
+                    <View key={subTask}  style={styles.subTasksContainer}>
+                        <Text style={styles.subTaskText}>{subTask}</Text>
+                        <TouchableOpacity onPress={() => onPressDeleteSubTask(index)}>
+                            <Ionicons name={'trash-outline'} size={30} color={color.BLACK}/>
+                        </TouchableOpacity>
                     </View>
                 );
             })}
@@ -50,11 +53,11 @@ const styles = StyleSheet.create({
         backgroundColor: color.TRANSPARENT_WHITE,
     },
     textInputStyle: {
-        width:'85%'
+        width: '85%',
     },
     addButtonStyle: {},
     subTasksContainer: {
-        flexDirection:'row',
+        flexDirection: 'row',
         width: layout.width * 0.75,
         backgroundColor: color.GREY,
         marginVertical: 5,
@@ -62,9 +65,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        borderRadius: 40
+        borderRadius: 40,
     },
     subTaskText: {
-        width:'85%'
+        width: '85%',
     },
 });

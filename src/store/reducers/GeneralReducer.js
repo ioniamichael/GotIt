@@ -1,11 +1,19 @@
-import {DELETE_TASK, FETCH_TASKS, SET_SHOW_CREATE_TASK_MODAL, SHOW_LOADER, SHOW_POPUP} from '../types';
+import {
+    DELETE_TASK,
+    FETCH_TASKS,
+    SET_SHOW_CREATE_TASK_MODAL,
+    SET_SHOW_QUICK_ACTIONS_TASK_MODAL,
+    SHOW_LOADER,
+    SHOW_POPUP,
+} from '../types';
 
 const INITIAL_STATE = {
     toShowPopUp: false,
     toShowLoader: false,
     errorMessage: '',
     taskList: [],
-    isCreateTaskModalVisible: false
+    isCreateTaskModalVisible: false,
+    isQuickActionsModalVisible: false
 };
 
 const GeneralReducer = (state = INITIAL_STATE, action) => {
@@ -35,6 +43,11 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 isCreateTaskModalVisible: action.payload
+            };
+        case SET_SHOW_QUICK_ACTIONS_TASK_MODAL:
+            return{
+                ...state,
+                isQuickActionsModalVisible: action.payload
             };
         default:
             return state;

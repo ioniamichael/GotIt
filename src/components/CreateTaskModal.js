@@ -37,7 +37,7 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
     const closeModal = () => {
         cleanState();
         dispatch(setShowCreateTaskModal(false));
-    }
+    };
 
     const createTask = async () => {
 
@@ -91,6 +91,10 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
         }
     };
 
+    const deleteSubTaskHandler = (index) => {
+        setSubTasks(subTasks.filter((subTask, i) => i !== index));
+    };
+
 
     return (
 
@@ -125,7 +129,13 @@ export const CreateTaskModal = ({isVisible, onClose}) => {
                         placeholder={'Title'} value={taskTitle}
                         onChangeText={setTaskTitle}/>
 
-                    <SubTasksView subTasks={subTasks} onAddSubTask={addSubTaskToList} setSubTaskValue={setSubTaskValue} subTaskValue={subTaskValue}/>
+                    <SubTasksView
+                        subTasks={subTasks}
+                        onAddSubTask={addSubTaskToList}
+                        setSubTaskValue={setSubTaskValue}
+                        subTaskValue={subTaskValue}
+                        onPressDeleteSubTask={deleteSubTaskHandler}
+                    />
 
                     <CustomTextInput
                         placeholder={'Task end date'} value={taskEndDate}

@@ -1,12 +1,13 @@
-import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Animated} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../constants/colors';
 import layout from '../constants/layout';
 import icon from '../constants/icons';
 import {getTaskImageByType} from '../utils';
+import {QuickActions} from './QuickActions';
 
-export const TaskCard = ({data, index, onTaskPress}) => {
+export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
     const isFinished = data.isFinished;
     const hasSubTasks = data.subTasks;
@@ -22,7 +23,10 @@ export const TaskCard = ({data, index, onTaskPress}) => {
                         return (
                             <View style={styles.subTasks}>
                                 <Text style={[{...layout.regularTextBase}, {fontSize: 12}]}>*</Text>
-                                <Text numberOfLines={2} style={[{...layout.regularTextBase}, {fontSize: 12, marginStart: 5}]}>{item}</Text>
+                                <Text numberOfLines={2} style={[{...layout.regularTextBase}, {
+                                    fontSize: 12,
+                                    marginStart: 5,
+                                }]}>{item}</Text>
                             </View>
                         );
                     }}
@@ -32,16 +36,16 @@ export const TaskCard = ({data, index, onTaskPress}) => {
     };
 
     const renderBorderRadiusPosition = () => {
-        if (index % 2 == 0){
-            return{
+        if (index % 2 == 0) {
+            return {
                 borderRadius: 20,
-                borderBottomEndRadius: 0
-            }
-        }else {
-            return{
+                borderBottomEndRadius: 0,
+            };
+        } else {
+            return {
                 borderRadius: 20,
-                borderTopEndRadius: 0
-            }
+                borderTopEndRadius: 0,
+            };
         }
     };
 
@@ -49,10 +53,15 @@ export const TaskCard = ({data, index, onTaskPress}) => {
         <View style={styles.mainContainer}>
 
             <Ionicons name={icon.TASK_STATUS_ICON} size={20} color={isFinished ? color.YELLOW : 'grey'}/>
-            <TouchableOpacity style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]} onPress={() => onTaskPress(data)}>
+            <TouchableOpacity
+                style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]}
+                onPress={() => onTaskPress(data)}
+                onLongPress={() => onTaskLongPress(data)}
+            >
                 <View style={styles.titleContainer}>
-                    <Image source={getTaskImageByType(data.taskType)} style={{width: 30, height: 30, marginEnd: 10}} />
-                    <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 14, width: '69%'}]}>{data.taskTitle}</Text>
+                    <Image source={getTaskImageByType(data.taskType)} style={{width: 30, height: 30, marginEnd: 10}}/>
+                    <Text numberOfLines={1}
+                          style={[{...layout.boldTextBase}, {fontSize: 14, width: '69%'}]}>{data.taskTitle}</Text>
                     <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>7:00am</Text>
                 </View>
                 {renderSubTasks()}
@@ -77,17 +86,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: color.YELLOW,
     },
-    titleContainer:{
+    titleContainer: {
         alignItems: 'center',
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     subTasksContainer: {
         marginTop: 5,
         marginHorizontal: 10,
     },
-    subTasks:{
+    subTasks: {
         marginStart: 30,
-        flexDirection: 'row'
-    }
+        flexDirection: 'row',
+    },
 });
