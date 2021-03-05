@@ -15,13 +15,6 @@ export const setShowLoader = (toShowLoader) => (dispatch) => {
     });
 };
 
-export const setShowCreateTaskModal = (toShowModal) => (dispatch) => {
-    dispatch({
-        type: SET_SHOW_CREATE_TASK_MODAL,
-        payload: toShowModal
-    })
-};
-
 export const setShowQuickActionsModal = (toShowModal) => (dispatch) => {
     dispatch({
         type:SET_SHOW_QUICK_ACTIONS_TASK_MODAL,

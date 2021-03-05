@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, TextInput, Platform} from 'react-native';
-import layout from '../constants/layout';
-import color from '../constants/colors';
+import layout from '../../constants/layout';
+import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {

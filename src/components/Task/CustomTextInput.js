@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, TextInput, Platform} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import layout from '../constants/layout';
-import color from '../constants/colors';
+import layout from '../../constants/layout';
+import color from '../../constants/colors';
 
 export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecure, keyboardType}) => {
 

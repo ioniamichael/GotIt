@@ -1,29 +1,26 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Button} from 'react-native';
-import {TaskList} from '../../components/TaskList';
-import {CreateTaskModal} from '../../components/CreateTaskModal';
-import {setShowCreateTaskModal, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
-import {QuickActions} from '../../components/QuickActions';
+import {StyleSheet, View, Button, Text} from 'react-native';
+import {TaskList} from '../../components/Task/TaskList';
+import {setShowQuickActionsModal} from '../../store/actions/GeneralActions';
+import {QuickActions} from '../../components/Task/QuickActions';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
+import icons from '../../constants/icons';
 
 export const HomeScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
     const userDetails = useSelector(state => state.UserReducer.userDetails);
     const tasks = useSelector(state => state.GeneralReducer.taskList);
-    const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
     const isQuickActionsModalVisible = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
 
     const [quickActionsTask, setQuickActionsTask] = useState({});
 
     const onTaskPressHandler = (task) => {
         navigation.navigate('TaskDetailsScreen', {task});
-    };
-
-    const openCreateTaskModal = () => {
-        dispatch(setShowCreateTaskModal(true));
     };
 
     const openQuickActionsModal = (data) => {
@@ -33,16 +30,38 @@ export const HomeScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Button title={'create'} onPress={openCreateTaskModal}/>
+
             <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
-            <CreateTaskModal isVisible={isCreateTaskModalVisible}/>
             <QuickActions isVisible={isQuickActionsModalVisible} data={quickActionsTask} navigation={navigation}/>
-            {isCreateTaskModalVisible || isQuickActionsModalVisible && <View style={styles.overlay}/>}
+            {isQuickActionsModalVisible && <View style={styles.overlay}/>}
         </View>
     );
 };
 
+HomeScreen.navigationOptions = ({navigation}) => ({
+    headerTitle: () => {
+        return(
+            <View>
+                <Text style={styles.headerTitle}>GotIt</Text>
+            </View>
+        )
+    },
+    headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
+            <Item
+                onPress={
+                    () => navigation.navigate('NotificationsScreen')
+                }
+                title={'NOTIFICATION'}
+                iconName={icons.NOTIFICATION_ICON}/>
+        </HeaderButtons>
+    ),
+});
+
 const styles = StyleSheet.create({
+    headerTitle:{
+        ...layout.boldTextBase
+    },
     container: {
         flex: 1,
         backgroundColor: color.WHITE,

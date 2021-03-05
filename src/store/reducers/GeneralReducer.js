@@ -12,7 +12,6 @@ const INITIAL_STATE = {
     toShowLoader: false,
     errorMessage: '',
     taskList: [],
-    isCreateTaskModalVisible: false,
     isQuickActionsModalVisible: false
 };
 
@@ -38,11 +37,6 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 taskList: state.taskList.filter(t => t.taskCreationDate !== action.payload),
-            };
-        case SET_SHOW_CREATE_TASK_MODAL:
-            return{
-                ...state,
-                isCreateTaskModalVisible: action.payload
             };
         case SET_SHOW_QUICK_ACTIONS_TASK_MODAL:
             return{

@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Modal} from 'react-native';
-import {deleteTask, fetchTasks, setShowQuickActionsModal} from '../store/actions/GeneralActions';
-import {removeTaskFromDB, setTaskAsFinished} from '../services/userService';
+import {deleteTask, fetchTasks, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
+import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import color from '../constants/colors';
+import color from '../../constants/colors';
 import {useDispatch} from 'react-redux';
-import layout from '../constants/layout';
+import layout from '../../constants/layout';
 
 export const QuickActions = ({isVisible, onPressActionButton, data, navigation}) => {
 

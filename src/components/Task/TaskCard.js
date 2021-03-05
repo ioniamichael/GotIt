@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
-import {getTaskImageByType} from '../utils';
+import {getTaskImageByType} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import color from '../constants/colors';
-import layout from '../constants/layout';
-import icon from '../constants/icons';
+import color from '../../constants/colors';
+import layout from '../../constants/layout';
+import icon from '../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
