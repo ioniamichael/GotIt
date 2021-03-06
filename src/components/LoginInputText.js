@@ -30,14 +30,13 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
 const styles = StyleSheet.create({
     container: {
         borderWidth: 1,
-        paddingVertical: Platform.OS === 'ios' ? 10 : 0,
         borderRadius: 100,
         borderColor: color.YELLOW,
         paddingHorizontal: 20,
-        marginVertical: 7.5,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
         width: layout.width * 0.75,
+        height: 50,
     },
     iconStyle: {
         alignSelf: 'center',

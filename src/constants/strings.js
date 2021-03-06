@@ -12,3 +12,8 @@ export default {
     PLACEHOLDER_REPEAT_PASSWORD: 'Repeat password',
     FORGOT_PASSWORD: 'Forgot password?',
 }
+
+export const screens = {
+    TASK_DETAILS_SCREEN: 'TaskDetailsScreen',
+
+};

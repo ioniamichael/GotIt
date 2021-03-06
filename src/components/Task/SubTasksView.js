@@ -8,7 +8,7 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
 
 
     return (
-        <View>
+        <View style={styles.mainContainer}>
             <View style={styles.textInputContainerStyle}>
                 <TextInput
                     style={styles.textInputStyle}
@@ -39,6 +39,9 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
 };
 
 const styles = StyleSheet.create({
+    mainContainer:{
+        marginBottom: 15
+    },
     textInputContainerStyle: {
         flexDirection: 'row',
         width: layout.width * 0.75,
@@ -47,7 +50,6 @@ const styles = StyleSheet.create({
         borderColor: color.YELLOW,
         borderRadius: 100,
         paddingHorizontal: 20,
-        marginVertical: 7.5,
         borderWidth: 1,
         paddingVertical: Platform.OS === 'ios' ? 10 : 0,
         backgroundColor: color.TRANSPARENT_WHITE,

@@ -13,8 +13,6 @@ export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecur
 
             <TextInput
                 style={styles.textInputStyle}
-
-                autoCompleteType={'off'}
                 autoCorrect={false}
                 secureTextEntry={isSecure}
                 keyboardType={keyboardType}
@@ -31,15 +29,15 @@ export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecur
 
 const styles = StyleSheet.create({
     container: {
+        height: 50,
         borderWidth: 1,
-        paddingVertical: Platform.OS === 'ios' ? 10 : 0,
         borderRadius: 100,
         borderColor: color.YELLOW,
         paddingHorizontal: 20,
-        marginVertical: 7.5,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
         width: layout.width * 0.75,
+        marginBottom: 15,
     },
     iconStyle: {
         alignSelf: 'center',

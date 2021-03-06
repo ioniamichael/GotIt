@@ -15,6 +15,7 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import icons from '../../constants/icons';
 import {HomeScreen} from './HomeScreen';
+import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
@@ -93,34 +94,17 @@ export const CreateTaskScreen = ({navigation}) => {
         setSubTasks(subTasks.filter((subTask, i) => i !== index));
     };
 
+    const selectType= (taskType) => {
+        console.log(taskType)
+        setTaskType(taskType.TYPE);
+        setTaskTypeTitle(taskType.title);
+    };
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.innerContainer}>
 
-                <Text style={{...layout.boldTextBase, marginBottom:  layout.height * 0.03}}>Pick your task type.</Text>
-
-                <FlatList
-                    style={styles.typesContainerStyle}
-                    data={assets.PICKER}
-                    showsHorizontalScrollIndicator={false}
-                    horizontal
-                    keyExtractor={(type, index) => 'D' + index.toString()}
-                    renderItem={({item}) => {
-                        return (
-                            <TouchableOpacity
-                                onPress={() => {
-                                    setTaskType(item.TYPE);
-                                    setTaskTypeTitle(item.title);
-                                }}
-                                style={[styles.pickerContainerStyle, renderSelectedTypeStyle(item.TYPE)]}>
-                                <Image source={item.IMAGE} style={styles.pickerImageStyles}/>
-                            </TouchableOpacity>
-                        );
-                    }}
-                />
-
-                <Text style={{...layout.regularTextBase, marginBottom: 20}}>{taskTypeTitle}</Text>
+                <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType} />
 
                 <CustomTextInput
                     placeholder={'Title'} value={taskTitle}
@@ -176,17 +160,5 @@ const styles = StyleSheet.create({
     innerContainer: {
         alignItems: 'center',
         marginBottom: layout.height * 0.03,
-    },
-    typesContainerStyle: {
-        marginBottom: layout.height * 0.03,
-    },
-    pickerContainerStyle:{
-        margin: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    pickerImageStyles: {
-        width: 30,
-        height: 30,
     },
 });
