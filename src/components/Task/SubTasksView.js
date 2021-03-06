@@ -12,7 +12,7 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
             <View style={styles.textInputContainerStyle}>
                 <TextInput
                     style={styles.textInputStyle}
-                    placeholder={'Add new sub task'}
+                    placeholder={'Sub task'}
                     value={subTaskValue}
                     onChangeText={setSubTaskValue}
                 />
@@ -40,11 +40,10 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
 
 const styles = StyleSheet.create({
     mainContainer:{
-        marginBottom: 15
+        marginBottom: 15,
     },
     textInputContainerStyle: {
         flexDirection: 'row',
-        width: layout.width * 0.75,
         alignItems: 'center',
         justifyContent: 'space-between',
         borderColor: color.YELLOW,

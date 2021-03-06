@@ -16,11 +16,13 @@ import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import icons from '../../constants/icons';
 import {HomeScreen} from './HomeScreen';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
+import {TimeAndDatePicker} from '../../components/Task/TimeAndDatePicker';
+import {BABY} from '../../pickerTypes';
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
 
-    const [taskType, setTaskType] = useState('');
+    const [taskType, setTaskType] = useState(BABY);
     const [taskTitle, setTaskTitle] = useState('');
     const [taskCreationDate, setTaskCreationDate] = useState(() => getCurrentDateInTimestamp().toString());
     const [taskEndDate, setTaskEndDate] = useState(() => new Date().toDateString());
@@ -28,10 +30,10 @@ export const CreateTaskScreen = ({navigation}) => {
     const [isExpired, setIsExpired] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
     const [subTaskValue, setSubTaskValue] = useState();
-    const [taskTypeTitle, setTaskTypeTitle] = useState('');
+    const [taskTypeTitle, setTaskTypeTitle] = useState('Baby');
 
     const cleanState = () => {
-        setTaskType('');
+        setTaskType(BABY);
         setTaskTitle('');
         setTaskCreationDate(getCurrentDateInTimestamp().toString());
         setTaskEndDate(new Date().toDateString());
@@ -39,6 +41,8 @@ export const CreateTaskScreen = ({navigation}) => {
         setSubTaskValue('');
         setTaskTypeTitle('');
     };
+
+    console.log(taskType)
 
     const createTask = async () => {
 
@@ -68,21 +72,6 @@ export const CreateTaskScreen = ({navigation}) => {
         }
     };
 
-    const renderSelectedTypeStyle = (type) => {
-        if (type === taskType) {
-            return {
-                backgroundColor: color.YELLOW,
-                borderRadius: 10,
-                width: 50,
-                height: 50,
-            };
-        } else {
-            return {
-                borderRadius: 10,
-            };
-        }
-    };
-
     const addSubTaskToList = () => {
         if (subTaskValue.length) {
             setSubTasks([...subTasks, subTaskValue]);
@@ -95,16 +84,16 @@ export const CreateTaskScreen = ({navigation}) => {
     };
 
     const selectType= (taskType) => {
-        console.log(taskType)
         setTaskType(taskType.TYPE);
         setTaskTypeTitle(taskType.title);
     };
 
     return (
         <ScrollView style={styles.container}>
-            <View style={styles.innerContainer}>
 
-                <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType} />
+            <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType} />
+
+            <View style={styles.innerContainer}>
 
                 <CustomTextInput
                     placeholder={'Title'} value={taskTitle}
@@ -118,10 +107,15 @@ export const CreateTaskScreen = ({navigation}) => {
                     onPressDeleteSubTask={deleteSubTaskHandler}
                 />
 
-                <CustomTextInput
-                    placeholder={'Task end date'} value={taskEndDate}
-                    onChangeText={setTaskEndDate}/>
+                {/*<CustomTextInput*/}
+                    {/*placeholder={'Task end date'} value={taskEndDate}*/}
+                    {/*onChangeText={setTaskEndDate}/>*/}
 
+                <View style={{flexDirection: 'row', justifyContent: 'space-around', width: layout.width * 0.7}}>
+                    <TimeAndDatePicker/>
+                    <TimeAndDatePicker/>
+
+                </View>
                 <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
 
             </View>
@@ -159,6 +153,6 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         alignItems: 'center',
-        marginBottom: layout.height * 0.03,
+        paddingHorizontal: 30
     },
 });

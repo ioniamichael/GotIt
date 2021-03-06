@@ -13,9 +13,10 @@ export const YellowButton = ({buttonTitle ,onButtonPressed}) => {
 
 const styles = StyleSheet.create({
     yellowButton: {
-        marginBottom: 20, backgroundColor: colors.YELLOW,
+        marginBottom: 20,
+        backgroundColor: colors.YELLOW,
         height: 50,
-        width: layout.width * 0.75,
+        width: layout.width *0.8,
         justifyContent: 'center',
         alignItems: 'center',
         ...layout.shadowBase,

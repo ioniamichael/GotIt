@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
-        width: layout.width * 0.75,
         marginBottom: 15,
     },
     iconStyle: {
