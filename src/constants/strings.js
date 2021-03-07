@@ -10,10 +10,10 @@ export default {
     PLACEHOLDER_PASSWORD: 'Password',
     PLACEHOLDER_NAME: 'Your name?',
     PLACEHOLDER_REPEAT_PASSWORD: 'Repeat password',
+    PLACEHOLDER_SUB_TASK: 'Sub task',
+    PLACEHOLDER_TITLE: 'Title',
     FORGOT_PASSWORD: 'Forgot password?',
-}
-
-export const screens = {
-    TASK_DETAILS_SCREEN: 'TaskDetailsScreen',
+    CREATE: 'Create',
+    SELECT_END_DATE: 'Please choose end date',
 
 };

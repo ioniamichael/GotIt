@@ -6,6 +6,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
 import {useDispatch} from 'react-redux';
 import layout from '../../constants/layout';
+import screens from '../../constants/screens';
+import icons from '../../constants/icons';
+
 
 export const QuickActions = ({isVisible, onPressActionButton, data, navigation}) => {
 
@@ -16,7 +19,7 @@ export const QuickActions = ({isVisible, onPressActionButton, data, navigation})
     };
 
     const openTaskDetailsScreen = () => {
-        navigation.navigate('TaskDetailsScreen', {data});
+        navigation.navigate(screens.TASK_DETAILS_SCREEN, {data});
         closeModal()
     };
 
@@ -45,13 +48,13 @@ export const QuickActions = ({isVisible, onPressActionButton, data, navigation})
             transparent>
             <View style={styles.container}>
                 <TouchableOpacity onPress={openTaskDetailsScreen}>
-                    <Ionicons name={'information-outline'} size={24} color={color.BLACK}/>
+                    <Ionicons name={icons.ICON_INFO} size={24} color={color.BLACK}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={checkThisTaskAsFinished}>
-                    <Ionicons name={'checkmark-done-outline'} size={24} color={color.BLACK}/>
+                    <Ionicons name={icons.ICON_TASK_DONE} size={24} color={color.BLACK}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={deleteSelectedTask}>
-                    <Ionicons name={'trash-outline'} size={24} color={color.BLACK}/>
+                    <Ionicons name={icons.ICON_TRASH} size={24} color={color.BLACK}/>
                 </TouchableOpacity>
             </View>
         </Modal>

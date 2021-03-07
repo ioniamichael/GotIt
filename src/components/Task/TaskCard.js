@@ -52,7 +52,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         <View style={styles.mainContainer}>
 
 
-            <Ionicons name={icon.TASK_STATUS_ICON} size={20} color={isFinished ? color.YELLOW : 'grey'}/>
+            <Ionicons name={icon.ICON_TASK_STATUS} size={20} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
 
             <TouchableOpacity
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]}

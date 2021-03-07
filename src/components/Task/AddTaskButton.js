@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {Image, TouchableOpacity, StyleSheet} from 'react-native';
 import assets from '../../constants/assets';
-import layout from '../../constants/layout';
 import {useDispatch} from 'react-redux';
 import {setShowCreateTaskModal} from '../../store/actions/GeneralActions';
 

@@ -5,11 +5,13 @@ import colors from '../../constants/colors';
 import string from '../../constants/strings';
 import layout from '../../constants/layout';
 import assets from '../../constants/assets';
+import screens from '../../constants/screens';
+
 
 export const EntryScreen = ({navigation}) => {
 
-    const navigateToLoginScreen = () => navigation.navigate('LoginScreen');
-    const navigateToSignUpScreen = () => navigation.navigate('SignUpScreen');
+    const navigateToLoginScreen = () => navigation.navigate(screens.LOGIN_SCREEN);
+    const navigateToSignUpScreen = () => navigation.navigate(screens.SIGN_UP_SCREEN);
 
     return (
         <ImageBackground style={styles.container} source={assets.BACKGROUND_IMAGE}>

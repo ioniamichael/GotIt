@@ -7,6 +7,8 @@ import {useDispatch} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import assets from '../constants/assets';
 import color from '../constants/colors';
+import screens from '../constants/screens';
+
 
 export const SplashScreen = ({navigation}) => {
 
@@ -21,11 +23,11 @@ export const SplashScreen = ({navigation}) => {
                     await dispatch(fetchUserDetails());
                     dispatch(fetchTasks());
                     setTimeout(() => {
-                        navigation.navigate('HomeScreen');
+                        navigation.navigate(screens.HOME_SCREEN);
                     }, 3000);
 
                 } else {
-                    navigation.navigate('EntryScreen');
+                    navigation.navigate(screens.ENTRY_SCREEN);
                 }
             });
         } catch (e) {

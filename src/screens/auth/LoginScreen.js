@@ -13,6 +13,8 @@ import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import appConfig from '../../constants/appConfig';
 import {useDispatch, useSelector} from 'react-redux';
+import screens from '../../constants/screens';
+
 
 const INITIAL_STATE = {
     userEmail: '',
@@ -31,7 +33,7 @@ export const LoginScreen = ({navigation}) => {
             try {
                 await login(state.userEmail, state.userPassword);
                 dispatch(setShowLoader(false));
-                navigation.navigate('SplashScreen')
+                navigation.navigate(screens.SPLASH_SCREEN)
             } catch (e) {
                 setTimeout(() => {
                     dispatch(setShowLoader(false));

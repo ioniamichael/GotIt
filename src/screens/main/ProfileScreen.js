@@ -2,11 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import {useSelector} from 'react-redux';
+import {friendsData} from '../../mockData';
 import icons from '../../constants/icons';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
-import {useSelector} from 'react-redux';
-import {friendsData} from '../../mockData';
+import screens from '../../constants/screens';
 
 export const ProfileScreen = ({navigation}) => {
 
@@ -58,10 +59,10 @@ ProfileScreen.navigationOptions = ({navigation}) => ({
         <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
             <Item
                 onPress={
-                    () => navigation.navigate('NotificationsScreen')
+                    () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
                 }
                 title={'NOTIFICATION'}
-                iconName={icons.NOTIFICATION_ICON}/>
+                iconName={icons.ICON_NOTIFICATION}/>
         </HeaderButtons>
     ),
 });

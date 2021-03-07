@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, Platform} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import layout from '../constants/layout';
 import color from '../constants/colors';

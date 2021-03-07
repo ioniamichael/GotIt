@@ -1,7 +1,6 @@
 import React from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
 import {TaskCard} from './TaskCard';
-import layout from '../../constants/layout';
 
 export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
 

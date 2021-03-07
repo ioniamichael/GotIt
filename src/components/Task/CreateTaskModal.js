@@ -12,6 +12,7 @@ import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker'
+import strings from '../../constants/strings';
 
 export const CreateTaskModal = ({navigation, isVisible}) => {
     const dispatch = useDispatch();
@@ -96,7 +97,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
                 <View style={styles.innerContainer}>
 
                     <CustomTextInput
-                        placeholder={'Title'} value={taskTitle}
+                        placeholder={strings.PLACEHOLDER_TITLE} value={taskTitle}
                         onChangeText={setTaskTitle}/>
 
                     <SubTasksView
@@ -110,7 +111,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
 
                     <View style={styles.mainContainer}>
                         <TouchableOpacity>
-                            <Text style={{...layout.boldTextBase, fontSize: 13}}>Please choose end date</Text>
+                            <Text style={{...layout.boldTextBase, fontSize: 13}}>{strings.SELECT_END_DATE}</Text>
                         </TouchableOpacity>
                         <DatePicker
                             date={taskEndDate}
@@ -120,7 +121,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
                         />
                     </View>
 
-                    <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
+                    <YellowButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
 
                 </View>
             </ScrollView>

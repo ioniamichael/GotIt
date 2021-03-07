@@ -3,6 +3,8 @@ import {StyleSheet, View, Text, TouchableOpacity, TextInput, Platform} from 'rea
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import strings from '../../constants/strings';
+import icons from '../../constants/icons';
 
 export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {
 
@@ -12,13 +14,13 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
             <View style={styles.textInputContainerStyle}>
                 <TextInput
                     style={styles.textInputStyle}
-                    placeholder={'Sub task'}
+                    placeholder={strings.PLACEHOLDER_SUB_TASK}
                     value={subTaskValue}
                     onChangeText={setSubTaskValue}
                 />
 
                 <TouchableOpacity style={styles.addButtonStyle} onPress={onAddSubTask}>
-                    <Ionicons name={'add-circle-outline'} size={35} color={color.YELLOW}/>
+                    <Ionicons name={icons.ICON_ADD} size={35} color={color.YELLOW}/>
                 </TouchableOpacity>
             </View>
 
@@ -28,7 +30,7 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
                     <View key={subTask}  style={styles.subTasksContainer}>
                         <Text style={styles.subTaskText}>{subTask}</Text>
                         <TouchableOpacity onPress={() => onPressDeleteSubTask(index)}>
-                            <Ionicons name={'trash-outline'} size={30} color={color.BLACK}/>
+                            <Ionicons name={icons.ICON_TRASH} size={30} color={color.DARK_GREY}/>
                         </TouchableOpacity>
                     </View>
                 );
