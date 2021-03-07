@@ -12,6 +12,15 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
+import colors from './constants/colors';
+
+const headerDefaultOption = {
+    headerShown: true,
+    headerStyle: {
+        backgroundColor: colors.YELLOW
+    },
+    ...TransitionPresets.SlideFromRightIOS,
+};
 
 const AuthStack = createStackNavigator({
     EntryScreen,
@@ -28,19 +37,13 @@ const HomeStack = createStackNavigator({
     HomeScreen,
     TaskDetailsScreen,
 }, {
-    defaultNavigationOptions: {
-        headerShown: true,
-        ...TransitionPresets.SlideFromRightIOS,
-    },
+    defaultNavigationOptions: headerDefaultOption
 });
 
 const ProfileStack = createStackNavigator({
     ProfileScreen,
 }, {
-    defaultNavigationOptions: {
-        headerShown: true,
-        ...TransitionPresets.SlideFromRightIOS,
-    },
+    defaultNavigationOptions: headerDefaultOption
 });
 
 

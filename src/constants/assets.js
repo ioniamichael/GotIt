@@ -4,6 +4,7 @@ export default {
     BACKGROUND_IMAGE: require('../assets/background.jpg'),
     LOGIN_BACKGROUND_IMAGE: require('../assets/loginBackground.jpg'),
     APP_LOADER: require('../assets/loader.json'),
+    NO_TASK_PLACEHOLDER_ANIM: require('../assets/noTask'),
     ADD_TASK_BUTTON: require('../assets/plus.png'),
     PICKER: [
         {TYPE: BABY, IMAGE: require('../assets/pickerImages/baby.png'), title: 'Baby'},

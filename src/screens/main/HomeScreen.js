@@ -6,12 +6,13 @@ import {QuickActions} from '../../components/Task/QuickActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {CreateTaskModal} from '../../components/Task/CreateTaskModal';
+import {AddTaskButton} from '../../components/Task/AddTaskButton';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icons from '../../constants/icons';
-import {AddTaskButton} from '../../components/Task/AddTaskButton';
 import screens from '../../constants/screens';
+import {NoTasksPlaceHolder} from '../../components/NoTasksPlaceholder';
 
 
 export const HomeScreen = ({navigation}) => {
@@ -22,6 +23,8 @@ export const HomeScreen = ({navigation}) => {
     const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
     const [quickActionsTask, setQuickActionsTask] = useState({});
 
+    console.log(tasks.length);
+
     const onTaskPressHandler = (task) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
@@ -31,8 +34,11 @@ export const HomeScreen = ({navigation}) => {
         dispatch(setShowQuickActionsModal(true));
     };
 
+
+
     return (
         <View style={styles.container}>
+            {!tasks.length && <NoTasksPlaceHolder/>}
             <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
             <QuickActions isVisible={isQuickActionsModalVisible} data={quickActionsTask} navigation={navigation}/>
             <CreateTaskModal isVisible={isCreateTaskModalVisible}/>
