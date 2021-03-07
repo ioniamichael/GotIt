@@ -1,25 +1,19 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Modal, ScrollView, FlatList, TouchableOpacity, Image, Text} from 'react-native';
+import {StyleSheet, View, Modal, ScrollView, Text} from 'react-native';
 import {CustomTextInput} from '../../components/Task/CustomTextInput';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createNewTask} from '../../services/userService';
-import {fetchTasks} from '../../store/actions/GeneralActions';
+import {fetchTasks, setShowCreateTaskModal} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
+import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
+import {TimeAndDatePicker} from '../../components/Task/TimeAndDatePicker';
 import {useDispatch} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
-import assets from '../../constants/assets';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {AppHeaderButtons} from '../../components/AppHeaderButtons';
-import icons from '../../constants/icons';
-import {HomeScreen} from './HomeScreen';
-import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
-import {TimeAndDatePicker} from '../../components/Task/TimeAndDatePicker';
 import {BABY} from '../../pickerTypes';
 
-export const CreateTaskScreen = ({navigation}) => {
+export const CreateTaskModal = ({navigation, isVisible}) => {
     const dispatch = useDispatch();
 
     const [taskType, setTaskType] = useState(BABY);
@@ -42,15 +36,10 @@ export const CreateTaskScreen = ({navigation}) => {
         setTaskTypeTitle('');
     };
 
-    console.log(taskType)
-
     const createTask = async () => {
-
         if (taskType.length && taskTitle.length) {
-
             setTaskCreationDate(getCurrentDateInTimestamp().toString());
             setTaskEndDate(new Date().toDateString());
-
             const task = {
                 taskType,
                 taskTitle,
@@ -60,12 +49,11 @@ export const CreateTaskScreen = ({navigation}) => {
                 isExpired,
                 isFinished,
             };
-
             try {
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();
-                navigation.navigate('HomeScreen');
+                dispatch(setShowCreateTaskModal(false));
             } catch (e) {
                 console.log('::CREATE TASK ', e);
             }
@@ -83,76 +71,74 @@ export const CreateTaskScreen = ({navigation}) => {
         setSubTasks(subTasks.filter((subTask, i) => i !== index));
     };
 
-    const selectType= (taskType) => {
+    const selectType = (taskType) => {
         setTaskType(taskType.TYPE);
         setTaskTypeTitle(taskType.title);
     };
 
+    const closeModal = () => {
+        dispatch(setShowCreateTaskModal(false));
+        cleanState();
+    };
+
+
     return (
-        <ScrollView style={styles.container}>
 
-            <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType} />
+        <Modal
+            onRequestClose={() => closeModal()}
+            visible={isVisible}
+            animationType='slide'
+               transparent>
+            <ScrollView style={styles.container}>
 
-            <View style={styles.innerContainer}>
+                <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
-                <CustomTextInput
-                    placeholder={'Title'} value={taskTitle}
-                    onChangeText={setTaskTitle}/>
+                <View style={styles.innerContainer}>
 
-                <SubTasksView
-                    subTasks={subTasks}
-                    onAddSubTask={addSubTaskToList}
-                    setSubTaskValue={setSubTaskValue}
-                    subTaskValue={subTaskValue}
-                    onPressDeleteSubTask={deleteSubTaskHandler}
-                />
+                    <CustomTextInput
+                        placeholder={'Title'} value={taskTitle}
+                        onChangeText={setTaskTitle}/>
 
-                {/*<CustomTextInput*/}
+                    <SubTasksView
+                        subTasks={subTasks}
+                        onAddSubTask={addSubTaskToList}
+                        setSubTaskValue={setSubTaskValue}
+                        subTaskValue={subTaskValue}
+                        onPressDeleteSubTask={deleteSubTaskHandler}
+                    />
+
+                    {/*<CustomTextInput*/}
                     {/*placeholder={'Task end date'} value={taskEndDate}*/}
                     {/*onChangeText={setTaskEndDate}/>*/}
 
-                <View style={{flexDirection: 'row', justifyContent: 'space-around', width: layout.width * 0.7}}>
-                    <TimeAndDatePicker/>
-                    <TimeAndDatePicker/>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-around', width: layout.width * 0.7}}>
+                        <TimeAndDatePicker/>
+                        <TimeAndDatePicker/>
+
+                    </View>
+                    <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
 
                 </View>
-                <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
-
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </Modal>
     );
 };
 
-CreateTaskScreen.navigationOptions = ({navigation}) => ({
-    headerTitle: () => {
-        return (
-            <View>
-                <Text style={styles.headerTitle}>Create new task</Text>
-            </View>
-        );
-    },
-    headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
-            <Item
-                onPress={
-                    () => navigation.navigate('NotificationsScreen')
-                }
-                title={'NOTIFICATION'}
-                iconName={icons.NOTIFICATION_ICON}/>
-        </HeaderButtons>
-    ),
-});
-
 const styles = StyleSheet.create({
-    headerTitle: {
-        ...layout.boldTextBase,
-    },
     container: {
-        backgroundColor: color.WHITE,
         paddingTop: layout.height * 0.03,
+        width: layout.width,
+        height: layout.height * 0.7,
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: color.WHITE,
+        ...layout.shadowBase,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+
     },
     innerContainer: {
         alignItems: 'center',
-        paddingHorizontal: 30
+        paddingHorizontal: 30,
     },
 });

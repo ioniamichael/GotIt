@@ -22,6 +22,13 @@ export const setShowQuickActionsModal = (toShowModal) => (dispatch) => {
     })
 };
 
+export const setShowCreateTaskModal = (toShowModal) => (dispatch) => {
+    dispatch({
+        type: SET_SHOW_CREATE_TASK_MODAL,
+        payload: toShowModal
+    })
+};
+
 export const setShowPopUp = (toShowPopUp, messageText) => (dispatch) => {
     dispatch({
         type: SHOW_POPUP,

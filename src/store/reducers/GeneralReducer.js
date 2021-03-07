@@ -12,7 +12,8 @@ const INITIAL_STATE = {
     toShowLoader: false,
     errorMessage: '',
     taskList: [],
-    isQuickActionsModalVisible: false
+    isQuickActionsModalVisible: false,
+    isCreateTaskModalVisible: false
 };
 
 const GeneralReducer = (state = INITIAL_STATE, action) => {
@@ -42,6 +43,11 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 isQuickActionsModalVisible: action.payload
+            };
+        case SET_SHOW_CREATE_TASK_MODAL:
+            return{
+                ...state,
+                isCreateTaskModalVisible: action.payload
             };
         default:
             return state;

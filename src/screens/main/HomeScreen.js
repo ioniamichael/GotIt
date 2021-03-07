@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Button, Text} from 'react-native';
 import {TaskList} from '../../components/Task/TaskList';
-import {setShowQuickActionsModal} from '../../store/actions/GeneralActions';
+import {setShowCreateTaskModal, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
 import {QuickActions} from '../../components/Task/QuickActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icons from '../../constants/icons';
+import {CreateTaskModal} from '../../components/Task/CreateTaskModal';
 
 export const HomeScreen = ({navigation}) => {
 
@@ -16,6 +17,7 @@ export const HomeScreen = ({navigation}) => {
     const userDetails = useSelector(state => state.UserReducer.userDetails);
     const tasks = useSelector(state => state.GeneralReducer.taskList);
     const isQuickActionsModalVisible = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
+    const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
 
     const [quickActionsTask, setQuickActionsTask] = useState({});
 
@@ -30,21 +32,22 @@ export const HomeScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-
+            <Button title={'create'} onPress={() => dispatch(setShowCreateTaskModal(true))}/>
             <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
             <QuickActions isVisible={isQuickActionsModalVisible} data={quickActionsTask} navigation={navigation}/>
-            {isQuickActionsModalVisible && <View style={styles.overlay}/>}
+            <CreateTaskModal isVisible={isCreateTaskModalVisible}/>
+            {isQuickActionsModalVisible || isCreateTaskModalVisible && <View style={styles.overlay}/>}
         </View>
     );
 };
 
 HomeScreen.navigationOptions = ({navigation}) => ({
     headerTitle: () => {
-        return(
+        return (
             <View>
                 <Text style={styles.headerTitle}>GotIt</Text>
             </View>
-        )
+        );
     },
     headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
@@ -59,8 +62,8 @@ HomeScreen.navigationOptions = ({navigation}) => ({
 });
 
 const styles = StyleSheet.create({
-    headerTitle:{
-        ...layout.boldTextBase
+    headerTitle: {
+        ...layout.boldTextBase,
     },
     container: {
         flex: 1,

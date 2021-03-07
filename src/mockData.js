@@ -1,0 +1,16 @@
+export const friendsData = [
+    {email: 'friend1@gmail.com', name:'Friend#1', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend2@gmail.com', name:'Friend#2', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend3@gmail.com', name:'Friend#3', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend4@gmail.com', name:'Friend#4', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend5@gmail.com', name:'Friend#5', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend6@gmail.com', name:'Friend#6', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend7@gmail.com', name:'Friend#7', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend8@gmail.com', name:'Friend#8', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend9@gmail.com', name:'Friend#9', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend10@gmail.com', name:'Friend#10', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend11@gmail.com', name:'Friend#11', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend12@gmail.com', name:'Friend#12', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend13@gmail.com', name:'Friend#13', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+    {email: 'friend14@gmail.com', name:'Friend#14', photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',userID:'1'},
+];

@@ -9,7 +9,6 @@ import {HomeScreen} from './screens/main/HomeScreen';
 import {EntryScreen} from './screens/auth/EntryScreen';
 import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 import {ProfileScreen} from './screens/main/ProfileScreen';
-import {CreateTaskScreen} from './screens/main/CreateTaskScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
@@ -35,15 +34,6 @@ const HomeStack = createStackNavigator({
     },
 });
 
-const CreateTaskStack = createStackNavigator({
-    CreateTaskScreen
-}, {
-    defaultNavigationOptions: {
-        headerShown: true,
-        ...TransitionPresets.SlideFromRightIOS,
-    },
-});
-
 const ProfileStack = createStackNavigator({
     ProfileScreen,
 }, {
@@ -60,16 +50,6 @@ const BottomTabBar = createBottomTabNavigator({
                 tabBarLabel: 'Home',
                 tabBarIcon: info => (
                     <Ionicons name={icons.HOME_ICON} size={layout.defaultIconSize} color={info.tintColor}/>
-                ),
-            },
-        },
-        Create: {
-            screen: CreateTaskStack,
-            navigationOptions: {
-                headerShow: true,
-                tabBarLabel: 'Create',
-                tabBarIcon: info => (
-                    <Ionicons name={icons.CREATE_ICON} size={layout.defaultIconSize} color={info.tintColor}/>
                 ),
             },
         },
