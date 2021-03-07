@@ -9,4 +9,7 @@ export default {
     ADD_ICON: 'add-circle-outline',
     PROFILE_ICON: 'people-outline',
     CREATE_ICON: 'add-circle-outline',
+    SETTINGS_ICON: 'settings-outline',
+    TASKS: 'newspaper-outline',
+    SEARCH: 'search-outline'
 };

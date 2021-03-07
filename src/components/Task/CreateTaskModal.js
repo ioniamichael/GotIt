@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Modal, ScrollView, Text} from 'react-native';
+import {StyleSheet, View, Modal, ScrollView, Text, TouchableOpacity} from 'react-native';
 import {CustomTextInput} from '../../components/Task/CustomTextInput';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
@@ -7,11 +7,11 @@ import {createNewTask} from '../../services/userService';
 import {fetchTasks, setShowCreateTaskModal} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
-import {TimeAndDatePicker} from '../../components/Task/TimeAndDatePicker';
 import {useDispatch} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import {BABY} from '../../pickerTypes';
+import DatePicker from 'react-native-date-picker'
 
 export const CreateTaskModal = ({navigation, isVisible}) => {
     const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
     const [taskType, setTaskType] = useState(BABY);
     const [taskTitle, setTaskTitle] = useState('');
     const [taskCreationDate, setTaskCreationDate] = useState(() => getCurrentDateInTimestamp().toString());
-    const [taskEndDate, setTaskEndDate] = useState(() => new Date().toDateString());
+    const [taskEndDate, setTaskEndDate] = useState(new Date());
     const [subTasks, setSubTasks] = useState([]);
     const [isExpired, setIsExpired] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
@@ -30,7 +30,6 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
         setTaskType(BABY);
         setTaskTitle('');
         setTaskCreationDate(getCurrentDateInTimestamp().toString());
-        setTaskEndDate(new Date().toDateString());
         setSubTasks([]);
         setSubTaskValue('');
         setTaskTypeTitle('');
@@ -39,7 +38,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
     const createTask = async () => {
         if (taskType.length && taskTitle.length) {
             setTaskCreationDate(getCurrentDateInTimestamp().toString());
-            setTaskEndDate(new Date().toDateString());
+
             const task = {
                 taskType,
                 taskTitle,
@@ -50,6 +49,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
                 isFinished,
             };
             try {
+                console.log('::TASK CREATION END DATE',taskEndDate);
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();
@@ -88,7 +88,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
             onRequestClose={() => closeModal()}
             visible={isVisible}
             animationType='slide'
-               transparent>
+            transparent>
             <ScrollView style={styles.container}>
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
@@ -107,15 +107,19 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
                         onPressDeleteSubTask={deleteSubTaskHandler}
                     />
 
-                    {/*<CustomTextInput*/}
-                    {/*placeholder={'Task end date'} value={taskEndDate}*/}
-                    {/*onChangeText={setTaskEndDate}/>*/}
 
-                    <View style={{flexDirection: 'row', justifyContent: 'space-around', width: layout.width * 0.7}}>
-                        <TimeAndDatePicker/>
-                        <TimeAndDatePicker/>
-
+                    <View style={styles.mainContainer}>
+                        <TouchableOpacity>
+                            <Text style={{...layout.boldTextBase, fontSize: 13}}>Please choose end date</Text>
+                        </TouchableOpacity>
+                        <DatePicker
+                            date={taskEndDate}
+                            onDateChange={setTaskEndDate}
+                            minimumDate={new Date()}
+                            minuteInterval={5}
+                        />
                     </View>
+
                     <YellowButton buttonTitle={'Create'} onButtonPressed={createTask}/>
 
                 </View>

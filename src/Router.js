@@ -9,6 +9,9 @@ import {HomeScreen} from './screens/main/HomeScreen';
 import {EntryScreen} from './screens/auth/EntryScreen';
 import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 import {ProfileScreen} from './screens/main/ProfileScreen';
+import {AllTasksScreen} from './screens/main/AllTasksScreen';
+import {SettingsScreen} from './screens/main/SettingsScreen';
+import {SearchScreen} from './screens/main/SearchScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
@@ -27,6 +30,17 @@ const AuthStack = createStackNavigator({
 const HomeStack = createStackNavigator({
     HomeScreen,
     TaskDetailsScreen,
+    ProfileScreen
+}, {
+    defaultNavigationOptions: {
+        headerShown: true,
+        ...TransitionPresets.SlideFromRightIOS,
+    },
+});
+
+const AllTasksStack = createStackNavigator({
+    AllTasksScreen,
+    TaskDetailsScreen,
 }, {
     defaultNavigationOptions: {
         headerShown: true,
@@ -43,6 +57,7 @@ const ProfileStack = createStackNavigator({
     },
 });
 
+
 const BottomTabBar = createBottomTabNavigator({
         Home: {
             screen: HomeStack,
@@ -53,12 +68,39 @@ const BottomTabBar = createBottomTabNavigator({
                 ),
             },
         },
-        Profile: {
-            screen: ProfileStack,
+        AllTasks: {
+            screen: AllTasksStack,
             navigationOptions: {
-                tabBarLabel: 'Profile',
+                tabBarLabel: 'AllTasks',
                 tabBarIcon: info => (
-                    <Ionicons name={icons.PROFILE_ICON} size={layout.defaultIconSize} color={info.tintColor}/>
+                    <Ionicons name={icons.TASKS} size={layout.defaultIconSize} color={info.tintColor}/>
+                ),
+            },
+        },
+        Search: {
+            screen: SearchScreen,
+            navigationOptions: {
+                tabBarLabel: 'AllTasks',
+                tabBarIcon: info => (
+                    <Ionicons name={icons.SEARCH} size={layout.defaultIconSize} color={info.tintColor}/>
+                ),
+            },
+        },
+        // Create: {
+        //     screen: CreateTaskModal,
+        //     navigationOptions:{
+        //         tabBarIcon: () => (
+        //             <Image style={{ width: 80, height: 80 }}
+        //                    source={assets.ADD_TASK_BUTTON} />
+        //         )
+        //     }
+        // },
+        Settings: {
+            screen: SettingsScreen,
+            navigationOptions: {
+                tabBarLabel: 'Settings',
+                tabBarIcon: info => (
+                    <Ionicons name={icons.SETTINGS_ICON} size={layout.defaultIconSize} color={info.tintColor}/>
                 ),
             },
         },

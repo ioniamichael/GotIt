@@ -8,7 +8,7 @@ import color from '../../constants/colors';
 import {useSelector} from 'react-redux';
 import {friendsData} from '../../mockData';
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({navigation}) => {
 
     const userDetails = useSelector(state => state.UserReducer.userDetails);
 
