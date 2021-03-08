@@ -90,7 +90,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
             visible={isVisible}
             animationType='slide'
             transparent>
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'} >
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
