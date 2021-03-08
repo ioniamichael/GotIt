@@ -12,14 +12,15 @@ export const login = (email, password) => new Promise(async (resolve, reject) =>
     }
 });
 
-export const createAccount = (email, password, name) => new Promise(async (resolve, reject) => {
+export const createAccount = (email, password, name, image) => new Promise(async (resolve, reject) => {
     try {
         const result = await auth().createUserWithEmailAndPassword(email, password);
         if (result) {
-            await auth().currentUser.updateProfile({
-                displayName: name,
-                photoURL: 'https://pagesix.com/wp-content/uploads/sites/3/2019/09/ashton-kutcher.jpg?quality=80&strip=all',
-            });
+            await setUserDataToDB(name, email, image);
+            // await auth().currentUser.updateProfile({
+            //     displayName: name,
+            //     photoURL: image,
+            // });
             resolve();
         } else {
             reject();
@@ -29,14 +30,28 @@ export const createAccount = (email, password, name) => new Promise(async (resol
     }
 });
 
-export const setUserDataToDB = (name, accountCreateDate, email) => new Promise(async (resolve, reject) => {
+export const setUserDataToDB = (name, email, image) => new Promise(async (resolve, reject) => {
     try {
         await database().ref(firebaseRefs.USERS_REF).child(auth().currentUser.uid).child(firebaseRefs.CURRENT_USER_DETAILS).set({
             name,
-            accountCreateDate,
             email,
+            image,
         });
         resolve();
+    } catch (e) {
+        reject(e);
+    }
+});
+
+export const fetchUserDetailsFromDB = () => new Promise(async (resolve, reject) => {
+    try {
+        const snapshot = await database().ref('users').child(auth().currentUser.uid).child('userDetails').once('value');
+        if (snapshot.exists) {
+            const data = snapshot.val();
+            resolve(data);
+        } else {
+            resolve(snapshot.val());
+        }
     } catch (e) {
         reject(e);
     }
@@ -72,7 +87,7 @@ export const setTaskAsFinished = (task) => new Promise(async (resolve, reject) =
     try {
         await database().ref('tasks').child(auth().currentUser.uid).child(task.taskCreationDate.toString()).child('isFinished').set(!task.isFinished);
         resolve();
-    }catch (e) {
+    } catch (e) {
         reject(e);
     }
 });
@@ -81,7 +96,7 @@ export const removeTaskFromDB = (taskID) => new Promise(async (resolve, reject) 
     try {
         await database().ref('tasks').child(auth().currentUser.uid).child(taskID).remove();
         resolve();
-    }catch (e) {
+    } catch (e) {
         reject(e);
     }
 });

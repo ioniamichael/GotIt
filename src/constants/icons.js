@@ -14,5 +14,6 @@ export default {
     ICON_SEARCH: 'search-outline',
     ICON_TRASH: 'trash-outline',
     ICON_INFO:'information-outline',
-    ICON_TASK_DONE: 'checkmark-done-outline'
+    ICON_TASK_DONE: 'checkmark-done-outline',
+    ICON_UPLOAD: 'cloud-upload-outline'
 };

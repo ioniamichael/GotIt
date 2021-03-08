@@ -17,7 +17,7 @@ export const ProfileScreen = ({navigation}) => {
         <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
                 <TouchableOpacity>
-                    <Image style={styles.photoStyle} source={{uri: userDetails.photoURL}}/>
+                    <Image source={{ uri: `data:image/jpeg;base64,${userDetails.image}` }} style={styles.photoStyle} />
                 </TouchableOpacity>
                 <View style={styles.emailAndNameContainer}>
                     <Text style={{...layout.boldTextBase}}>{userDetails.name}</Text>

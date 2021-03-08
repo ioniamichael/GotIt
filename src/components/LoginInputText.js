@@ -29,6 +29,7 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
 
 const styles = StyleSheet.create({
     container: {
+        marginBottom: 10,
         borderWidth: 1,
         borderRadius: 100,
         borderColor: color.YELLOW,

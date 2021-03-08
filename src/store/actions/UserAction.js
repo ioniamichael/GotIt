@@ -1,25 +1,9 @@
 import {FETCH_USER_DETAILS} from '../types';
-import auth from '@react-native-firebase/auth';
+import {fetchUserDetailsFromDB} from '../../services/userService';
 
-export const fetchUserDetails = () => (dispatch) => new Promise(async (resolve, reject) => {
-    try {
-        const user = await auth().currentUser;
-        if (user) {
-            const userData = {
-                name: user.displayName,
-                email: user.email,
-                photoURL: user.photoURL,
-                userID: user.uid,
-            };
-            dispatch({
-                type: FETCH_USER_DETAILS,
-                payload: userData
-            });
-            resolve(userData);
-        } else {
-            reject();
-        }
-    } catch (e) {
-        reject(e);
-    }
-});
+export const fetchUserDetails = () => async (dispatch) => {
+    dispatch({
+        type: FETCH_USER_DETAILS,
+        payload: await fetchUserDetailsFromDB()
+    })
+};

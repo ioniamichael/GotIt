@@ -13,6 +13,7 @@ import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import {useDispatch, useSelector} from 'react-redux';
 import screens from '../../constants/screens';
+import {ImagePicker} from '../../components/ImagePicker';
 
 
 const INITIAL_STATE = {
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
     userRepeatPassword: '',
     accountCreationDate: getCurrentDateInTimestamp(),
     userName: '',
+    image: null
 
 };
 
@@ -33,7 +35,7 @@ export const SignUpScreen = ({navigation}) => {
     const onSignUpButtonPressed = async () => {
         dispatch(setShowLoader(true));
         try {
-            await createAccount(state.userEmail, state.userPassword, state.userName);
+            await createAccount(state.userEmail, state.userPassword, state.userName, state.image);
             dispatch(setShowLoader(false));
             navigation.navigate(screens.SPLASH_SCREEN);
         } catch (e) {
@@ -41,6 +43,8 @@ export const SignUpScreen = ({navigation}) => {
             dispatch(setShowLoader(false));
         }
     };
+
+    console.log(state.image);
 
     return (
         <ImageBackground style={styles.container} source={assets.LOGIN_BACKGROUND_IMAGE}>
@@ -52,6 +56,12 @@ export const SignUpScreen = ({navigation}) => {
             </View>
 
             <View style={styles.bottomContainer}>
+
+                <ImagePicker onImagePicked={image => setState((prevState) => ({
+                    ...prevState,
+                    image
+                }))} />
+
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
                                 value={state.userEmail}
                                 onChangeText={userEmail => setState((prevState) => ({

@@ -6,6 +6,7 @@ export default {
     APP_LOADER: require('../assets/loader.json'),
     NO_TASK_PLACEHOLDER_ANIM: require('../assets/noTask'),
     ADD_TASK_BUTTON: require('../assets/plus.png'),
+    IMAGE_UPLOAD: require('../assets/image_upload.png'),
     PICKER: [
         {TYPE: BABY, IMAGE: require('../assets/pickerImages/baby.png'), title: 'Baby'},
         {TYPE: BAR, IMAGE: require('../assets/pickerImages/bar.png'), title: 'Cocktails'},
