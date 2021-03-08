@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
 import {getTaskImageByType} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -7,6 +7,7 @@ import layout from '../../constants/layout';
 import icon from '../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
+
 
     const isFinished = data.isFinished;
     const hasSubTasks = data.subTasks;
@@ -82,10 +83,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    typeImageContainer:{
+    typeImageContainer: {
         backgroundColor: color.GREY,
         marginEnd: 10,
-        padding:5,
+        padding: 5,
         borderRadius: 10,
     },
     typeImageStyle: {
