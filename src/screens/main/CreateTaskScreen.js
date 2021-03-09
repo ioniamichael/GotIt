@@ -51,7 +51,7 @@ export const CreateTaskScreen = ({navigation}) => {
                 isFinished,
             };
             try {
-                console.log('::TASK CREATION END DATE',taskEndDate);
+                console.log('::TASK CREATION END DATE', taskEndDate);
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();
@@ -80,7 +80,9 @@ export const CreateTaskScreen = ({navigation}) => {
 
 
     return (
-            <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
+        <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
+
+            <View style={{flex:1}}>
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
@@ -99,33 +101,36 @@ export const CreateTaskScreen = ({navigation}) => {
                     />
 
 
-                    <View style={styles.mainContainer}>
+                    <View style={{marginBottom: 20}}>
+
                         <TouchableOpacity>
-                            <Text style={{...layout.boldTextBase, fontSize: 13}}>{strings.SELECT_END_DATE}</Text>
+                            <Text style={{...layout.regularTextBase, marginBottom: 15, marginStart: -15}}>{strings.SELECT_END_DATE}</Text>
                         </TouchableOpacity>
+
                         <DatePicker
                             date={taskEndDate}
                             onDateChange={setTaskEndDate}
                             minimumDate={new Date()}
                             minuteInterval={5}
                         />
+
                     </View>
 
                     <YellowButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
 
                 </View>
-            </ScrollView>
+            </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        padding: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
-        ...layout.shadowBase,
-        paddingVertical: 30
     },
     innerContainer: {
+        marginVertical: 30,
         alignItems: 'center',
-        paddingHorizontal: 30,
     },
 });

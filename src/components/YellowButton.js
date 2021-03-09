@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     yellowButton: {
         backgroundColor: colors.YELLOW,
         height: 50,
+        marginBottom: 20,
         width: layout.width *0.8,
         justifyContent: 'center',
         alignItems: 'center',

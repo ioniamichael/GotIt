@@ -29,20 +29,24 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
-        borderRadius: 100,
-        borderColor: color.YELLOW,
+        marginBottom: 10,
+        borderBottomWidth: 0.5,
+        borderColor: color.DARK_GREY,
+        paddingHorizontal: 10,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
         width: layout.width * 0.75,
-        height: 50,
+        height: 70,
     },
     iconStyle: {
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
+        marginBottom: 10
     },
     textInputStyle: {
         flex: 1,
         ...layout.regularTextBase,
         fontSize: 14,
+        alignSelf: 'flex-end',
+
     },
 });

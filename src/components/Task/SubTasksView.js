@@ -25,16 +25,17 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
             </View>
 
 
-            {subTasks.map((subTask, index) => {
-                return (
-                    <View key={subTask}  style={styles.subTasksContainer}>
-                        <Text style={styles.subTaskText}>{subTask}</Text>
-                        <TouchableOpacity onPress={() => onPressDeleteSubTask(index)}>
-                            <Ionicons name={icons.ICON_TRASH} size={30} color={color.DARK_GREY}/>
-                        </TouchableOpacity>
-                    </View>
-                );
-            })}
+
+                {subTasks.map((subTask, index) => {
+                    return (
+                        <View key={subTask}  style={styles.subTasksContainer}>
+                            <Text style={styles.subTaskText}>{subTask}</Text>
+                            <TouchableOpacity onPress={() => onPressDeleteSubTask(index)}>
+                                <Ionicons name={icons.ICON_TRASH} size={20} color={color.DARK_GREY}/>
+                            </TouchableOpacity>
+                        </View>
+                    );
+                })}
 
         </View>
     );
@@ -42,8 +43,12 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
 
 const styles = StyleSheet.create({
     mainContainer:{
+        width: layout.width - (layout.defaultPaddingSize *2),
+        marginBottom: 20,
     },
     textInputContainerStyle: {
+        marginBottom:20,
+        paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -54,13 +59,18 @@ const styles = StyleSheet.create({
     },
     textInputStyle: {
         width: '85%',
+        height: 50
     },
-    addButtonStyle: {},
+    addButtonStyle: {
+
+    },
     subTasksContainer: {
+        marginHorizontal:10,
+        marginBottom:10,
+        paddingHorizontal:20,
         flexDirection: 'row',
-        width: layout.width * 0.75,
         backgroundColor: color.GREY,
-        height: 40,
+        height: 60,
         alignItems: 'center',
         justifyContent: 'space-between',
         borderRadius: 40,

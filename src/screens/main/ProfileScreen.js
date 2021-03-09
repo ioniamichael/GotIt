@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import {ImagePicker} from "../../components/ImagePicker";
 import {useSelector} from 'react-redux';
 import {friendsData} from '../../mockData';
 import icons from '../../constants/icons';
@@ -13,36 +14,32 @@ export const ProfileScreen = ({navigation}) => {
 
     const userDetails = useSelector(state => state.UserReducer.userDetails);
 
-    console.log(userDetails.image);
-
     return (
         <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity>
-                    <Image source={{ uri: `data:image/jpeg;base64,${userDetails.image}` }} style={styles.photoStyle} />
-                </TouchableOpacity>
+                <ImagePicker image={userDetails.image} onImagePicked={() => console.log('picked')} />
                 <View style={styles.emailAndNameContainer}>
                     <Text style={{...layout.boldTextBase}}>{userDetails.name}</Text>
                     <Text style={{...layout.regularTextBase}}>{userDetails.email}</Text>
                 </View>
             </View>
-            <View style={styles.friendContainer}>
-                <Text style={{...layout.boldTextBase}}>Your friend:</Text>
-                <FlatList
-                    data={friendsData}
-                    keyExtractor={(friend, index) => 'D' + index.toString()}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({friend, index}) => {
-                        return (
-                            <TouchableOpacity style={styles.friendsCard}>
-                                <Image source={{uri: friendsData[index].photoURL}} style={{width: 100, height: 100, borderRadius: 30}}/>
-                                <Text style={{width: 100}}>{friendsData[index].name}</Text>
-                            </TouchableOpacity>
-                        );
-                    }}
-                />
-            </View>
+            {/*<View style={styles.friendContainer}>*/}
+                {/*<Text style={{...layout.boldTextBase}}>Your friend:</Text>*/}
+                {/*<FlatList*/}
+                    {/*data={friendsData}*/}
+                    {/*keyExtractor={(friend, index) => 'D' + index.toString()}*/}
+                    {/*horizontal*/}
+                    {/*showsHorizontalScrollIndicator={false}*/}
+                    {/*renderItem={({friend, index}) => {*/}
+                        {/*return (*/}
+                            {/*<TouchableOpacity style={styles.friendsCard}>*/}
+                                {/*<Image source={{uri: friendsData[index].photoURL}} style={{width: 100, height: 100, borderRadius: 30}}/>*/}
+                                {/*<Text style={{width: 100}}>{friendsData[index].name}</Text>*/}
+                            {/*</TouchableOpacity>*/}
+                        {/*);*/}
+                    {/*}}*/}
+                {/*/>*/}
+            {/*</View>*/}
         </View>
     );
 };
@@ -71,10 +68,10 @@ ProfileScreen.navigationOptions = ({navigation}) => ({
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
+        padding: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
     },
     headerContainer: {
-        justifyContent: 'center',
         flexDirection: 'row',
     },
     photoStyle: {
@@ -86,6 +83,9 @@ const styles = StyleSheet.create({
         ...layout.boldTextBase,
     },
     emailAndNameContainer: {
+        marginStart: 15,
+        marginEnd:15,
+        width: '62%',
         justifyContent: 'center',
     },
     friendContainer: {

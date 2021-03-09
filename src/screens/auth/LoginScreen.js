@@ -52,21 +52,21 @@ export const LoginScreen = ({navigation}) => {
     };
 
     return (
-        <ImageBackground style={styles.container} source={assets.LOGIN_BACKGROUND_IMAGE}>
+        <View style={styles.container}>
 
             <Loader isVisible={isLoaderShown}/>
 
-            <View style={styles.topContainer}>
-                <Text style={styles.entryTitle}>{string.LOGIN_SCREEN_TITLE}</Text>
-            </View>
 
-            <View style={styles.bottomContainer}>
+            <Text style={styles.entryTitle}>GotIt</Text>
+            <Text style={{...layout.regularTextBase}}>{string.LOGIN_SCREEN_TITLE}</Text>
+
+            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
                                 value={state.userEmail}
                                 onChangeText={userEmail => setState((prevState) => ({
-                                     ...prevState,
-                                     userEmail: userEmail,
-                                 }))}
+                                    ...prevState,
+                                    userEmail: userEmail,
+                                }))}
                                 placeholder={string.PLACEHOLDER_EMAIL}/>
 
                 <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
@@ -80,32 +80,28 @@ export const LoginScreen = ({navigation}) => {
                     <Text style={{...layout.regularTextBase}}>{string.FORGOT_PASSWORD}</Text>
                 </TouchableOpacity>
                 <YellowButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
-
-
             </View>
 
-        </ImageBackground>
+
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        padding: layout.defaultPaddingSize,
+        width: layout.width,
+        height: layout.height,
+        backgroundColor: colors.WHITE,
         flex: 1,
-        justifyContent: 'center',
-    },
-    topContainer: {
-        height: layout.height * 0.5,
-    },
-    bottomContainer: {
-        height: layout.height * 0.5,
-        alignItems: 'center',
     },
     entryTitle: {
         fontFamily: 'Montserrat-Bold',
-        color: colors.TEXT_COLOR,
+        color: colors.DARK_GREY,
         fontSize: 30,
     },
     forgotPasswordContainer: {
+        marginBottom: 30,
         alignSelf: 'flex-end',
     },
 });

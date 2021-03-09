@@ -6,12 +6,12 @@ export default {
     height: Dimensions.get('window').height,
     regularTextBase: {
         fontSize: 16,
-        color: colors.TEXT_COLOR,
+        color: colors.DARK_GREY,
         fontFamily: 'Montserrat-Regular',
     },
     boldTextBase: {
         fontSize: 18,
-        color: colors.TEXT_COLOR,
+        color: colors.DARK_GREY,
         fontFamily: 'Montserrat-Bold',
     },
     shadowBase: {

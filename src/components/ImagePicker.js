@@ -6,25 +6,24 @@ import color from '../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import icons from '../constants/icons';
 
-export const ImagePicker = ({onImagePicked}) => {
-
-    const [image, setImage] = useState(null);
+export const ImagePicker = ({image, onImagePicked}) => {
 
     const selectPhotoFromLibrary = () => {
-        launchImageLibrary({ mediaType: 'photo', includeBase64: true, quality: 0.2 }, (res) => {
-            setImage(res.base64);
-            onImagePicked(image);
+        launchImageLibrary({mediaType: 'photo', includeBase64: true, quality: 0.2}, (res) => {
+            // setImage(res.base64);
+            onImagePicked(res.base64);
         });
     };
 
-
     return (
-        <View style={{flexDirection: 'row',}}>
-            <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.rootView} onPress={selectPhotoFromLibrary}>
-                {!image && <Ionicons name={icons.ICON_UPLOAD} size={24} color={color.DARK_GREY}/>}
-                {image && <Image source={{ uri: `data:image/jpeg;base64,${image}` }} style={styles.imageStyle} />}
-            </TouchableOpacity >
-            <Text style={{...layout.regularTextBase, alignSelf: 'center'}}>Please upload avatar</Text>
+        <View>
+            <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.rootView}
+                              onPress={selectPhotoFromLibrary}>
+                {image && <Image source={{uri: `data:image/jpeg;base64,${image}`}} style={styles.imageStyle}/>}
+            </TouchableOpacity>
+            <View style={styles.uploadIconContainer}>
+                <Ionicons name={icons.ICON_UPLOAD} size={16} color={color.YELLOW}/>
+            </View>
         </View>
     );
 };
@@ -33,13 +32,28 @@ const styles = StyleSheet.create({
     rootView: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 100,
+        width: 120,
         backgroundColor: color.GREY,
-        height: 100,
+        height: 120,
         borderRadius: 100,
         ...layout.shadowBase,
     },
+    uploadIconContainer: {
+        position: 'absolute',
+        elevation: 5,
+        bottom: 5,
+        left: 5,
+        zIndex: 5,
+        backgroundColor: color.DARK_GREY,
+        borderRadius: 100,
+        padding: 4,
+        borderColor: color.YELLOW,
+        borderWidth: 1,
+    },
     imageStyle: {
-        width: 98, height: 98, resizeMode: 'cover', borderRadius: 100
+        width: 110,
+        height: 110,
+        resizeMode: 'cover',
+        borderRadius: 100
     }
 });

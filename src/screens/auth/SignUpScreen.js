@@ -8,7 +8,6 @@ import {Loader} from '../../components/Loader';
 import {setShowLoader} from '../../store/actions/GeneralActions';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
-import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import {useDispatch, useSelector} from 'react-redux';
@@ -44,86 +43,82 @@ export const SignUpScreen = ({navigation}) => {
         }
     };
 
-    console.log(state.image);
-
     return (
-        <ImageBackground style={styles.container} source={assets.LOGIN_BACKGROUND_IMAGE}>
+        <View style={styles.container}>
 
             <Loader isVisible={isLoaderShown}/>
 
-            <View style={styles.topContainer}>
-                <Text style={styles.entryTitle}>{string.LOGIN_SCREEN_TITLE}</Text>
-            </View>
+            <Text style={styles.entryTitle}>GotIt</Text>
+            <Text style={{...layout.regularTextBase}}>{string.SIGN_UP_SCREEN_TITLE}</Text>
 
-            <View style={styles.bottomContainer}>
+            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
 
-                <ImagePicker onImagePicked={image => setState((prevState) => ({
-                    ...prevState,
-                    image
-                }))} />
+                <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
+                    <ImagePicker image={state.image} onImagePicked={image => setState((prevState) => ({
+                        ...prevState,
+                        image
+                    }))}/>
+
+                    <Text style={{...layout.regularTextBase, fontSize: 12, marginStart: 20}}>Please upload your avatar{'\n'}(Required)</Text>
+                </View>
 
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
                                 value={state.userEmail}
                                 onChangeText={userEmail => setState((prevState) => ({
-                                     ...prevState,
-                                     userEmail,
-                                 }))}
+                                    ...prevState,
+                                    userEmail,
+                                }))}
                                 placeholder={string.PLACEHOLDER_EMAIL}/>
 
                 <LoginInputText icon={icon.ICON_NAME} isSecure={false} keyboardType={'default'}
                                 value={state.userName}
                                 onChangeText={userName => setState((prevState) => ({
-                                     ...prevState,
-                                     userName,
-                                 }))}
+                                    ...prevState,
+                                    userName,
+                                }))}
                                 placeholder={string.PLACEHOLDER_NAME}/>
 
                 <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
                                 value={state.userPassword}
                                 onChangeText={userPassword => setState((prevState) => ({
-                                     ...prevState,
-                                     userPassword,
-                                 }))}
+                                    ...prevState,
+                                    userPassword,
+                                }))}
                                 placeholder={string.PLACEHOLDER_PASSWORD}/>
 
                 <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
                                 value={state.userRepeatPassword}
                                 onChangeText={userRepeatPassword => setState((prevState) => ({
-                                     ...prevState,
-                                     userRepeatPassword,
-                                 }))}
+                                    ...prevState,
+                                    userRepeatPassword,
+                                }))}
                                 placeholder={string.PLACEHOLDER_REPEAT_PASSWORD}/>
-
-                <View style={styles.yellowButtonContainer}>
-                    <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
-                </View>
 
             </View>
 
-        </ImageBackground>
+
+            <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
+
+
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        padding: layout.defaultPaddingSize,
+        width: layout.width,
+        height: layout.height,
+        backgroundColor: colors.WHITE,
         flex: 1,
-        justifyContent: 'center',
-    },
-    topContainer: {
-        height: layout.height * 0.4,
-    },
-    bottomContainer: {
-        height: layout.height * 0.6,
-        alignItems: 'center',
     },
     entryTitle: {
         fontFamily: 'Montserrat-Bold',
-        color: colors.TEXT_COLOR,
+        color: colors.DARK_GREY,
         fontSize: 30,
     },
     forgotPasswordContainer: {
+        marginBottom: 30,
         alignSelf: 'flex-end',
-    },
-    yellowButtonContainer: {
     },
 });

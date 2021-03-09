@@ -16,21 +16,18 @@ export const EntryScreen = ({navigation}) => {
     return (
         <ImageBackground style={styles.container} source={assets.BACKGROUND_IMAGE}>
 
-            <View style={styles.topContainer}>
-                <Text style={styles.entryTitle}>{string.ENTRY_TITLE}</Text>
+                <Text style={styles.entryTitle}>GotIt</Text>
                 <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
 
-            </View>
-
-            <View style={styles.bottomContainer}>
-                <YellowButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
-                <View style={styles.haveAccountContainer}>
-                    <Text style={[{...layout.boldTextBase}, {fontSize: 13}]}>{string.HAVE_ACCOUNT}</Text>
-                    <TouchableOpacity activeOpacity={layout.activeOpacity} onPress={navigateToLoginScreen}>
-                        <Text style={styles.loginButton}>{string.LOGIN}</Text>
-                    </TouchableOpacity>
+                <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                    <YellowButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
+                    <View style={styles.haveAccountContainer}>
+                        <Text style={[{...layout.boldTextBase}, {fontSize: 13}]}>{string.HAVE_ACCOUNT}</Text>
+                        <TouchableOpacity activeOpacity={layout.activeOpacity} onPress={navigateToLoginScreen}>
+                            <Text style={styles.loginButton}>{string.LOGIN}</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
 
         </ImageBackground>
     );
@@ -38,22 +35,17 @@ export const EntryScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container: {
+        padding: layout.defaultPaddingSize,
         width: layout.width,
         height: layout.height,
         backgroundColor: colors.WHITE,
         flex: 1,
     },
-    topContainer: {
-        height: layout.height *0.5,
-    },
-    bottomContainer: {
-        height: layout.height *0.5,
-        alignItems: 'center',
-    },
     entryTitle: {
+        justifyContent: 'flex-start',
         fontFamily: 'Montserrat-Bold',
-        color: colors.TEXT_COLOR,
         fontSize: 30,
+        color: colors.DARK_GREY
     },
     haveAccountContainer: {
         flexDirection: 'row',
