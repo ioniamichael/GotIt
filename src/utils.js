@@ -29,3 +29,8 @@ export const getTaskImageByType = (type) => {
         }
     }
 };
+
+export const getHoursAndMinutes = (time) => {
+    const date = new Date(time);
+    return date.getHours()+':'+date.getMinutes();
+};

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native';
 import {CustomTextInput} from '../../components/Task/CustomTextInput';
 import {YellowButton} from '../../components/YellowButton';
@@ -11,9 +11,9 @@ import {useDispatch} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import {BABY} from '../../pickerTypes';
-import DatePicker from 'react-native-date-picker'
+import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
-import screens from "../../constants/screens";
+import screens from '../../constants/screens';
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
@@ -21,12 +21,20 @@ export const CreateTaskScreen = ({navigation}) => {
     const [taskType, setTaskType] = useState(BABY);
     const [taskTitle, setTaskTitle] = useState('');
     const [taskCreationDate, setTaskCreationDate] = useState(() => getCurrentDateInTimestamp().toString());
-    const [taskEndDate, setTaskEndDate] = useState(new Date());
     const [subTasks, setSubTasks] = useState([]);
     const [isExpired, setIsExpired] = useState(false);
     const [isFinished, setIsFinished] = useState(false);
     const [subTaskValue, setSubTaskValue] = useState();
     const [taskTypeTitle, setTaskTypeTitle] = useState('Baby');
+
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [taskEndDate, setTaskEndDate] = useState(selectedDate.getTime());
+
+    console.log(taskEndDate);
+
+    useEffect(() => {
+        setTaskEndDate(selectedDate.getTime());
+    }, [selectedDate]);
 
     const cleanState = () => {
         setTaskType(BABY);
@@ -82,7 +90,7 @@ export const CreateTaskScreen = ({navigation}) => {
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
 
-            <View style={{flex:1}}>
+            <View style={{flex: 1}}>
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
@@ -104,12 +112,16 @@ export const CreateTaskScreen = ({navigation}) => {
                     <View style={{marginBottom: 20}}>
 
                         <TouchableOpacity>
-                            <Text style={{...layout.regularTextBase, marginBottom: 15, marginStart: -15}}>{strings.SELECT_END_DATE}</Text>
+                            <Text style={{
+                                ...layout.regularTextBase,
+                                marginBottom: 15,
+                                marginStart: -15,
+                            }}>{strings.SELECT_END_DATE}</Text>
                         </TouchableOpacity>
 
                         <DatePicker
-                            date={taskEndDate}
-                            onDateChange={setTaskEndDate}
+                            date={selectedDate}
+                            onDateChange={setSelectedDate}
                             minimumDate={new Date()}
                             minuteInterval={5}
                         />

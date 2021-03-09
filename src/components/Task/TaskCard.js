@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
-import {getTaskImageByType} from '../../utils';
+import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
@@ -61,14 +61,18 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
             >
 
                 <View style={styles.titleContainer}>
-                    <View style={styles.taskImageTypeContainer} >
+                    <View style={styles.taskImageTypeContainer}>
                         <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
                     </View>
                     <View style={styles.innerTaskContainer}>
-                        <View style={styles.titleContainer} >
+                        <View style={styles.titleContainer}>
                             <Text numberOfLines={1}
-                                  style={[{...layout.boldTextBase}, {fontSize: 14, width: '69%'}]}>{data.taskTitle}</Text>
-                            <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>7:00am</Text>
+                                  style={[{...layout.boldTextBase}, {
+                                      fontSize: 14,
+                                      width: '69%',
+                                  }]}>{data.taskTitle}</Text>
+                            <Text numberOfLines={1}
+                                  style={[{...layout.boldTextBase}, {fontSize: 11}]}>{getHoursAndMinutes(data.taskEndDate)}</Text>
                         </View>
                         {renderSubTasks()}
                     </View>
@@ -81,7 +85,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        marginBottom:10,
+        marginBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -93,10 +97,10 @@ const styles = StyleSheet.create({
     typeImageStyle: {
         width: 20,
         height: 20,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
     },
-    innerTaskContainer:{
-        marginStart: 10
+    innerTaskContainer: {
+        marginStart: 10,
     },
     taskContainer: {
         marginStart: 10,
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     subTasksContainer: {},
-    taskImageTypeContainer:{
+    taskImageTypeContainer: {
         alignSelf: 'flex-start',
         backgroundColor: color.GREY,
         padding: 10,
