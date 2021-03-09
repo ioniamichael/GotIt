@@ -32,5 +32,17 @@ export const getTaskImageByType = (type) => {
 
 export const getHoursAndMinutes = (time) => {
     const date = new Date(time);
-    return date.getHours()+':'+date.getMinutes();
+    let ampm = 'am';
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    if (hour < 10){
+        hour = `0${date.getHours()}`;
+    }
+    if (hour > 11){
+        ampm = 'pm';
+    }
+    if (minutes < 10){
+        minutes = `0${date.getMinutes()}`;
+    }
+    return `${hour}:${minutes}${ampm}`
 };

@@ -8,8 +8,10 @@ import icon from '../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
+    const currentDate = new Date().getTime();
 
     const isFinished = data.isFinished;
+    const isExpired = currentDate > data.taskEndDate;
     const hasSubTasks = data.subTasks;
 
     const renderSubTasks = () => {
@@ -50,7 +52,6 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
     return (
         <View style={styles.mainContainer}>
-
 
             <Ionicons name={icon.ICON_TASK_STATUS} size={24} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
 

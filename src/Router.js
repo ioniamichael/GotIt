@@ -86,8 +86,8 @@ const BottomTabBar = createBottomTabNavigator({
     {
         tabBarOptions: {
             showLabel: false,
-            activeTintColor: 'black',
-            inactiveTintColor: 'grey',
+            activeTintColor: colors.YELLOW,
+            inactiveTintColor: colors.DARK_GREY,
             labelStyle: {
                 ...layout.boldTextBase,
             },
