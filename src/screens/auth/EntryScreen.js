@@ -41,12 +41,10 @@ const styles = StyleSheet.create({
         width: layout.width,
         height: layout.height,
         backgroundColor: colors.WHITE,
-        paddingHorizontal: 30,
         flex: 1,
     },
     topContainer: {
         height: layout.height *0.5,
-        paddingTop: 80
     },
     bottomContainer: {
         height: layout.height *0.5,
@@ -56,7 +54,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         color: colors.TEXT_COLOR,
         fontSize: 30,
-        marginBottom: 20,
     },
     haveAccountContainer: {
         flexDirection: 'row',
@@ -64,7 +61,6 @@ const styles = StyleSheet.create({
     loginButton: {
         ...layout.boldTextBase,
         color: colors.YELLOW,
-        marginStart: 5,
         fontSize: 13,
     },
 });

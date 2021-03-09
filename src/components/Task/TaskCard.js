@@ -25,7 +25,6 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                                 <Text style={[{...layout.regularTextBase}, {fontSize: 12}]}>*</Text>
                                 <Text numberOfLines={2} style={[{...layout.regularTextBase}, {
                                     fontSize: 12,
-                                    marginStart: 5,
                                 }]}>{item}</Text>
                             </View>
                         );
@@ -53,22 +52,27 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         <View style={styles.mainContainer}>
 
 
-            <Ionicons name={icon.ICON_TASK_STATUS} size={20} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
+            <Ionicons name={icon.ICON_TASK_STATUS} size={24} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
 
             <TouchableOpacity
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
                 onLongPress={() => onTaskLongPress(data)}
             >
+
                 <View style={styles.titleContainer}>
-                    <View style={styles.typeImageContainer}>
+                    <View style={styles.taskImageTypeContainer} >
                         <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
                     </View>
-                    <Text numberOfLines={1}
-                          style={[{...layout.boldTextBase}, {fontSize: 14, width: '69%'}]}>{data.taskTitle}</Text>
-                    <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>7:00am</Text>
+                    <View style={styles.innerTaskContainer}>
+                        <View style={styles.titleContainer} >
+                            <Text numberOfLines={1}
+                                  style={[{...layout.boldTextBase}, {fontSize: 14, width: '69%'}]}>{data.taskTitle}</Text>
+                            <Text numberOfLines={1} style={[{...layout.boldTextBase}, {fontSize: 11}]}>7:00am</Text>
+                        </View>
+                        {renderSubTasks()}
+                    </View>
                 </View>
-                {renderSubTasks()}
             </TouchableOpacity>
 
         </View>
@@ -77,38 +81,40 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
 const styles = StyleSheet.create({
     mainContainer: {
+        marginBottom:10,
         flexDirection: 'row',
-        marginVertical: 5,
-        marginHorizontal: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
     },
     typeImageContainer: {
         backgroundColor: color.GREY,
-        marginEnd: 10,
-        padding: 5,
         borderRadius: 10,
     },
     typeImageStyle: {
         width: 20,
         height: 20,
+        alignSelf: 'flex-start'
+    },
+    innerTaskContainer:{
+        marginStart: 10
     },
     taskContainer: {
-        marginStart: 20,
-        paddingHorizontal: 15,
-        paddingVertical: 20,
+        marginStart: 10,
+        padding: 20,
         flex: 1,
         backgroundColor: color.YELLOW,
     },
     titleContainer: {
-        alignItems: 'center',
         justifyContent: 'space-between',
+        alignItems: 'center',
         flexDirection: 'row',
     },
-    subTasksContainer: {
-        marginStart: 60,
-        marginTop: 5,
-        marginHorizontal: 10,
+    subTasksContainer: {},
+    taskImageTypeContainer:{
+        alignSelf: 'flex-start',
+        backgroundColor: color.GREY,
+        padding: 10,
+        borderRadius: 10,
     },
     subTasks: {
         flexDirection: 'row',

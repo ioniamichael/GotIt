@@ -107,12 +107,10 @@ export const SignUpScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 30,
         justifyContent: 'center',
     },
     topContainer: {
         height: layout.height * 0.4,
-        paddingTop: 80,
     },
     bottomContainer: {
         height: layout.height * 0.6,
@@ -122,14 +120,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         color: colors.TEXT_COLOR,
         fontSize: 30,
-        marginBottom: 20,
     },
     forgotPasswordContainer: {
-        marginBottom: 40,
-        marginEnd: 20,
         alignSelf: 'flex-end',
     },
     yellowButtonContainer: {
-        marginVertical: 10,
     },
 });

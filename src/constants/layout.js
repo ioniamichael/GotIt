@@ -27,5 +27,5 @@ export default {
     },
     activeOpacity: 0.8,
     defaultIconSize: 24,
-    hitSlop: { top: 20, bottom: 20, right: 20, left: 20 },
+    defaultPaddingSize:30
 };

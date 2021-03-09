@@ -22,6 +22,5 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
 
 const styles = StyleSheet.create({
     container:{
-        marginHorizontal: 10,
     }
 });

@@ -33,14 +33,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 100,
         borderColor: color.YELLOW,
-        paddingHorizontal: 20,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
-        marginBottom: 15,
     },
     iconStyle: {
         alignSelf: 'center',
-        marginEnd: 15,
     },
     textInputStyle: {
         flex: 1,

@@ -13,6 +13,8 @@ export const ProfileScreen = ({navigation}) => {
 
     const userDetails = useSelector(state => state.UserReducer.userDetails);
 
+    console.log(userDetails.image);
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
@@ -27,7 +29,6 @@ export const ProfileScreen = ({navigation}) => {
             <View style={styles.friendContainer}>
                 <Text style={{...layout.boldTextBase}}>Your friend:</Text>
                 <FlatList
-                    style={{paddingHorizontal: 30}}
                     data={friendsData}
                     keyExtractor={(friend, index) => 'D' + index.toString()}
                     horizontal
@@ -69,7 +70,6 @@ ProfileScreen.navigationOptions = ({navigation}) => ({
 
 const styles = StyleSheet.create({
     mainContainer: {
-        padding: 30,
         flex: 1,
         backgroundColor: color.WHITE,
     },
@@ -86,14 +86,11 @@ const styles = StyleSheet.create({
         ...layout.boldTextBase,
     },
     emailAndNameContainer: {
-        marginStart: 20,
         justifyContent: 'center',
     },
     friendContainer: {
-        marginTop: 30,
-        marginHorizontal: -30,
     },
     friendsCard:{
-        margin:5,
+
     }
 });

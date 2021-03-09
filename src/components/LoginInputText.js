@@ -29,11 +29,9 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 10,
         borderWidth: 1,
         borderRadius: 100,
         borderColor: color.YELLOW,
-        paddingHorizontal: 20,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
         width: layout.width * 0.75,
@@ -41,7 +39,6 @@ const styles = StyleSheet.create({
     },
     iconStyle: {
         alignSelf: 'center',
-        marginEnd: 15,
     },
     textInputStyle: {
         flex: 1,

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image} from 'react-native';
 import {createStackNavigator, TransitionPresets} from 'react-navigation-stack';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {LoginScreen} from './screens/auth/LoginScreen';
@@ -12,7 +13,9 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
+import assets from './constants/assets';
 import colors from './constants/colors';
+import {CreateTaskScreen} from "./screens/main/CreateTaskScreen";
 
 const headerDefaultOption = {
     headerShown: true,
@@ -46,6 +49,9 @@ const ProfileStack = createStackNavigator({
     defaultNavigationOptions: headerDefaultOption
 });
 
+const CreateStack = createStackNavigator({
+    CreateTaskScreen,
+},{defaultNavigationOptions: headerDefaultOption});
 
 const BottomTabBar = createBottomTabNavigator({
         Home: {
@@ -56,6 +62,16 @@ const BottomTabBar = createBottomTabNavigator({
                     <Ionicons name={icons.ICON_HOME} size={layout.defaultIconSize} color={info.tintColor}/>
                 ),
             },
+        },
+        Create: {
+            screen: CreateStack,
+            navigationOptions: {
+                tabBarLabel: 'Create',
+                tabBarIcon: () => (
+                    <Image style={{width: 80, height: 80}}
+                           source={assets.ADD_TASK_BUTTON}/>
+                )
+            }
         },
         Profile: {
             screen: ProfileStack,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Modal, ScrollView, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native';
 import {CustomTextInput} from '../../components/Task/CustomTextInput';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
@@ -13,8 +13,9 @@ import color from '../../constants/colors';
 import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker'
 import strings from '../../constants/strings';
+import screens from "../../constants/screens";
 
-export const CreateTaskModal = ({navigation, isVisible}) => {
+export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
 
     const [taskType, setTaskType] = useState(BABY);
@@ -54,7 +55,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();
-                dispatch(setShowCreateTaskModal(false));
+                navigation.navigate(screens.HOME_SCREEN);
             } catch (e) {
                 console.log('::CREATE TASK ', e);
             }
@@ -77,20 +78,9 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
         setTaskTypeTitle(taskType.title);
     };
 
-    const closeModal = () => {
-        dispatch(setShowCreateTaskModal(false));
-        cleanState();
-    };
-
 
     return (
-
-        <Modal
-            onRequestClose={() => closeModal()}
-            visible={isVisible}
-            animationType='slide'
-            transparent>
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
@@ -125,23 +115,17 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
 
                 </View>
             </ScrollView>
-        </Modal>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        width: layout.width,
-        height: layout.height * 0.7,
-        position: 'absolute',
-        bottom: 0,
         backgroundColor: color.WHITE,
         ...layout.shadowBase,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-
+        paddingVertical: 30
     },
     innerContainer: {
         alignItems: 'center',
+        paddingHorizontal: 30,
     },
 });

@@ -33,8 +33,6 @@ const styles = StyleSheet.create({
     rootView: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10,
-        marginEnd: 20,
         width: 100,
         backgroundColor: color.GREY,
         height: 100,

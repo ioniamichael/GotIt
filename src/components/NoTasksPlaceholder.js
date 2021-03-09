@@ -39,7 +39,6 @@ export const NoTasksPlaceHolder = () => {
 const styles = StyleSheet.create({
     container: {
         width: layout.width,
-        paddingBottom: 100,
         height: layout.height,
         justifyContent: 'center',
         alignItems: 'center',

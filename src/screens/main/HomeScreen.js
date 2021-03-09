@@ -5,8 +5,6 @@ import {setShowQuickActionsModal} from '../../store/actions/GeneralActions';
 import {QuickActions} from '../../components/Task/QuickActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
-import {CreateTaskModal} from '../../components/Task/CreateTaskModal';
-import {AddTaskButton} from '../../components/Task/AddTaskButton';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
@@ -41,9 +39,7 @@ export const HomeScreen = ({navigation}) => {
             {!tasks.length && <NoTasksPlaceHolder/>}
             <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
             <QuickActions isVisible={isQuickActionsModalVisible} data={quickActionsTask} navigation={navigation}/>
-            <CreateTaskModal isVisible={isCreateTaskModalVisible}/>
             {isQuickActionsModalVisible || isCreateTaskModalVisible && <View style={styles.overlay}/>}
-            <AddTaskButton/>
         </View>
     );
 };
@@ -74,6 +70,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex:1,
+        padding: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
     },
     overlay: {
