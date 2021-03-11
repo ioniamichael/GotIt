@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex:1,
-        padding: layout.defaultPaddingSize,
+        paddingHorizontal: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
     },
     overlay: {

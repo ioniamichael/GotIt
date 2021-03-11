@@ -38,13 +38,12 @@ export const NoTasksPlaceHolder = () => {
 
 const styles = StyleSheet.create({
     container: {
-        width: layout.width,
-        height: layout.height,
+        flex:1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     lottie: {
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
     },
 });

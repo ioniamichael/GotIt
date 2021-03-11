@@ -5,13 +5,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icon from '../../constants/icons';
+import moment from 'moment';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
-    const currentDate = new Date().getTime();
-
     const isFinished = data.isFinished;
-    const isExpired = currentDate > data.taskEndDate;
+    const isExpired = moment() > data.taskEndDate;
     const hasSubTasks = data.subTasks;
 
     const renderSubTasks = () => {
@@ -53,7 +52,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     return (
         <View style={styles.mainContainer}>
 
-            <Ionicons name={icon.ICON_TASK_STATUS} size={24} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
+            <View style={{alignItems: 'center', width: 40}}>
+                <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
+            </View>
 
             <TouchableOpacity
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]}
@@ -105,7 +106,8 @@ const styles = StyleSheet.create({
     },
     taskContainer: {
         marginStart: 10,
-        padding: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 20,
         flex: 1,
         backgroundColor: color.YELLOW,
     },

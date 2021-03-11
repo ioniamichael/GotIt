@@ -27,5 +27,5 @@ export default {
     },
     activeOpacity: 0.8,
     defaultIconSize: 24,
-    defaultPaddingSize:30
+    defaultPaddingSize:20
 };

@@ -4,7 +4,6 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {ImagePicker} from "../../components/ImagePicker";
 import {useSelector} from 'react-redux';
-import {friendsData} from '../../mockData';
 import icons from '../../constants/icons';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
@@ -23,23 +22,6 @@ export const ProfileScreen = ({navigation}) => {
                     <Text style={{...layout.regularTextBase}}>{userDetails.email}</Text>
                 </View>
             </View>
-            {/*<View style={styles.friendContainer}>*/}
-                {/*<Text style={{...layout.boldTextBase}}>Your friend:</Text>*/}
-                {/*<FlatList*/}
-                    {/*data={friendsData}*/}
-                    {/*keyExtractor={(friend, index) => 'D' + index.toString()}*/}
-                    {/*horizontal*/}
-                    {/*showsHorizontalScrollIndicator={false}*/}
-                    {/*renderItem={({friend, index}) => {*/}
-                        {/*return (*/}
-                            {/*<TouchableOpacity style={styles.friendsCard}>*/}
-                                {/*<Image source={{uri: friendsData[index].photoURL}} style={{width: 100, height: 100, borderRadius: 30}}/>*/}
-                                {/*<Text style={{width: 100}}>{friendsData[index].name}</Text>*/}
-                            {/*</TouchableOpacity>*/}
-                        {/*);*/}
-                    {/*}}*/}
-                {/*/>*/}
-            {/*</View>*/}
         </View>
     );
 };
