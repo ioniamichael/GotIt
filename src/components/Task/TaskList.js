@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, StyleSheet, Text, SectionList} from 'react-native';
+import {StyleSheet, Text, SectionList} from 'react-native';
 import {TaskCard} from './TaskCard';
 import moment from 'moment';
 import layout from '../../constants/layout';
@@ -7,13 +7,15 @@ import layout from '../../constants/layout';
 
 export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
 
+    data.sort((a,b) => (a.taskEndDate > b.taskEndDate) ? 1 : ((b.taskEndDate > a.taskEndDate) ? -1 : 0));
+
     const sortedData = [
         {
             title: 'Previous',
             data: data.filter((task) => moment().format('YYYY-MM-DD') > moment(task.taskEndDate).format('YYYY-MM-DD'))
         },
         {
-            title: 'Today',
+            title: `Today - ${moment().format('MMMM-DD')}`,
             data: data.filter((task) => moment().format('YYYY-MM-DD') === moment(task.taskEndDate).format('YYYY-MM-DD'))
         },
         {
@@ -62,4 +64,3 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
 const styles = StyleSheet.create({
     container: {},
 });
-

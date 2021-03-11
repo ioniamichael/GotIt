@@ -43,6 +43,7 @@ export const CreateTaskScreen = ({navigation}) => {
         setSubTasks([]);
         setSubTaskValue('');
         setTaskTypeTitle('');
+        setTaskEndDate(selectedDate.getTime())
     };
 
     const createTask = async () => {
@@ -58,8 +59,8 @@ export const CreateTaskScreen = ({navigation}) => {
                 isExpired,
                 isFinished,
             };
+
             try {
-                console.log('::TASK CREATION END DATE', taskEndDate);
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();
@@ -121,6 +122,7 @@ export const CreateTaskScreen = ({navigation}) => {
 
                         <DatePicker
                             date={selectedDate}
+                            androidVariant={'nativeAndroid'}
                             onDateChange={setSelectedDate}
                             minimumDate={new Date()}
                             minuteInterval={5}

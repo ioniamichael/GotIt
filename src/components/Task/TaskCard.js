@@ -11,6 +11,8 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
     const isFinished = data.isFinished;
     const isExpired = moment() > data.taskEndDate;
+    const isFutureDay = moment().add(2, 'd') < data.taskEndDate;
+    const isPrevDay = moment().subtract(1, 'd') > data.taskEndDate;
     const hasSubTasks = data.subTasks;
 
     const renderSubTasks = () => {
@@ -62,6 +64,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                 onLongPress={() => onTaskLongPress(data)}
             >
 
+                {isFutureDay || isPrevDay ? <Text style={styles.dateStyle}>{moment(data.taskEndDate).format('MMMM-D').toString()}</Text> : null}
                 <View style={styles.titleContainer}>
                     <View style={styles.taskImageTypeContainer}>
                         <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
@@ -126,4 +129,11 @@ const styles = StyleSheet.create({
     subTasks: {
         flexDirection: 'row',
     },
+    dateStyle: {
+        ...layout.regularTextBase,
+        fontSize: 10,
+        position: 'absolute',
+        top: 20,
+        right: 5,
+    }
 });
