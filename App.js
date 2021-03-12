@@ -9,7 +9,7 @@ const App = () => {
     return (
         <View style={styles.container}>
             <Provider store={store}>
-                <StatusBar barStyle={'light-content'} backgroundColor={colors.YELLOW} />
+                <StatusBar barStyle={'dark-content'} backgroundColor={colors.WHITE} />
                 <AppNavigator/>
             </Provider>
         </View>
@@ -20,7 +20,6 @@ const App = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.WHITE
     },
 });
 

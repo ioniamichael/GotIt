@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     loginButton: {
         ...layout.boldTextBase,
-        color: colors.YELLOW,
+        color: colors.ORANGE,
         fontSize: 13,
     },
 });

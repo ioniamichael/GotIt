@@ -22,7 +22,7 @@ export const ImagePicker = ({image, onImagePicked}) => {
                 {image && <Image source={{uri: `data:image/jpeg;base64,${image}`}} style={styles.imageStyle}/>}
             </TouchableOpacity>
             <View style={styles.uploadIconContainer}>
-                <Ionicons name={icons.ICON_UPLOAD} size={16} color={color.YELLOW}/>
+                <Ionicons name={icons.ICON_UPLOAD} size={16} color={color.ORANGE}/>
             </View>
         </View>
     );

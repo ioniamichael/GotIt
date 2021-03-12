@@ -55,11 +55,11 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         <View style={styles.mainContainer}>
 
             <View style={{alignItems: 'center', width: 40}}>
-                <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.YELLOW : color.DARK_GREY}/>
+                <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.ORANGE : color.DARK_GREY}/>
             </View>
 
             <TouchableOpacity
-                style={[styles.taskContainer, {backgroundColor: isFinished ? color.YELLOW : color.GREY}, renderBorderRadiusPosition()]}
+                style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.GREY}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
                 onLongPress={() => onTaskLongPress(data)}
             >
@@ -74,7 +74,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                         <View style={styles.titleContainer}>
                             <Text numberOfLines={1}
                                   style={[{...layout.boldTextBase}, {
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       width: '69%',
                                   }]}>{data.taskTitle}</Text>
                             <Text numberOfLines={1}
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 20,
         flex: 1,
-        backgroundColor: color.YELLOW,
+        backgroundColor: color.ORANGE,
     },
     titleContainer: {
         justifyContent: 'space-between',

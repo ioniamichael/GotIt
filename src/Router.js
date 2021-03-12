@@ -20,10 +20,9 @@ import colors from './constants/colors';
 const headerDefaultOption = {
     headerShown: true,
     headerStyle: {
-        backgroundColor: colors.YELLOW,
-        ...layout.shadowBase,
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
+        backgroundColor: colors.WHITE,
+        elevation: 0,
+        borderBottomWidth: 0.5,
     },
     ...TransitionPresets.SlideFromRightIOS,
 };
@@ -89,8 +88,8 @@ const BottomTabBar = createBottomTabNavigator({
     {
         tabBarOptions: {
             showLabel: false,
-            activeTintColor: colors.YELLOW,
-            inactiveTintColor: colors.DARK_GREY,
+            activeTintColor: colors.DARK_GREY,
+            inactiveTintColor: '#bfbfbf',
             labelStyle: {
                 ...layout.boldTextBase,
             },

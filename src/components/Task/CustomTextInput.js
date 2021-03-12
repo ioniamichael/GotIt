@@ -9,7 +9,7 @@ export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecur
     return (
         <View style={styles.container}>
 
-            <Ionicons style={styles.iconStyle} name={icon} size={layout.defaultIconSize} color={color.YELLOW}/>
+            <Ionicons style={styles.iconStyle} name={icon} size={layout.defaultIconSize} color={color.ORANGE}/>
 
             <TextInput
                 style={styles.textInputStyle}
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         marginBottom: 20,
         paddingHorizontal: 20,
-        borderColor: color.YELLOW,
+        borderColor: color.ORANGE,
         backgroundColor: color.TRANSPARENT_WHITE,
         flexDirection: 'row',
     },

@@ -8,7 +8,7 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
     return (
         <View style={styles.container}>
 
-            <Ionicons style={styles.iconStyle} name={icon} size={layout.defaultIconSize} color={color.YELLOW}/>
+            <Ionicons style={styles.iconStyle} name={icon} size={layout.defaultIconSize} color={color.ORANGE}/>
 
             <TextInput
                 style={styles.textInputStyle}

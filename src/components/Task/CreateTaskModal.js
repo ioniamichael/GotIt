@@ -111,7 +111,7 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
 
                     <View style={styles.mainContainer}>
                         <TouchableOpacity>
-                            <Text style={{...layout.boldTextBase, fontSize: 13}}>{strings.SELECT_END_DATE}</Text>
+                            <Text style={{...layout.boldTextBase, fontSize: 12}}>{strings.SELECT_END_DATE}</Text>
                         </TouchableOpacity>
                         <DatePicker
                             date={taskEndDate}

@@ -20,7 +20,7 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
                 />
 
                 <TouchableOpacity style={styles.addButtonStyle} onPress={onAddSubTask}>
-                    <Ionicons name={icons.ICON_ADD} size={35} color={color.YELLOW}/>
+                    <Ionicons name={icons.ICON_ADD} size={35} color={color.ORANGE}/>
                 </TouchableOpacity>
             </View>
 
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderColor: color.YELLOW,
+        borderColor: color.ORANGE,
         borderRadius: 100,
         borderWidth: 1,
         backgroundColor: color.TRANSPARENT_WHITE,

@@ -4,6 +4,11 @@ import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import screens from '../../constants/screens';
+import icons from '../../constants/icons';
+import {HomeScreen} from './HomeScreen';
 
 export const TaskDetailsScreen = ({navigation}) => {
 
@@ -41,7 +46,30 @@ export const TaskDetailsScreen = ({navigation}) => {
     );
 };
 
+TaskDetailsScreen.navigationOptions = ({navigation}) => ({
+    headerTitle: () => {
+        return (
+            <View>
+                <Text style={styles.headerTitle}>Details:</Text>
+            </View>
+        );
+    },
+    headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
+            <Item
+                onPress={
+                    () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
+                }
+                title={'NOTIFICATION'}
+                iconName={icons.ICON_NOTIFICATION}/>
+        </HeaderButtons>
+    ),
+});
+
 const styles = StyleSheet.create({
+    headerTitle: {
+        ...layout.boldTextBase,
+    },
     mainContainer: {
         flex: 1,
         backgroundColor: color.WHITE,

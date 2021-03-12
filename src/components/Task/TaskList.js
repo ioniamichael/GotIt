@@ -37,7 +37,7 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     const renderTitleIfHasData = (dataToRender, titleToRender) => {
         if (dataToRender.length) {
             return (
-                <Text style={{...layout.boldTextBase, marginVertical: 10}}>{titleToRender}</Text>
+                <Text style={{...layout.boldTextBase, fontSize: 12, marginVertical: 10}}>{titleToRender}</Text>
             );
         }
     };
