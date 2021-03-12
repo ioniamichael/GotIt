@@ -27,8 +27,8 @@ export const HomeScreen = ({navigation}) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
 
-    const openQuickActionsModal = (data) => {
-        setQuickActionsTask(data);
+    const openQuickActionsModal = (task) => {
+        setQuickActionsTask(task);
         dispatch(setShowQuickActionsModal(true));
     };
 
@@ -38,7 +38,7 @@ export const HomeScreen = ({navigation}) => {
         <View style={styles.container}>
             {!tasks.length && <NoTasksPlaceHolder/>}
             <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
-            <QuickActions isVisible={isQuickActionsModalVisible} data={quickActionsTask} navigation={navigation}/>
+            <QuickActions isVisible={isQuickActionsModalVisible} task={quickActionsTask} navigation={navigation}/>
             {isQuickActionsModalVisible || isCreateTaskModalVisible && <View style={styles.overlay}/>}
         </View>
     );
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         ...layout.boldTextBase,
     },
     container: {
-        flex:1,
+        flex: 1,
         paddingHorizontal: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
     },

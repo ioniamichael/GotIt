@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Animated, Easing} from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
@@ -64,7 +64,8 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                 onLongPress={() => onTaskLongPress(data)}
             >
 
-                {isFutureDay || isPrevDay ? <Text style={styles.dateStyle}>{moment(data.taskEndDate).format('MMMM-D').toString()}</Text> : null}
+                {isFutureDay || isPrevDay ?
+                    <Text style={styles.dateStyle}>{moment(data.taskEndDate).format('MMMM-D').toString()}</Text> : null}
                 <View style={styles.titleContainer}>
                     <View style={styles.taskImageTypeContainer}>
                         <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
     },
     innerTaskContainer: {
-        marginStart: 10,
+        marginStart: 5,
     },
     taskContainer: {
         marginStart: 10,
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         ...layout.regularTextBase,
         fontSize: 10,
         position: 'absolute',
-        top: 20,
+        top: 10,
         right: 5,
-    }
+    },
 });

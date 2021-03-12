@@ -10,23 +10,24 @@ import screens from '../../constants/screens';
 import icons from '../../constants/icons';
 
 
-export const QuickActions = ({isVisible, onPressActionButton, data, navigation}) => {
+export const QuickActions = ({isVisible, onPressActionButton, task, navigation}) => {
 
     const dispatch = useDispatch();
+    console.log(task);
 
     const closeModal = () => {
         dispatch(setShowQuickActionsModal(false));
     };
 
     const openTaskDetailsScreen = () => {
-        navigation.navigate(screens.TASK_DETAILS_SCREEN, {data});
+        navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
         closeModal()
     };
 
     const deleteSelectedTask = async ()  => {
         try {
-            await removeTaskFromDB(data.taskCreationDate);
-            await dispatch(deleteTask(data.taskCreationDate));
+            await removeTaskFromDB(task.taskCreationDate);
+            await dispatch(deleteTask(task.taskCreationDate));
             await dispatch(fetchTasks());
             closeModal();
         } catch (e) {
@@ -35,7 +36,7 @@ export const QuickActions = ({isVisible, onPressActionButton, data, navigation})
     };
 
     const checkThisTaskAsFinished = async () => {
-        await setTaskAsFinished(data);
+        await setTaskAsFinished(task);
         await dispatch(fetchTasks());
         closeModal();
     };

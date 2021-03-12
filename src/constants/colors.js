@@ -7,5 +7,9 @@ export default {
     WHITE: '#fff',
     BLACK: '#000',
     TRANSPARENT_WHITE: '#ffffff99',
-    RED: '#ffb9ab',
+    RED: '#ffc8ba',
+    BACKGROUND_COLOR: '#121212',
+    ORANGE: '#ffdcb7',
+    GREEN: '#b5eadb',
+    PURPLE: '#c8cdf2',
 }

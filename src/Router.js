@@ -9,18 +9,21 @@ import {HomeScreen} from './screens/main/HomeScreen';
 import {EntryScreen} from './screens/auth/EntryScreen';
 import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 import {ProfileScreen} from './screens/main/ProfileScreen';
+import {CreateTaskScreen} from "./screens/main/CreateTaskScreen";
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
-import {CreateTaskScreen} from "./screens/main/CreateTaskScreen";
 
 const headerDefaultOption = {
     headerShown: true,
     headerStyle: {
-        backgroundColor: colors.YELLOW
+        backgroundColor: colors.YELLOW,
+        ...layout.shadowBase,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
     },
     ...TransitionPresets.SlideFromRightIOS,
 };
