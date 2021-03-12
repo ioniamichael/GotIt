@@ -18,6 +18,7 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import icons from '../../constants/icons';
 import {ProfileScreen} from './ProfileScreen';
+import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export const CreateTaskScreen = ({navigation}) => {
     const [isFinished, setIsFinished] = useState(false);
     const [subTaskValue, setSubTaskValue] = useState();
     const [taskTypeTitle, setTaskTypeTitle] = useState('Baby');
+    const [images, setImages] = useState([]);
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [taskEndDate, setTaskEndDate] = useState(selectedDate.getTime());
@@ -43,6 +45,7 @@ export const CreateTaskScreen = ({navigation}) => {
         setTaskTitle('');
         setTaskCreationDate(getCurrentDateInTimestamp().toString());
         setSubTasks([]);
+        setImages([]);
         setSubTaskValue('');
         setTaskTypeTitle('');
         setTaskEndDate(selectedDate.getTime())
@@ -60,6 +63,7 @@ export const CreateTaskScreen = ({navigation}) => {
                 subTasks,
                 isExpired,
                 isFinished,
+                images
             };
 
             try {
@@ -110,6 +114,8 @@ export const CreateTaskScreen = ({navigation}) => {
                         subTaskValue={subTaskValue}
                         onPressDeleteSubTask={deleteSubTaskHandler}
                     />
+
+                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])} />
 
 
                     <View style={{marginBottom: 20}}>

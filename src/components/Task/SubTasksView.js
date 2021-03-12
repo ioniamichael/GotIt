@@ -28,7 +28,7 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
 
                 {subTasks.map((subTask, index) => {
                     return (
-                        <View key={subTask}  style={styles.subTasksContainer}>
+                        <View key={subTask + 'd' + index}  style={styles.subTasksContainer}>
                             <Text style={styles.subTaskText}>{subTask}</Text>
                             <TouchableOpacity onPress={() => onPressDeleteSubTask(index)}>
                                 <Ionicons name={icons.ICON_TRASH} size={20} color={color.DARK_GREY}/>

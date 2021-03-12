@@ -9,16 +9,18 @@ import moment from 'moment';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
-    const isFinished = data.isFinished;
-    const isExpired = moment() > data.taskEndDate;
     const isFutureDay = moment().add(2, 'd') < data.taskEndDate;
     const isPrevDay = moment().subtract(1, 'd') > data.taskEndDate;
     const hasSubTasks = data.subTasks;
+    const hasImages = data.images;
+    const isFinished = data.isFinished;
+    const isExpired = moment() > data.taskEndDate;
 
     const renderSubTasks = () => {
         if (hasSubTasks) {
             return (
                 <FlatList
+                    scrollEnabled={false}
                     data={data.subTasks}
                     style={styles.subTasksContainer}
                     keyExtractor={(subTask, index) => 'D' + index.toString()}
@@ -29,6 +31,29 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                                 <Text numberOfLines={2} style={[{...layout.regularTextBase}, {
                                     fontSize: 12,
                                 }]}>{item}</Text>
+                            </View>
+                        );
+                    }}
+                />
+            );
+        }
+    };
+
+    const renderImages = () => {
+        if (hasImages) {
+            return (
+                <FlatList
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    scrollEnabled={false}
+                    data={data.images}
+                    style={{marginTop: 10}}
+                    keyExtractor={(subTask, index) => 'D' + index.toString()}
+                    renderItem={({item, index}) => {
+                        return (
+                            <View
+                                style={[styles.imageContainer, {borderColor: isFinished ? color.ORANGE : color.GREY, marginStart: index !== 0 ? -10 : 0}]}>
+                                <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
                             </View>
                         );
                     }}
@@ -81,6 +106,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                                   style={[{...layout.boldTextBase}, {fontSize: 11}]}>{getHoursAndMinutes(data.taskEndDate)}</Text>
                         </View>
                         {renderSubTasks()}
+                        {renderImages()}
                     </View>
                 </View>
             </TouchableOpacity>
@@ -136,5 +162,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         right: 5,
+    },
+    imageContainer: {
+        borderRadius: 100,
+        borderWidth: 2,
+    },
+    imageStyle: {
+        width: 35,
+        height: 35,
+        borderRadius: 100,
     },
 });
