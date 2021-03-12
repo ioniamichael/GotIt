@@ -41,8 +41,8 @@ ProfileScreen.navigationOptions = ({navigation}) => ({
                 onPress={
                     () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
                 }
-                title={'NOTIFICATION'}
-                iconName={icons.ICON_NOTIFICATION}/>
+                title={'EDIT'}
+                iconName={icons.ICON_EDIT}/>
         </HeaderButtons>
     ),
 });

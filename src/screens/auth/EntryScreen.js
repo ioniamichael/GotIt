@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, ImageBackground, Image} from 'react-native';
 import {YellowButton} from '../../components/YellowButton';
 import colors from '../../constants/colors';
 import string from '../../constants/strings';
@@ -16,18 +16,18 @@ export const EntryScreen = ({navigation}) => {
     return (
         <ImageBackground style={styles.container} source={assets.BACKGROUND_IMAGE}>
 
-                <Text style={styles.entryTitle}>GotIt</Text>
-                <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
+            <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
+            <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
 
-                <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-                    <YellowButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
-                    <View style={styles.haveAccountContainer}>
-                        <Text style={[{...layout.boldTextBase}, {fontSize: 13}]}>{string.HAVE_ACCOUNT}</Text>
-                        <TouchableOpacity activeOpacity={layout.activeOpacity} onPress={navigateToLoginScreen}>
-                            <Text style={styles.loginButton}>{string.LOGIN}</Text>
-                        </TouchableOpacity>
-                    </View>
+            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                <YellowButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
+                <View style={styles.haveAccountContainer}>
+                    <Text style={[{...layout.boldTextBase}, {fontSize: 13}]}>{string.HAVE_ACCOUNT}</Text>
+                    <TouchableOpacity activeOpacity={layout.activeOpacity} onPress={navigateToLoginScreen}>
+                        <Text style={styles.loginButton}>{string.LOGIN}</Text>
+                    </TouchableOpacity>
                 </View>
+            </View>
 
         </ImageBackground>
     );
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         fontFamily: 'Montserrat-Bold',
         fontSize: 30,
-        color: colors.DARK_GREY
+        color: colors.DARK_GREY,
     },
     haveAccountContainer: {
         flexDirection: 'row',

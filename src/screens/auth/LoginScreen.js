@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, ImageBackground, TouchableOpacity, Image} from 'react-native';
 import {LoginInputText} from '../../components/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {isValidEmail, isValidPassword} from '../../utils';
@@ -57,7 +57,7 @@ export const LoginScreen = ({navigation}) => {
             <Loader isVisible={isLoaderShown}/>
 
 
-            <Text style={styles.entryTitle}>GotIt</Text>
+            <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
             <Text style={{...layout.regularTextBase}}>{string.LOGIN_SCREEN_TITLE}</Text>
 
             <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>

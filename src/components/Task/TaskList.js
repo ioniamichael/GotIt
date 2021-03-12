@@ -32,8 +32,6 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
         },
     ];
 
-    console.log(moment().add(1, 'd').format('YYYY-MM-DD'));
-
     const renderTitleIfHasData = (dataToRender, titleToRender) => {
         if (dataToRender.length) {
             return (

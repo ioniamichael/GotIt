@@ -13,7 +13,6 @@ import icons from '../../constants/icons';
 export const QuickActions = ({isVisible, onPressActionButton, task, navigation}) => {
 
     const dispatch = useDispatch();
-    console.log(task);
 
     const closeModal = () => {
         dispatch(setShowQuickActionsModal(false));

@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import {TaskList} from '../../components/Task/TaskList';
 import {setShowQuickActionsModal} from '../../store/actions/GeneralActions';
 import {QuickActions} from '../../components/Task/QuickActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import {NoTasksPlaceHolder} from '../../components/NoTasksPlaceholder';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icons from '../../constants/icons';
+import assets from '../../constants/assets';
 import screens from '../../constants/screens';
-import {NoTasksPlaceHolder} from '../../components/NoTasksPlaceholder';
 
 
 export const HomeScreen = ({navigation}) => {
@@ -21,8 +22,6 @@ export const HomeScreen = ({navigation}) => {
     const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
     const [quickActionsTask, setQuickActionsTask] = useState({});
 
-    console.log(tasks.length);
-
     const onTaskPressHandler = (task) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
@@ -31,8 +30,6 @@ export const HomeScreen = ({navigation}) => {
         setQuickActionsTask(task);
         dispatch(setShowQuickActionsModal(true));
     };
-
-
 
     return (
         <View style={styles.container}>
@@ -47,8 +44,8 @@ export const HomeScreen = ({navigation}) => {
 HomeScreen.navigationOptions = ({navigation}) => ({
     headerTitle: () => {
         return (
-            <View>
-                <Text style={styles.headerTitle}>GotIt</Text>
+            <View style={{marginStart: -20}}>
+                <Image source={assets.APP_LOGO} style={{width: 90, height: 40}} />
             </View>
         );
     },

@@ -50,7 +50,6 @@ export const CreateTaskModal = ({navigation, isVisible}) => {
                 isFinished,
             };
             try {
-                console.log('::TASK CREATION END DATE',taskEndDate);
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();

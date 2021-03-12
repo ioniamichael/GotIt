@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ImageBackground} from 'react-native';
+import {StyleSheet, View, Text, ImageBackground, Image} from 'react-native';
 import {LoginInputText} from '../../components/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
@@ -13,6 +13,7 @@ import colors from '../../constants/colors';
 import {useDispatch, useSelector} from 'react-redux';
 import screens from '../../constants/screens';
 import {ImagePicker} from '../../components/ImagePicker';
+import assets from '../../constants/assets';
 
 
 const INITIAL_STATE = {
@@ -48,7 +49,7 @@ export const SignUpScreen = ({navigation}) => {
 
             <Loader isVisible={isLoaderShown}/>
 
-            <Text style={styles.entryTitle}>GotIt</Text>
+            <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
             <Text style={{...layout.regularTextBase}}>{string.SIGN_UP_SCREEN_TITLE}</Text>
 
             <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>

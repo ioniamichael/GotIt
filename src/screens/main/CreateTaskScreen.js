@@ -14,6 +14,10 @@ import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import icons from '../../constants/icons';
+import {ProfileScreen} from './ProfileScreen';
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
@@ -29,8 +33,6 @@ export const CreateTaskScreen = ({navigation}) => {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [taskEndDate, setTaskEndDate] = useState(selectedDate.getTime());
-
-    console.log(taskEndDate);
 
     useEffect(() => {
         setTaskEndDate(selectedDate.getTime());
@@ -138,7 +140,20 @@ export const CreateTaskScreen = ({navigation}) => {
     );
 };
 
+CreateTaskScreen.navigationOptions = ({navigation}) => ({
+    headerTitle: () => {
+        return (
+            <View>
+                <Text style={styles.headerTitle}>Create new task</Text>
+            </View>
+        );
+    }
+});
+
 const styles = StyleSheet.create({
+    headerTitle: {
+        ...layout.boldTextBase,
+    },
     container: {
         padding: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,

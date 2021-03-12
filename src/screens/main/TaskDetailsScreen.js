@@ -1,18 +1,52 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
-import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
+import { getTaskImageByType} from '../../utils';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
+import {deleteTask, fetchTasks} from '../../store/actions/GeneralActions';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {AppHeaderButtons} from '../../components/AppHeaderButtons';
-import screens from '../../constants/screens';
 import icons from '../../constants/icons';
-import {HomeScreen} from './HomeScreen';
+import {useDispatch} from 'react-redux';
+
 
 export const TaskDetailsScreen = ({navigation}) => {
 
     const task = navigation.getParam('task');
+    const dispatch = useDispatch();
+    const [isFinished, setIsFinished] = useState(task.isFinished);
+
+    const checkThisTaskAsFinished = async () => {
+        try {
+            await setTaskAsFinished(task);
+            await dispatch(fetchTasks());
+            setIsFinished(!isFinished);
+        }catch (e) {
+            console.log(e);
+        }
+
+    };
+
+    const deleteSelectedTask = async ()  => {
+        try {
+            await removeTaskFromDB(task.taskCreationDate);
+            await dispatch(deleteTask(task.taskCreationDate));
+            await dispatch(fetchTasks());
+            navigation.goBack();
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        navigation.setParams({isTaskFinished: isFinished})
+    }, [isFinished]);
+
+    useEffect(() => {
+        navigation.setParams({deleteTask: deleteSelectedTask, checkAsFinished: checkThisTaskAsFinished})
+    }, []);
 
     const renderSubTasks = () => {
         if (task.subTasks) {
@@ -57,11 +91,20 @@ TaskDetailsScreen.navigationOptions = ({navigation}) => ({
     headerRight: () => (
         <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
             <Item
+                onPress={navigation.getParam('deleteTask')}
+                title={'DELETE'}
+                iconName={icons.ICON_TRASH}/>
+            <Item
+                onPress={navigation.getParam('checkAsFinished')}
+                title={'DELETE'}
+                color={navigation.getParam('isTaskFinished') ? color.ORANGE : color.DARK_GREY}
+                iconName={icons.ICON_TASK_DONE}/>
+            <Item
                 onPress={
-                    () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
+                    () => alert('Not developed yet')
                 }
-                title={'NOTIFICATION'}
-                iconName={icons.ICON_NOTIFICATION}/>
+                title={'EDIT'}
+                iconName={icons.ICON_EDIT}/>
         </HeaderButtons>
     ),
 });
