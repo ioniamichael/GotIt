@@ -78,7 +78,7 @@ export const CreateTaskScreen = ({navigation}) => {
     };
 
     const addSubTaskToList = () => {
-        if (subTaskValue.length) {
+        if (subTaskValue) {
             setSubTasks([...subTasks, subTaskValue]);
             setSubTaskValue('');
         }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ImageBackground, Image} from 'react-native';
+import {StyleSheet, View, Text, KeyboardAvoidingView, Image} from 'react-native';
 import {LoginInputText} from '../../components/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
@@ -45,7 +45,7 @@ export const SignUpScreen = ({navigation}) => {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
 
             <Loader isVisible={isLoaderShown}/>
 
@@ -95,13 +95,15 @@ export const SignUpScreen = ({navigation}) => {
                                 }))}
                                 placeholder={string.PLACEHOLDER_REPEAT_PASSWORD}/>
 
+                <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
+
             </View>
 
 
-            <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
 
 
-        </View>
+
+        </KeyboardAvoidingView>
     );
 };
 

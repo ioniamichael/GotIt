@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: color.TRANSPARENT_WHITE,
     },
     textInputStyle: {
+        ...layout.regularTextBase,
         width: '85%',
         height: 50
     },
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
         borderRadius: 40,
     },
     subTaskText: {
+        ...layout.regularTextBase,
         width: '85%',
     },
 });
