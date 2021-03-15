@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
-import { getTaskImageByType} from '../../utils';
+import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import {getTaskImageByType} from '../../utils';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
@@ -11,15 +11,16 @@ import moment from 'moment';
 import icons from '../../constants/icons';
 import {useDispatch, useSelector} from 'react-redux';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import Ionicons from '../../components/Task/TaskImagePicker';
 
 
 export const TaskDetailsScreen = ({navigation}) => {
 
-    const task = navigation.getParam('task');
     const dispatch = useDispatch();
-    const [isFinished, setIsFinished] = useState(task.isFinished);
-
     const toShowLoader = useSelector(state => state.GeneralReducer.toShowLoader);
+
+    const task = navigation.getParam('task');
+    const [isFinished, setIsFinished] = useState(task.isFinished);
 
     const checkThisTaskAsFinished = async () => {
         dispatch(setShowLoader(true));
@@ -28,14 +29,14 @@ export const TaskDetailsScreen = ({navigation}) => {
             await dispatch(fetchTasks());
             setIsFinished(!isFinished);
             dispatch(setShowLoader(false));
-        }catch (e) {
+        } catch (e) {
             dispatch(setShowLoader(false));
             console.log(e);
         }
 
     };
 
-    const deleteSelectedTask = async ()  => {
+    const deleteSelectedTask = async () => {
         dispatch(setShowLoader(true));
         try {
             await removeTaskFromDB(task.taskCreationDate);
@@ -50,11 +51,11 @@ export const TaskDetailsScreen = ({navigation}) => {
     };
 
     useEffect(() => {
-        navigation.setParams({isTaskFinished: isFinished})
+        navigation.setParams({isTaskFinished: isFinished});
     }, [isFinished]);
 
     useEffect(() => {
-        navigation.setParams({deleteTask: deleteSelectedTask, checkAsFinished: checkThisTaskAsFinished})
+        navigation.setParams({deleteTask: deleteSelectedTask, checkAsFinished: checkThisTaskAsFinished});
     }, []);
 
     const renderSubTasks = () => {
@@ -70,13 +71,41 @@ export const TaskDetailsScreen = ({navigation}) => {
         }
     };
 
+    const renderTaskImages = () => {
+        if (task.images) {
+            return (
+                <FlatList
+                    data={task.images}
+                    keyExtractor={(item, index) => item + index}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({item}) => {
+                        return (
+                            <View
+                                style={{...layout.shadowBase, marginVertical: 15, marginEnd: 10, borderRadius: 20}}>
+                                <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
+                            </View>
+                        );
+                    }}
+                />
+            );
+        }
+    };
+
     return (
         <View style={styles.mainContainer}>
-            <TaskLoader isVisible={toShowLoader} />
+            <TaskLoader isVisible={toShowLoader}/>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View>
-                    <Text style={{...layout.boldTextBase,fontSize: 12, textAlign: 'center'}}>{moment(task.taskEndDate).format('MMMM-DD-YYYY')}</Text>
-                    <Text style={{...layout.boldTextBase, textAlign: 'center'}}>{moment(task.taskEndDate).format('HH:MM')}</Text>
+                    <Text style={{
+                        ...layout.boldTextBase,
+                        fontSize: 12,
+                        textAlign: 'center',
+                    }}>{moment(task.taskEndDate).format('MMMM-DD-YYYY')}</Text>
+                    <Text style={{
+                        ...layout.boldTextBase,
+                        textAlign: 'center',
+                    }}>{moment(task.taskEndDate).format('HH:MM')}</Text>
                 </View>
                 <TouchableOpacity style={styles.taskTypeContainer}>
                     <Image source={getTaskImageByType(task.taskType)} style={styles.taskTypeImage}/>
@@ -85,6 +114,9 @@ export const TaskDetailsScreen = ({navigation}) => {
             <Text style={{marginBottom: 30, ...layout.boldTextBase, textAlign: 'center'}}>{task.taskTitle}</Text>
             <View style={{marginBottom: 30}}>
                 {renderSubTasks()}
+            </View>
+            <View style={{marginBottom: 30}}>
+                {renderTaskImages()}
             </View>
         </View>
     );
@@ -142,5 +174,11 @@ const styles = StyleSheet.create({
     taskTypeImage: {
         width: 50,
         height: 50,
+    },
+    imageStyle: {
+        width: layout.width * 0.4,
+        height: layout.height * 0.12,
+        borderWidth: 1,
+        borderRadius: 20,
     },
 });
