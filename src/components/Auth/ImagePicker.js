@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity, Image, Text} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
-import layout from '../constants/layout';
-import color from '../constants/colors';
+import layout from '../../constants/layout';
+import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import icons from '../constants/icons';
+import icons from '../../constants/icons';
 
 export const ImagePicker = ({image, onImagePicked}) => {
 

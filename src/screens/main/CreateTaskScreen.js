@@ -4,7 +4,7 @@ import {CustomTextInput} from '../../components/Task/CustomTextInput';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createNewTask} from '../../services/userService';
-import {fetchTasks, setShowCreateTaskModal} from '../../store/actions/GeneralActions';
+import {fetchTasks} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
 import {useDispatch} from 'react-redux';
@@ -14,10 +14,6 @@ import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {AppHeaderButtons} from '../../components/AppHeaderButtons';
-import icons from '../../constants/icons';
-import {ProfileScreen} from './ProfileScreen';
 import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
 
 export const CreateTaskScreen = ({navigation}) => {
@@ -88,11 +84,14 @@ export const CreateTaskScreen = ({navigation}) => {
         setSubTasks(subTasks.filter((subTask, i) => i !== index));
     };
 
+    const deleteImage = (index) => {
+        setImages(images.filter((image, i) => i !== index));
+    };
+
     const selectType = (taskType) => {
         setTaskType(taskType.TYPE);
         setTaskTypeTitle(taskType.title);
     };
-
 
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
@@ -115,7 +114,7 @@ export const CreateTaskScreen = ({navigation}) => {
                         onPressDeleteSubTask={deleteSubTaskHandler}
                     />
 
-                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])} />
+                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])} onDeleteImage={deleteImage} />
 
 
                     <View style={{marginBottom: 20}}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
-import {ImagePicker} from "../../components/ImagePicker";
+import {ImagePicker} from "../../components/Auth/ImagePicker";
 import {useSelector} from 'react-redux';
 import icons from '../../constants/icons';
 import layout from '../../constants/layout';

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Animated, Easing} from 'react-native';
+import React, {useEffect, useState, useRef} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
@@ -52,7 +52,10 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                     renderItem={({item, index}) => {
                         return (
                             <View
-                                style={[styles.imageContainer, {borderColor: isFinished ? color.ORANGE : color.GREY, marginStart: index !== 0 ? -10 : 0}]}>
+                                style={[styles.imageContainer, {
+                                    borderColor: isFinished ? color.ORANGE : color.GREY,
+                                    marginStart: index !== 0 ? -10 : 0,
+                                }]}>
                                 <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
                             </View>
                         );

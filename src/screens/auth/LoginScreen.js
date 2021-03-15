@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, ImageBackground, TouchableOpacity, Image} from 'react-native';
-import {LoginInputText} from '../../components/LoginInputText';
+import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {isValidEmail, isValidPassword} from '../../utils';
 import {login} from '../../services/userService';

@@ -6,7 +6,7 @@ import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from '../../constants/icons';
 
-export const TaskImagePicker = ({images, onImagePicked}) => {
+export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
 
     const selectPhotoFromLibrary = () => {
         launchImageLibrary({mediaType: 'photo', includeBase64: true, quality: 0.2}, (res) => {
@@ -30,10 +30,15 @@ export const TaskImagePicker = ({images, onImagePicked}) => {
                 horizontal
                 renderItem={({item, index}) => {
                     return (
-                        <TouchableOpacity
+                        <View
                             style={{...layout.shadowBase, marginVertical: 15, marginEnd: 10, borderRadius: 20}}>
                             <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
-                        </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.deleteButton} onPress={() => onDeleteImage(index)}>
+                                <Ionicons name={icons.ICON_TRASH} size={24} color={color.WHITE} />
+                            </TouchableOpacity>
+
+                        </View>
                     );
                 }}
             />
@@ -54,9 +59,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     imageStyle: {
-        width: layout.width * 0.6,
-        height: layout.height * 0.18,
+        width: layout.width * 0.4,
+        height: layout.height * 0.12,
         borderWidth: 1,
         borderRadius: 20,
     },
+    deleteButton:{
+        position:'absolute',
+        ...layout.shadowBase,
+        right:5,
+        top:5
+    }
 });

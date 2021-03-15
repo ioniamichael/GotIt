@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, SectionList } from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, SectionList} from 'react-native';
 import {TaskCard} from './TaskCard';
 import moment from 'moment';
 import layout from '../../constants/layout';

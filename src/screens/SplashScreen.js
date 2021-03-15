@@ -21,7 +21,7 @@ export const SplashScreen = ({navigation}) => {
             unsubscribe = auth().onAuthStateChanged(async (user) => {
                 if (user) {
                     await dispatch(fetchUserDetails());
-                    dispatch(fetchTasks());
+                    await dispatch(fetchTasks());
                     setTimeout(() => {
                         navigation.navigate(screens.HOME_SCREEN);
                     }, 3000);

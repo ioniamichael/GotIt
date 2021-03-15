@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import layout from '../constants/layout';
-import color from '../constants/colors';
+import layout from '../../constants/layout';
+import color from '../../constants/colors';
 
 export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure, keyboardType}) => {
     return (

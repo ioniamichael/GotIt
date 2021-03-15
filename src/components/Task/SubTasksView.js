@@ -24,8 +24,6 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
                 </TouchableOpacity>
             </View>
 
-
-
                 {subTasks.map((subTask, index) => {
                     return (
                         <View key={subTask + 'd' + index}  style={styles.subTasksContainer}>

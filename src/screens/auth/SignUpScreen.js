@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, KeyboardAvoidingView, Image} from 'react-native';
-import {LoginInputText} from '../../components/LoginInputText';
+import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createAccount} from '../../services/userService';
@@ -12,7 +12,7 @@ import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import {useDispatch, useSelector} from 'react-redux';
 import screens from '../../constants/screens';
-import {ImagePicker} from '../../components/ImagePicker';
+import {ImagePicker} from '../../components/Auth/ImagePicker';
 import assets from '../../constants/assets';
 
 
@@ -45,7 +45,7 @@ export const SignUpScreen = ({navigation}) => {
     };
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "padding"} style={styles.container}>
 
             <Loader isVisible={isLoaderShown}/>
 
