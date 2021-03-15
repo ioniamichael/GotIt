@@ -4,15 +4,15 @@ import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createAccount} from '../../services/userService';
-import {Loader} from '../../components/Loader';
 import {setShowLoader} from '../../store/actions/GeneralActions';
+import {ImagePicker} from '../../components/Auth/ImagePicker';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 import {useDispatch, useSelector} from 'react-redux';
 import screens from '../../constants/screens';
-import {ImagePicker} from '../../components/Auth/ImagePicker';
 import assets from '../../constants/assets';
 
 
@@ -47,7 +47,7 @@ export const SignUpScreen = ({navigation}) => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "padding"} style={styles.container}>
 
-            <Loader isVisible={isLoaderShown}/>
+            <TaskLoader isVisible={isLoaderShown}/>
 
             <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
             <Text style={{...layout.regularTextBase}}>{string.SIGN_UP_SCREEN_TITLE}</Text>

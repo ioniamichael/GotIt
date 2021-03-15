@@ -1,15 +1,15 @@
 import React from 'react';
-import store from './src/store';
-import AppNavigator from './src/Router';
 import {Provider} from 'react-redux';
 import {StyleSheet, View, StatusBar} from 'react-native';
+import store from './src/store';
+import AppNavigator from './src/Router';
 import colors from './src/constants/colors';
 
 const App = () => {
     return (
         <View style={styles.container}>
             <Provider store={store}>
-                <StatusBar barStyle={'dark-content'} backgroundColor={colors.WHITE} />
+                <StatusBar barStyle={'dark-content'} backgroundColor={colors.WHITE}/>
                 <AppNavigator/>
             </Provider>
         </View>

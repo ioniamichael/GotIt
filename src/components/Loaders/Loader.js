@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
-import layout from '../constants/layout';
-import color from '../constants/colors';
+import layout from '../../constants/layout';
+import color from '../../constants/colors';
 
 export const Loader = ({isVisible}) => {
     return(

@@ -9,13 +9,14 @@ import {HomeScreen} from './screens/main/HomeScreen';
 import {EntryScreen} from './screens/auth/EntryScreen';
 import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 import {ProfileScreen} from './screens/main/ProfileScreen';
-import {CreateTaskScreen} from "./screens/main/CreateTaskScreen";
+import {CreateTaskScreen} from './screens/main/CreateTaskScreen';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
+import {TaskLoader} from './components/Loaders/TaskLoader';
 
 const headerDefaultOption = {
     headerShown: true,
@@ -42,18 +43,19 @@ const HomeStack = createStackNavigator({
     HomeScreen,
     TaskDetailsScreen,
 }, {
-    defaultNavigationOptions: headerDefaultOption
+    defaultNavigationOptions: headerDefaultOption,
 });
 
 const ProfileStack = createStackNavigator({
     ProfileScreen,
 }, {
-    defaultNavigationOptions: headerDefaultOption
+    defaultNavigationOptions: headerDefaultOption,
 });
 
 const CreateStack = createStackNavigator({
     CreateTaskScreen,
-},{defaultNavigationOptions: headerDefaultOption});
+}, {defaultNavigationOptions: headerDefaultOption});
+
 
 const BottomTabBar = createBottomTabNavigator({
         Home: {
@@ -72,8 +74,8 @@ const BottomTabBar = createBottomTabNavigator({
                 tabBarIcon: () => (
                     <Image style={{width: 80, height: 80}}
                            source={assets.ADD_TASK_BUTTON}/>
-                )
-            }
+                ),
+            },
         },
         Profile: {
             screen: ProfileStack,

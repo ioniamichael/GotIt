@@ -4,10 +4,10 @@ import {CustomTextInput} from '../../components/Task/CustomTextInput';
 import {YellowButton} from '../../components/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createNewTask} from '../../services/userService';
-import {fetchTasks} from '../../store/actions/GeneralActions';
+import {fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import {BABY} from '../../pickerTypes';
@@ -15,9 +15,12 @@ import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
 import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
+
+    const toShowLoader = useSelector(state => state.GeneralReducer.toShowLoader);
 
     const [taskType, setTaskType] = useState(BABY);
     const [taskTitle, setTaskTitle] = useState('');
@@ -50,7 +53,6 @@ export const CreateTaskScreen = ({navigation}) => {
     const createTask = async () => {
         if (taskType.length && taskTitle.length) {
             setTaskCreationDate(getCurrentDateInTimestamp().toString());
-
             const task = {
                 taskType,
                 taskTitle,
@@ -63,11 +65,14 @@ export const CreateTaskScreen = ({navigation}) => {
             };
 
             try {
+                dispatch(setShowLoader(true));
                 await createNewTask(task);
                 await dispatch(fetchTasks());
                 cleanState();
                 navigation.navigate(screens.HOME_SCREEN);
+                dispatch(setShowLoader(false));
             } catch (e) {
+                dispatch(setShowLoader(false));
                 console.log('::CREATE TASK ', e);
             }
         }
@@ -95,7 +100,7 @@ export const CreateTaskScreen = ({navigation}) => {
 
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
-
+            <TaskLoader isVisible={toShowLoader} />
             <View style={{flex: 1}}>
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>

@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ImageBackground, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {isValidEmail, isValidPassword} from '../../utils';
 import {login} from '../../services/userService';
 import {setShowLoader} from '../../store/actions/GeneralActions';
-import {Loader} from '../../components/Loader';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
@@ -54,7 +54,7 @@ export const LoginScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
 
-            <Loader isVisible={isLoaderShown}/>
+            <TaskLoader isVisible={isLoaderShown}/>
 
 
             <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>

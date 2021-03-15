@@ -5,7 +5,7 @@ import {setShowQuickActionsModal} from '../../store/actions/GeneralActions';
 import {QuickActions} from '../../components/Task/QuickActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
-import {NoTasksPlaceHolder} from '../../components/NoTasksPlaceholder';
+import {NoTasksPlaceHolder} from '../../components/Loaders/NoTasksPlaceholder';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';

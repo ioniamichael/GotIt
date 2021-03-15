@@ -4,12 +4,13 @@ import { getTaskImageByType} from '../../utils';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
-import {deleteTask, fetchTasks} from '../../store/actions/GeneralActions';
+import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
 import icons from '../../constants/icons';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 
 
 export const TaskDetailsScreen = ({navigation}) => {
@@ -18,24 +19,32 @@ export const TaskDetailsScreen = ({navigation}) => {
     const dispatch = useDispatch();
     const [isFinished, setIsFinished] = useState(task.isFinished);
 
+    const toShowLoader = useSelector(state => state.GeneralReducer.toShowLoader);
+
     const checkThisTaskAsFinished = async () => {
+        dispatch(setShowLoader(true));
         try {
             await setTaskAsFinished(task);
             await dispatch(fetchTasks());
             setIsFinished(!isFinished);
+            dispatch(setShowLoader(false));
         }catch (e) {
+            dispatch(setShowLoader(false));
             console.log(e);
         }
 
     };
 
     const deleteSelectedTask = async ()  => {
+        dispatch(setShowLoader(true));
         try {
             await removeTaskFromDB(task.taskCreationDate);
             await dispatch(deleteTask(task.taskCreationDate));
             await dispatch(fetchTasks());
             navigation.goBack();
+            dispatch(setShowLoader(false));
         } catch (e) {
+            dispatch(setShowLoader(false));
             console.log(e);
         }
     };
@@ -63,6 +72,7 @@ export const TaskDetailsScreen = ({navigation}) => {
 
     return (
         <View style={styles.mainContainer}>
+            <TaskLoader isVisible={toShowLoader} />
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View>
                     <Text style={{...layout.boldTextBase,fontSize: 12, textAlign: 'center'}}>{moment(task.taskEndDate).format('MMMM-DD-YYYY')}</Text>
