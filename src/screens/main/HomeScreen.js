@@ -22,6 +22,8 @@ export const HomeScreen = ({navigation}) => {
     const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
     const [quickActionsTask, setQuickActionsTask] = useState({});
 
+    console.log(tasks);
+
     const onTaskPressHandler = (task) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
@@ -33,8 +35,9 @@ export const HomeScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-            {!tasks.length && <NoTasksPlaceHolder/>}
-            <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
+            {tasks
+                ? <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
+            : <NoTasksPlaceHolder/>}
             <QuickActions isVisible={isQuickActionsModalVisible} task={quickActionsTask} navigation={navigation}/>
             {isQuickActionsModalVisible || isCreateTaskModalVisible && <View style={styles.overlay}/>}
         </View>

@@ -22,10 +22,7 @@ export const SplashScreen = ({navigation}) => {
                 if (user) {
                     await dispatch(fetchUserDetails());
                     await dispatch(fetchTasks());
-                    setTimeout(() => {
-                        navigation.navigate(screens.HOME_SCREEN);
-                    }, 3000);
-
+                    navigation.navigate(screens.HOME_SCREEN);
                 } else {
                     navigation.navigate(screens.ENTRY_SCREEN);
                 }
@@ -50,12 +47,11 @@ export const SplashScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         backgroundColor: color.ORANGE,
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
     },
-    lottie: {
-    },
+    lottie: {},
 });

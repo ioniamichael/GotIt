@@ -115,6 +115,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
             </View>
 
             <TouchableOpacity
+                activeOpacity={layout.activeOpacity}
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.GREY}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
                 onLongPress={() => setIsQuickActionsShown(!isQuickActionsShown)}
