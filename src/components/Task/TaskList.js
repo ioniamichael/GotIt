@@ -39,14 +39,13 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
             );
         }
     };
-
     return (
         <SectionList
             sections={sortedData}
             keyExtractor={(item, index) => item + index}
             renderItem={({item, index}) => {
                 return (
-                    <TaskCard data={item} index={index} onTaskPress={onTaskPress} onTaskLongPress={onTaskLongPress}/>
+                    <TaskCard data={item} index={index} onTaskPress={onTaskPress} onTaskLongPress={onTaskLongPress} />
                 );
             }}
             renderSectionHeader={({section: {title}, section: {data}}) => {

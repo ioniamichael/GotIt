@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Animated, Easing} from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icon from '../../constants/icons';
 import moment from 'moment';
+import {TasksQuickActions} from "./TasksQuickActions";
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
@@ -15,6 +16,8 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     const hasImages = data.images;
     const isFinished = data.isFinished;
     const isExpired = moment() > data.taskEndDate;
+    const [isQuickActionsShown, setIsQuickActionsShown] = useState(false);
+    const expandAnim = new Animated.Value(isQuickActionsShown ? 0 : 1);
 
     const renderSubTasks = () => {
         if (hasSubTasks) {
@@ -38,6 +41,23 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
             );
         }
     };
+
+    useEffect(() => {
+        Animated.spring(
+            expandAnim,
+            {
+                toValue: !isQuickActionsShown ? 0 : 1,
+                friction: 4,
+                tension: 140,
+                useNativeDriver: true
+            }
+        ).start();
+    }, [isQuickActionsShown]);
+
+    const expand = expandAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1]
+    });
 
     const renderImages = () => {
         if (hasImages) {
@@ -79,6 +99,14 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         }
     };
 
+    const renderQuickActions = () => {
+        return (
+            <Animated.View style={{transform: [{ scaleY: expand }]}}>
+                <TasksQuickActions task={data}/>
+            </Animated.View>
+        )
+    };
+
     return (
         <View style={styles.mainContainer}>
 
@@ -89,7 +117,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
             <TouchableOpacity
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.GREY}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
-                onLongPress={() => onTaskLongPress(data)}
+                onLongPress={() => setIsQuickActionsShown(!isQuickActionsShown)}
             >
 
                 {isFutureDay || isPrevDay ?
@@ -112,6 +140,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                         {renderImages()}
                     </View>
                 </View>
+
+                {isQuickActionsShown && renderQuickActions()}
+
             </TouchableOpacity>
 
         </View>

@@ -5,13 +5,12 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
 import icons from '../../constants/icons';
 import {useDispatch, useSelector} from 'react-redux';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
-import Ionicons from '../../components/Task/TaskImagePicker';
 
 
 export const TaskDetailsScreen = ({navigation}) => {
@@ -178,7 +177,6 @@ const styles = StyleSheet.create({
     imageStyle: {
         width: layout.width * 0.4,
         height: layout.height * 0.12,
-        borderWidth: 1,
         borderRadius: 20,
     },
 });

@@ -35,7 +35,7 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
                             <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
 
                             <TouchableOpacity style={styles.deleteButton} onPress={() => onDeleteImage(index)}>
-                                <Ionicons name={icons.ICON_TRASH} size={24} color={color.WHITE} />
+                                <Ionicons name={icons.ICON_TRASH} size={24} color={color.WHITE}/>
                             </TouchableOpacity>
 
                         </View>
@@ -61,13 +61,12 @@ const styles = StyleSheet.create({
     imageStyle: {
         width: layout.width * 0.4,
         height: layout.height * 0.12,
-        borderWidth: 1,
         borderRadius: 20,
     },
-    deleteButton:{
-        position:'absolute',
+    deleteButton: {
+        position: 'absolute',
         ...layout.shadowBase,
-        right:5,
-        top:5
+        right: 5,
+        top: 5
     }
 });
