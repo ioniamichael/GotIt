@@ -7,6 +7,8 @@ import {createNewTask} from '../../services/userService';
 import {fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
+import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
@@ -14,8 +16,7 @@ import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
-import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {BlurView} from "@react-native-community/blur";
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
@@ -100,7 +101,7 @@ export const CreateTaskScreen = ({navigation}) => {
 
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
-            <TaskLoader isVisible={toShowLoader} />
+
             <View style={{flex: 1}}>
 
                 <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
@@ -119,7 +120,8 @@ export const CreateTaskScreen = ({navigation}) => {
                         onPressDeleteSubTask={deleteSubTaskHandler}
                     />
 
-                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])} onDeleteImage={deleteImage} />
+                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])}
+                                     onDeleteImage={deleteImage}/>
 
 
                     <View style={{marginBottom: 20}}>
@@ -146,6 +148,9 @@ export const CreateTaskScreen = ({navigation}) => {
 
                 </View>
             </View>
+
+            <TaskLoader isVisible={toShowLoader}/>
+
         </ScrollView>
     );
 };
@@ -171,5 +176,5 @@ const styles = StyleSheet.create({
     innerContainer: {
         marginVertical: 30,
         alignItems: 'center',
-    },
+    }
 });

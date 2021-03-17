@@ -3,6 +3,7 @@ import {StyleSheet, Modal, View, Text} from 'react-native';
 import LottieView from 'lottie-react-native';
 import assets from '../../constants/assets';
 import layout from '../../constants/layout';
+import {BlurView} from "@react-native-community/blur";
 
 export const TaskLoader = ({isVisible}) => {
     return (
@@ -10,6 +11,14 @@ export const TaskLoader = ({isVisible}) => {
             visible={isVisible}
             animationType="fade"
             transparent={true} >
+
+            <BlurView
+                style={styles.absolute}
+                blurType="light"
+                blurAmount={10}
+                reducedTransparencyFallbackColor="white"
+            />
+
             <View
                 style={styles.rootView}>
                 <LottieView style={styles.lottie} source={assets.TASK_LOADER} autoPlay loop/>
@@ -23,7 +32,6 @@ const styles = StyleSheet.create({
     rootView: {
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffdcb799',
         height: layout.height,
         width: layout.width,
     },
@@ -31,4 +39,11 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
     },
+    absolute:{
+        position: 'absolute',
+        top:0,
+        bottom:0,
+        start: 0,
+        end: 0
+    }
 });

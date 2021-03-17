@@ -22,8 +22,6 @@ export const HomeScreen = ({navigation}) => {
     const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
     const [quickActionsTask, setQuickActionsTask] = useState({});
 
-    console.log(tasks);
-
     const onTaskPressHandler = (task) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
