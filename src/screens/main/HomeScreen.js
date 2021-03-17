@@ -1,43 +1,30 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {TaskList} from '../../components/Task/TaskList';
-import {setShowQuickActionsModal} from '../../store/actions/GeneralActions';
-import {QuickActions} from '../../components/Task/QuickActions';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {NoTasksPlaceHolder} from '../../components/Loaders/NoTasksPlaceholder';
-import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icons from '../../constants/icons';
 import assets from '../../constants/assets';
 import screens from '../../constants/screens';
+import {useSelector} from "react-redux";
 
 
 export const HomeScreen = ({navigation}) => {
 
-    const dispatch = useDispatch();
     const tasks = useSelector(state => state.GeneralReducer.taskList);
-    const isQuickActionsModalVisible = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
-    const isCreateTaskModalVisible = useSelector(state => state.GeneralReducer.isCreateTaskModalVisible);
-    const [quickActionsTask, setQuickActionsTask] = useState({});
 
     const onTaskPressHandler = (task) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
 
-    const openQuickActionsModal = (task) => {
-        setQuickActionsTask(task);
-        dispatch(setShowQuickActionsModal(true));
-    };
-
     return (
         <View style={styles.container}>
             {tasks
-                ? <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsModal}/>
+                ? <TaskList data={tasks} onTaskPress={onTaskPressHandler}/>
             : <NoTasksPlaceHolder/>}
-            <QuickActions isVisible={isQuickActionsModalVisible} task={quickActionsTask} navigation={navigation}/>
-            {isQuickActionsModalVisible || isCreateTaskModalVisible && <View style={styles.overlay}/>}
         </View>
     );
 };

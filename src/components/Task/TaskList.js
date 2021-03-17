@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, SectionList} from 'react-native';
-import {TaskCard} from './TaskCard';
+import {StyleSheet, Text, SectionList,View} from 'react-native';
+import {TaskCard} from './TaskCard/TaskCard';
 import moment from 'moment';
 import layout from '../../constants/layout';
+import color from '../../constants/colors';
 
 
 export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
@@ -35,7 +36,9 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     const renderTitleIfHasData = (dataToRender, titleToRender) => {
         if (dataToRender.length) {
             return (
-                <Text style={{...layout.boldTextBase, fontSize: 12, marginVertical: 10}}>{titleToRender}</Text>
+                <View style={{backgroundColor: color.WHITE}}>
+                    <Text style={{...layout.boldTextBase, fontSize: 12, marginVertical: 10}}>{titleToRender}</Text>
+                </View>
             );
         }
     };
