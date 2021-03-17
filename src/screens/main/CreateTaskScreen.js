@@ -16,7 +16,6 @@ import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
-import {BlurView} from "@react-native-community/blur";
 
 export const CreateTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
