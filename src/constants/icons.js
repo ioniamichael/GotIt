@@ -16,5 +16,6 @@ export default {
     ICON_INFO:'information-outline',
     ICON_TASK_DONE: 'checkmark-done-outline',
     ICON_UPLOAD: 'cloud-upload-outline',
-    ICON_EDIT: 'create-outline'
+    ICON_EDIT: 'create-outline',
+    ICON_CLOSE: 'close-outline',
 };

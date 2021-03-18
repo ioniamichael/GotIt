@@ -16,7 +16,6 @@ import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
-import {TaskLoader} from './components/Loaders/TaskLoader';
 
 const headerDefaultOption = {
     headerShown: true,

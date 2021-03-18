@@ -9,21 +9,40 @@ import layout from '../../constants/layout';
 import icons from '../../constants/icons';
 import assets from '../../constants/assets';
 import screens from '../../constants/screens';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setShowQuickActionsModal} from "../../store/actions/GeneralActions";
+import {TasksQuickActions} from "../../components/Task/TasksQuickActions";
 
 
 export const HomeScreen = ({navigation}) => {
 
+    const dispatch = useDispatch();
     const tasks = useSelector(state => state.GeneralReducer.taskList);
+    const [dataForQuickActions, setDataForQuickActions] = useState(null);
+    const isQuickActionsModalVisible = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
 
     const onTaskPressHandler = (task) => {
         navigation.navigate(screens.TASK_DETAILS_SCREEN, {task});
     };
 
+
+    const openQuickActionsWithData = (data) => {
+        setDataForQuickActions(data);
+        dispatch(setShowQuickActionsModal(true));
+    };
+
+    const closeQuickActions = () => {
+        setDataForQuickActions(null);
+        dispatch(setShowQuickActionsModal(false));
+    };
+
     return (
         <View style={styles.container}>
+
+            <TasksQuickActions isVisible={isQuickActionsModalVisible} task={dataForQuickActions} onClosePressed={closeQuickActions} navigation={navigation} />
+
             {tasks
-                ? <TaskList data={tasks} onTaskPress={onTaskPressHandler}/>
+                ? <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsWithData}/>
             : <NoTasksPlaceHolder/>}
         </View>
     );

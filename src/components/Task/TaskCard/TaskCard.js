@@ -24,10 +24,6 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     const toShowQuickActions = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
     const [longPressedIndex, setLongPressedIndex] = useState(null);
 
-    useEffect(() => {
-        dispatch(setShowQuickActionsModal(true ));
-    }, [longPressedIndex]);
-
     const renderBorderRadiusPosition = () => {
         if (index % 2 === 0) {
             return {
@@ -54,12 +50,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                 activeOpacity={layout.activeOpacity}
                 style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.GREY}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
-                onLongPress={() => {
-                    setLongPressedIndex(index)
-                }}>
+                onLongPress={() => onTaskLongPress(data) }>
 
-                {isFutureDay || isPrevDay ?
-                    <Text style={styles.dateStyle}>{moment(data.taskEndDate).format('MMMM-D').toString()}</Text> : null}
+                {isFutureDay || isPrevDay ? <Text style={styles.dateStyle}>{moment(data.taskEndDate).format('MMMM-D').toString()}</Text> : null}
 
                 <View style={styles.titleContainer}>
 
@@ -88,8 +81,6 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                     </View>
 
                 </View>
-
-                {toShowQuickActions && longPressedIndex === index ? <TasksQuickActions task={data}/> : null}
 
             </TouchableOpacity>
 
