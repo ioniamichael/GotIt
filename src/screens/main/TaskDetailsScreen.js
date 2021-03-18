@@ -27,12 +27,10 @@ export const TaskDetailsScreen = ({navigation}) => {
             await setTaskAsFinished(task);
             await dispatch(fetchTasks());
             setIsFinished(!isFinished);
-            dispatch(setShowLoader(false));
         } catch (e) {
-            dispatch(setShowLoader(false));
             console.log(e);
         }
-
+        dispatch(setShowLoader(false));
     };
 
     const deleteSelectedTask = async () => {
@@ -42,11 +40,10 @@ export const TaskDetailsScreen = ({navigation}) => {
             await dispatch(deleteTask(task.taskCreationDate));
             await dispatch(fetchTasks());
             navigation.goBack();
-            dispatch(setShowLoader(false));
         } catch (e) {
-            dispatch(setShowLoader(false));
             console.log(e);
         }
+        dispatch(setShowLoader(false));
     };
 
     useEffect(() => {
