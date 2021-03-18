@@ -7,12 +7,12 @@ import colors from './src/constants/colors';
 
 const App = () => {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <Provider store={store}>
                 <StatusBar barStyle={'dark-content'} backgroundColor={colors.WHITE}/>
                 <AppNavigator/>
             </Provider>
-        </SafeAreaView>
+        </View>
     );
 };
 
