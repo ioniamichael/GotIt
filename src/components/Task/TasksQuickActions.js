@@ -17,15 +17,15 @@ export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation})
     const expandAnim = new Animated.Value(isQuickActionsShown ? 0 : 1);
 
     useEffect(() => {
-        Animated.spring(
-            expandAnim,
-            {
-                toValue: isQuickActionsShown ? 1 : 0,
-                friction: 4,
-                tension: 140,
-                useNativeDriver: true
-            }
-        ).start();
+            Animated.spring(
+                expandAnim,
+                {
+                    toValue: isQuickActionsShown ? 1 : 0,
+                    friction: 4,
+                    tension: 140,
+                    useNativeDriver: true
+                }
+            ).start();
     }, [isQuickActionsShown]);
 
     const expand = expandAnim.interpolate({
