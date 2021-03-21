@@ -34,13 +34,6 @@ export const EditTaskScreen = ({navigation}) => {
     const [selectedDate, setSelectedDate] = useState(new Date(task.taskEndDate));
     const [taskEndDate, setTaskEndDate] = useState(selectedDate.getTime());
 
-    const [isOriginalState, setIsOriginalState] = useState(true);
-
-    useEffect(() => {
-        console.log(':::STATE CHANGED ', isOriginalState);
-        setIsOriginalState(false);
-    }, [taskTitle, taskType, taskCreationDate, taskEndDate, subTasks,isExpired, isFinished, images]);
-
     useEffect(() => {
         setTaskEndDate(selectedDate.getTime());
     }, [selectedDate]);
