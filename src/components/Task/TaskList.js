@@ -11,30 +11,18 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
 
     data.sort((a, b) => (a.taskEndDate > b.taskEndDate) ? 1 : ((b.taskEndDate > a.taskEndDate) ? -1 : 0));
 
-    const getSortedArrayWithTitles = () => {
+    let sortedData = [];
+    let length = 0;
 
-        if (data.length) {
-            let sortedArray = [
-                {
-                    title: moment(data[0].taskEndDate).format(appConfig.DAYS_FORMAT),
-                    data: data.filter((task) => moment(task.taskEndDate).format(appConfig.DAYS_FORMAT) === moment(data[0].taskEndDate).format(appConfig.DAYS_FORMAT))
-                }
-            ];
-
-            for (let i = 0, j = 0; i < data.length; i++) {
-                if (!sortedArray[j].title.includes(moment(data[i].taskEndDate).format(appConfig.DAYS_FORMAT))) {
-                    sortedArray.push(
-                        {
-                            title: moment(data[i].taskEndDate).format(appConfig.DAYS_FORMAT),
-                            data: data.filter((task) => moment(task.taskEndDate).format(appConfig.DAYS_FORMAT) === moment(data[i].taskEndDate).format(appConfig.DAYS_FORMAT))
-                        }
-                    );
-                    j++;
-                }
-            }
-            return sortedArray;
+    data.forEach(task => {
+        if(sortedData[length - 1] && moment(task.taskEndDate).format(appConfig.DAYS_FORMAT) === sortedData[length - 1].title){
+            sortedData[length - 1].data.push(task);
         }
-    };
+        else{
+            sortedData.push({title: moment(task.taskEndDate).format(appConfig.DAYS_FORMAT), data: [task] });
+            ++length;
+        }
+    });
 
     const renderTitleIfHasData = (dataToRender, titleToRender) => {
         if (dataToRender.length) {
@@ -51,7 +39,7 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     };
     return (
         <SectionList
-            sections={getSortedArrayWithTitles()}
+            sections={sortedData}
             keyExtractor={(item, index) => item + index}
             renderItem={({item, index}) => {
                 return (
