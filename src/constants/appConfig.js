@@ -1,3 +1,4 @@
 export default {
     MODAL_VISIBILITY_TIME_IN_MILLISECONDS: 2000,
+    DAYS_FORMAT: 'YYYY-MMM-DD',
 }

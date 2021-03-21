@@ -7,7 +7,6 @@ export const UserPicIcon = () => {
     const user = useSelector(state => state.UserReducer.userDetails);
     const userImage = user.image;
 
-    console.log('::::USERIMAGE', userImage);
 
     return (
         <View>

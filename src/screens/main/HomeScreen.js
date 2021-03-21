@@ -4,14 +4,14 @@ import {TaskList} from '../../components/Task/TaskList';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {NoTasksPlaceHolder} from '../../components/Loaders/NoTasksPlaceholder';
+import {setShowQuickActionsModal} from "../../store/actions/GeneralActions";
+import {TasksQuickActions} from "../../components/Task/TasksQuickActions";
+import {useDispatch, useSelector} from "react-redux";
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icons from '../../constants/icons';
 import assets from '../../constants/assets';
 import screens from '../../constants/screens';
-import {useDispatch, useSelector} from "react-redux";
-import {setShowQuickActionsModal} from "../../store/actions/GeneralActions";
-import {TasksQuickActions} from "../../components/Task/TasksQuickActions";
 
 
 export const HomeScreen = ({navigation}) => {
@@ -39,11 +39,12 @@ export const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
 
-            <TasksQuickActions isVisible={isQuickActionsModalVisible} task={dataForQuickActions} onClosePressed={closeQuickActions} navigation={navigation} />
+            <TasksQuickActions isVisible={isQuickActionsModalVisible} task={dataForQuickActions}
+                               onClosePressed={closeQuickActions} navigation={navigation}/>
 
             {tasks
                 ? <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsWithData}/>
-            : <NoTasksPlaceHolder/>}
+                : <NoTasksPlaceHolder/>}
         </View>
     );
 };
@@ -52,7 +53,7 @@ HomeScreen.navigationOptions = ({navigation}) => ({
     headerTitle: () => {
         return (
             <View style={{marginStart: -20}}>
-                <Image source={assets.APP_LOGO} style={{width: 90, height: 40}} />
+                <Image source={assets.APP_LOGO} style={{width: 90, height: 40}}/>
             </View>
         );
     },
