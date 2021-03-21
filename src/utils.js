@@ -30,6 +30,14 @@ export const getTaskImageByType = (type) => {
     }
 };
 
+export const getTaskTypeTitleByType = (type) => {
+    for (let i = 0; i < assets.PICKER.length; i++) {
+        if (assets.PICKER[i].TYPE === type){
+            return assets.PICKER[i].title;
+        }
+    }
+};
+
 export const getHoursAndMinutes = (time) => {
     const date = new Date(time);
     let ampm = 'am';

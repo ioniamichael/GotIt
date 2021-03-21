@@ -16,6 +16,7 @@ import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
+import {EditTaskScreen} from './screens/main/EditTaskScreen';
 
 const headerDefaultOption = {
     headerShown: true,
@@ -41,6 +42,7 @@ const AuthStack = createStackNavigator({
 const HomeStack = createStackNavigator({
     HomeScreen,
     TaskDetailsScreen,
+    EditTaskScreen,
 }, {
     defaultNavigationOptions: headerDefaultOption,
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, TextInput, Platform} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, TextInput, Animated} from 'react-native';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -7,7 +7,6 @@ import strings from '../../constants/strings';
 import icons from '../../constants/icons';
 
 export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {
-
 
     return (
         <View style={styles.mainContainer}>
@@ -24,28 +23,30 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
                 </TouchableOpacity>
             </View>
 
-                {subTasks.map((subTask, index) => {
-                    return (
-                        <View key={subTask + 'd' + index}  style={styles.subTasksContainer}>
-                            <Text style={styles.subTaskText}>{subTask}</Text>
-                            <TouchableOpacity onPress={() => onPressDeleteSubTask(index)}>
-                                <Ionicons name={icons.ICON_TRASH} size={20} color={color.DARK_GREY}/>
-                            </TouchableOpacity>
-                        </View>
-                    );
-                })}
+            {subTasks.map((subTask, index) => {
+                return (
+                    <View key={subTask + 'd' + index} style={styles.subTasksContainer}>
+                        <Text style={styles.subTaskText}>{subTask}</Text>
+                        <TouchableOpacity onPress={() => {
+                            onPressDeleteSubTask(index);
+                        }}>
+                            <Ionicons name={icons.ICON_TRASH} size={20} color={color.DARK_GREY}/>
+                        </TouchableOpacity>
+                    </View>
+                );
+            })}
 
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    mainContainer:{
-        width: layout.width - (layout.defaultPaddingSize *2),
+    mainContainer: {
+        width: layout.width - (layout.defaultPaddingSize * 2),
         marginBottom: 20,
     },
     textInputContainerStyle: {
-        marginBottom:20,
+        marginBottom: 20,
         paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
@@ -58,15 +59,13 @@ const styles = StyleSheet.create({
     textInputStyle: {
         ...layout.regularTextBase,
         width: '85%',
-        height: 50
+        height: 50,
     },
-    addButtonStyle: {
-
-    },
+    addButtonStyle: {},
     subTasksContainer: {
-        marginHorizontal:10,
-        marginBottom:10,
-        paddingHorizontal:20,
+        marginHorizontal: 10,
+        marginBottom: 10,
+        paddingHorizontal: 20,
         flexDirection: 'row',
         backgroundColor: color.GREY,
         height: 60,

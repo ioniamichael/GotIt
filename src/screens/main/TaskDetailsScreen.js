@@ -11,6 +11,7 @@ import layout from '../../constants/layout';
 import moment from 'moment';
 import icons from '../../constants/icons';
 import {useDispatch, useSelector} from 'react-redux';
+import {EditTaskScreen} from './EditTaskScreen';
 
 
 export const TaskDetailsScreen = ({navigation}) => {
@@ -45,6 +46,14 @@ export const TaskDetailsScreen = ({navigation}) => {
         }
         dispatch(setShowLoader(false));
     };
+
+    const openEditTaskScreenWithTask = () => {
+        navigation.navigate('EditTaskScreen', {task})
+    };
+
+    useEffect(() => {
+       navigation.setParams({navigateToEditScreen: openEditTaskScreenWithTask});
+    },[task]);
 
     useEffect(() => {
         navigation.setParams({isTaskFinished: isFinished});
@@ -138,9 +147,7 @@ TaskDetailsScreen.navigationOptions = ({navigation}) => ({
                 color={navigation.getParam('isTaskFinished') ? color.ORANGE : color.DARK_GREY}
                 iconName={icons.ICON_TASK_DONE}/>
             <Item
-                onPress={
-                    () => alert('Not developed yet')
-                }
+                onPress={navigation.getParam('navigateToEditScreen')}
                 title={'EDIT'}
                 iconName={icons.ICON_EDIT}/>
         </HeaderButtons>
