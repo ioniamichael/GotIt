@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     exitButtonContainer: {
         ...layout.shadowBase,
         height: 40,
-        bottom: layout.height * 0.2,
+        bottom: layout.height * 0.22,
         width: 40,
         borderRadius: 100,
         backgroundColor: color.ORANGE,

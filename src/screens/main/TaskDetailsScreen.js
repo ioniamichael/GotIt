@@ -6,12 +6,13 @@ import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {EditTaskScreen} from './EditTaskScreen';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
 import icons from '../../constants/icons';
 import {useDispatch, useSelector} from 'react-redux';
-import {EditTaskScreen} from './EditTaskScreen';
+import appConfig from "../../constants/appConfig";
 
 
 export const TaskDetailsScreen = ({navigation}) => {
@@ -106,7 +107,12 @@ export const TaskDetailsScreen = ({navigation}) => {
                         ...layout.boldTextBase,
                         fontSize: 12,
                         textAlign: 'center',
-                    }}>{moment(task.taskEndDate).format('MMMM-DD-YYYY')}</Text>
+                    }}>{moment(task.taskEndDate).format(appConfig.DAYS_FORMAT)}</Text>
+                    <Text style={{
+                        ...layout.boldTextBase,
+                        fontSize: 12,
+                        textAlign: 'center',
+                    }}>{moment(task.taskEndDate).format('dddd')}</Text>
                     <Text style={{
                         ...layout.boldTextBase,
                         textAlign: 'center',

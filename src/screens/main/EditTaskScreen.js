@@ -24,7 +24,7 @@ export const EditTaskScreen = ({navigation}) => {
     const [taskType, setTaskType] = useState(task.taskType);
     const [taskTitle, setTaskTitle] = useState(task.taskTitle);
     const [taskCreationDate] = useState(task.taskCreationDate);
-    const [subTasks, setSubTasks] = useState(task.subTasks);
+    const [subTasks, setSubTasks] = useState(task.subTasks ? task.subTasks : []);
     const [isExpired] = useState(task.isExpired);
     const [isFinished] = useState(task.isFinished);
     const [subTaskValue, setSubTaskValue] = useState();
@@ -97,13 +97,13 @@ export const EditTaskScreen = ({navigation}) => {
                         placeholder={strings.PLACEHOLDER_TITLE} value={taskTitle}
                         onChangeText={setTaskTitle}/>
 
-                    {subTasks && <SubTasksView
+                    <SubTasksView
                         subTasks={subTasks}
                         onAddSubTask={addSubTaskToList}
                         setSubTaskValue={setSubTaskValue}
                         subTaskValue={subTaskValue}
                         onPressDeleteSubTask={deleteSubTaskHandler}
-                    />}
+                    />
 
                     <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])}
                                      onDeleteImage={deleteImage}/>
