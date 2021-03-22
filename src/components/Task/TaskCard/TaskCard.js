@@ -1,28 +1,19 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, FlatList, Image, Animated, Easing} from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../../utils';
-import {setShowQuickActionsModal} from "../../../store/actions/GeneralActions";
 import {SubTaskList} from "./SubTasksList";
 import {ImagesList} from "./ImagesList";
-import {TasksQuickActions} from "../TasksQuickActions";
-import {useDispatch, useSelector} from "react-redux";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../../constants/colors';
 import layout from '../../../constants/layout';
 import icon from '../../../constants/icons';
-import moment from 'moment';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
-    const isFutureDay = moment().add(2, 'd') < data.taskEndDate;
-    const isPrevDay = moment().subtract(1, 'd') > data.taskEndDate;
     const hasSubTasks = data.subTasks;
     const hasImages = data.images;
     const isFinished = data.isFinished;
-    const isExpired = moment() > data.taskEndDate;
-    const dispatch = useDispatch();
-    const toShowQuickActions = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
-    const [longPressedIndex, setLongPressedIndex] = useState(null);
+
 
     const renderBorderRadiusPosition = () => {
         if (index % 2 === 0) {
@@ -48,11 +39,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
             <TouchableOpacity
                 index={index}
                 activeOpacity={layout.activeOpacity}
-                style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.GREY}, renderBorderRadiusPosition()]}
+                style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.WHITE}, renderBorderRadiusPosition()]}
                 onPress={() => onTaskPress(data)}
-                onLongPress={() => onTaskLongPress(data) }>
-
-                {isFutureDay || isPrevDay ? <Text style={styles.dateStyle}>{moment(data.taskEndDate).format('MMMM-D').toString()}</Text> : null}
+                onLongPress={() => onTaskLongPress(data)}>
 
                 <View style={styles.titleContainer}>
 
@@ -91,6 +80,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 const styles = StyleSheet.create({
     mainContainer: {
         marginBottom: 10,
+        marginHorizontal: 2,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -108,6 +98,7 @@ const styles = StyleSheet.create({
         marginStart: 5,
     },
     taskContainer: {
+        ...layout.shadowBase,
         marginStart: 10,
         paddingHorizontal: 10,
         paddingVertical: 20,
@@ -124,12 +115,5 @@ const styles = StyleSheet.create({
         backgroundColor: color.GREY,
         padding: 10,
         borderRadius: 10,
-    },
-    dateStyle: {
-        ...layout.regularTextBase,
-        fontSize: 10,
-        position: 'absolute',
-        top: 10,
-        right: 5,
     }
 });

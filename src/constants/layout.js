@@ -15,15 +15,15 @@ export default {
         fontFamily: 'Montserrat-Bold',
     },
     shadowBase: {
-        shadowColor: '#000',
+        shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
 
-        elevation: 5,
+        elevation: 3,
     },
     activeOpacity: 0.8,
     defaultIconSize: 24,

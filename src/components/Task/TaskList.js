@@ -39,6 +39,7 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     };
     return (
         <SectionList
+            showsVerticalScrollIndicator={false}
             sections={sortedData}
             keyExtractor={(item, index) => item + index}
             renderItem={({item, index}) => {

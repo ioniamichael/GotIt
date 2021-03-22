@@ -39,6 +39,7 @@ export const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
 
+
             <TasksQuickActions isVisible={isQuickActionsModalVisible} task={dataForQuickActions}
                                onClosePressed={closeQuickActions} navigation={navigation}/>
 

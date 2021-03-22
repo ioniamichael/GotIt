@@ -4,6 +4,7 @@ import layout from '../constants/layout';
 import colors from '../constants/colors';
 
 export const YellowButton = ({buttonTitle, onButtonPressed}) => {
+
     return (
         <TouchableOpacity style={styles.yellowButton}
                           onPress={onButtonPressed} activeOpacity={layout.activeOpacity}>
