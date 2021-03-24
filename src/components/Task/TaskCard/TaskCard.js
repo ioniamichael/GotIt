@@ -64,11 +64,14 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
                         </View>
 
-                        {hasSubTasks && <SubTaskList subTasks={data.subTasks}/>}
-                        {hasImages && <ImagesList images={data.images} isFinished={isFinished}/>}
 
                     </View>
 
+                </View>
+
+                <View style={styles.subTasksAndImagesContainer}>
+                    {hasSubTasks && <SubTaskList subTasks={data.subTasks}/>}
+                    {hasImages && <ImagesList images={data.images} isFinished={isFinished}/>}
                 </View>
 
             </TouchableOpacity>
@@ -100,12 +103,12 @@ const styles = StyleSheet.create({
     taskContainer: {
         ...layout.shadowBase,
         marginStart: 10,
-        paddingHorizontal: 10,
         paddingVertical: 20,
         flex: 1,
         backgroundColor: color.ORANGE,
     },
     titleContainer: {
+        marginHorizontal: 10,
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
@@ -115,5 +118,10 @@ const styles = StyleSheet.create({
         backgroundColor: color.GREY,
         padding: 10,
         borderRadius: 10,
+    },
+    subTasksAndImagesContainer:{
+        paddingStart: 60,
+        paddingEnd: 10,
+
     }
 });

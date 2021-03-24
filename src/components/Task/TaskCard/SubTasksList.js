@@ -10,13 +10,11 @@ export const SubTaskList = ({subTasks}) => {
                 data={subTasks}
                 style={styles.subTasksContainer}
                 keyExtractor={(subTask, index) => 'D' + index.toString()}
-                renderItem={({item}) => {
+                renderItem={({item, index}) => {
                     return (
                         <View style={styles.subTasks}>
-                            <Text style={[{...layout.regularTextBase}, {fontSize: 12}]}>*</Text>
-                            <Text numberOfLines={2} style={[{...layout.regularTextBase}, {
-                                fontSize: 12,
-                            }]}>{item}</Text>
+                            <Text style={[{...layout.regularTextBase}, {fontSize: 12}]}>{index + 1} - </Text>
+                            <Text numberOfLines={2} style={[{...layout.regularTextBase}, {fontSize: 12}]}>{item}</Text>
                         </View>
                     );
                 }}
@@ -26,6 +24,9 @@ export const SubTaskList = ({subTasks}) => {
 };
 
 const styles = StyleSheet.create({
+    subTasksContainer:{
+        marginHorizontal: 10,
+    },
     subTasks: {
         flexDirection: 'row',
     },

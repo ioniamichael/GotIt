@@ -11,6 +11,7 @@ export const TaskTypePicker = ({onTypeSelect, taskTypeTitle, taskType}) => {
             return {
                 backgroundColor: color.ORANGE,
                 borderRadius: 10,
+                ...layout.shadowBase
             };
         } else {
             return {
@@ -48,14 +49,14 @@ export const TaskTypePicker = ({onTypeSelect, taskTypeTitle, taskType}) => {
 
 const styles = StyleSheet.create({
     typesContainerStyle: {
-
     },
     flatListContainer: {
-        marginBottom: 15
+        marginBottom: 15,
     },
     pickerContainerStyle: {
-        width: 60,
-        height: 60,
+        width: 70,
+        height: 70,
+        marginBottom:5,
         alignItems: 'center',
         justifyContent: 'center',
     },
