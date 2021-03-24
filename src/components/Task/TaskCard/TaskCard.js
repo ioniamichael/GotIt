@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Image, Animated, Easing } from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../../utils';
 import {SubTaskList} from "./SubTasksList";
 import {ImagesList} from "./ImagesList";
@@ -9,6 +9,9 @@ import layout from '../../../constants/layout';
 import icon from '../../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
+
+    const scaleAnim = new Animated.Value(1);
+
 
     const hasSubTasks = data.subTasks;
     const hasImages = data.images;
@@ -29,8 +32,35 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         }
     };
 
+    const onPressHandler = data => {
+        Animated.timing(
+            scaleAnim,
+            {
+                toValue: 0.9,
+                inputRange: [1,0],
+                outputRange: [1, 0.9],
+                duration: 30,
+                useNativeDriver: true,
+                easing: Easing.linear
+            }
+        ).start(() => {
+            onTaskPress(data);
+            Animated.timing(
+                scaleAnim,
+                {
+                    toValue: 1,
+                    inputRange: [1,0],
+                    outputRange: [1, 0.9],
+                    duration: 50,
+                    useNativeDriver: true,
+                    easing: Easing.linear
+                }
+            ).start()
+        });
+    };
+
     return (
-        <View key={index} style={styles.mainContainer}>
+        <Animated.View key={index} style={[styles.mainContainer, {transform: [{scale: scaleAnim}]}]}>
 
             <View style={{alignItems: 'center', width: 40}}>
                 <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.ORANGE : color.DARK_GREY}/>
@@ -39,8 +69,8 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
             <TouchableOpacity
                 index={index}
                 activeOpacity={layout.activeOpacity}
-                style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.WHITE}, renderBorderRadiusPosition()]}
-                onPress={() => onTaskPress(data)}
+                style={[styles.taskContainer, {backgroundColor: isFinished ? color.ORANGE : color.GREY}, renderBorderRadiusPosition()]}
+                onPress={() => onPressHandler(data)}
                 onLongPress={() => onTaskLongPress(data)}>
 
                 <View style={styles.titleContainer}>
@@ -76,7 +106,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
             </TouchableOpacity>
 
-        </View>
+        </Animated.View>
     );
 };
 
@@ -101,7 +131,6 @@ const styles = StyleSheet.create({
         marginStart: 5,
     },
     taskContainer: {
-        ...layout.shadowBase,
         marginStart: 10,
         paddingVertical: 20,
         flex: 1,

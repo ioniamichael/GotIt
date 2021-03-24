@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, TextInput, Animated} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, TextInput} from 'react-native';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -25,7 +25,8 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
 
             {subTasks.map((subTask, index) => {
                 return (
-                    <View key={subTask + 'd' + index} style={styles.subTasksContainer}>
+                    <View key={subTask + 'd' + index}
+                                   style={styles.subTasksContainer}>
                         <Text style={styles.subTaskText}>{subTask}</Text>
                         <TouchableOpacity onPress={() => {
                             onPressDeleteSubTask(index);
