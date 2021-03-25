@@ -1,12 +1,22 @@
-import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, TextInput} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, TextInput, FlatList, LogBox} from 'react-native';
+import {SubTaskItem} from "../SubTaskItem";
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import strings from '../../constants/strings';
 import icons from '../../constants/icons';
 
-export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {
+export const SubTasksView = ({renderedIndex, subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {
+
+    useEffect(() => {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    }, []);
+
+    const onPressDeleteSubTaskHandler = index => {
+        onPressDeleteSubTask(index);
+    };
+
 
     return (
         <View style={styles.mainContainer}>
@@ -23,19 +33,16 @@ export const SubTasksView = ({subTasks, onAddSubTask, subTaskValue, setSubTaskVa
                 </TouchableOpacity>
             </View>
 
-            {subTasks.map((subTask, index) => {
-                return (
-                    <View key={subTask + 'd' + index}
-                                   style={styles.subTasksContainer}>
-                        <Text style={styles.subTaskText}>{subTask}</Text>
-                        <TouchableOpacity onPress={() => {
-                            onPressDeleteSubTask(index);
-                        }}>
-                            <Ionicons name={icons.ICON_TRASH} size={20} color={color.DARK_GREY}/>
-                        </TouchableOpacity>
-                    </View>
-                );
-            })}
+            <FlatList
+                data={subTasks}
+                keyExtractor={(item, index) => 'D' + index.toString()}
+
+                renderItem={({item, index}) => {
+                    return(
+                        <SubTaskItem subTask={item} renderedIndex={index} onPressDeleteButton={() => onPressDeleteSubTaskHandler(index)} />
+                    )
+                }}
+            />
 
         </View>
     );
@@ -61,22 +68,5 @@ const styles = StyleSheet.create({
         ...layout.regularTextBase,
         width: '85%',
         height: 50,
-    },
-    addButtonStyle: {},
-    subTasksContainer: {
-        ...layout.shadowBase,
-        paddingVertical: 20,
-        marginBottom: 10,
-        marginHorizontal: 10,
-        paddingHorizontal: 20,
-        flexDirection: 'row',
-        backgroundColor: color.GREY,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderRadius: 40,
-    },
-    subTaskText: {
-        ...layout.regularTextBase,
-        width: '85%',
     },
 });

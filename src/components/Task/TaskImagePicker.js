@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TouchableOpacity, Image, Text, FlatList} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Image, Text, FlatList, Animated, Easing} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {ImageItem} from "../ImageItem";
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from '../../constants/icons';
 
 export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
+
+
+    const onDeletePressHandler = (index) => {
+            onDeleteImage(index)
+    };
 
     const selectPhotoFromLibrary = () => {
         launchImageLibrary({mediaType: 'photo', includeBase64: true, quality: 0.2}, (res) => {
@@ -30,15 +36,7 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
                 horizontal
                 renderItem={({item, index}) => {
                     return (
-                        <View
-                            style={{...layout.shadowBase, marginVertical: 15, marginEnd: 10, borderRadius: 20}}>
-                            <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
-
-                            <TouchableOpacity style={styles.deleteButton} onPress={() => onDeleteImage(index)}>
-                                <Ionicons name={icons.ICON_TRASH} size={24} color={color.WHITE}/>
-                            </TouchableOpacity>
-
-                        </View>
+                        <ImageItem item={item} onPressDeleteButton={() => onDeletePressHandler(index)} renderedIndex={index}/>
                     );
                 }}
             />
@@ -53,20 +51,10 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 100,
     },
+    itemRootView: {...layout.shadowBase, marginVertical: 15, marginEnd: 10, borderRadius: 20,},
     uploadIconContainer: {
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    imageStyle: {
-        width: layout.width * 0.4,
-        height: layout.height * 0.12,
-        borderRadius: 20,
-    },
-    deleteButton: {
-        position: 'absolute',
-        ...layout.shadowBase,
-        right: 5,
-        top: 5
     }
 });
