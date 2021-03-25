@@ -15,11 +15,10 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     let length = 0;
 
     data.forEach(task => {
-        if(sortedData[length - 1] && moment(task.taskEndDate).format(appConfig.DAYS_FORMAT) === sortedData[length - 1].title){
+        if (sortedData[length - 1] && moment(task.taskEndDate).format(appConfig.DAYS_FORMAT) === sortedData[length - 1].title) {
             sortedData[length - 1].data.push(task);
-        }
-        else{
-            sortedData.push({title: moment(task.taskEndDate).format(appConfig.DAYS_FORMAT), data: [task] });
+        } else {
+            sortedData.push({title: moment(task.taskEndDate).format(appConfig.DAYS_FORMAT), data: [task]});
             ++length;
         }
     });

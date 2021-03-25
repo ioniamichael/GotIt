@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
         ...layout.boldTextBase,
     },
     container: {
+        paddingHorizontal: 20,
         flex: 1,
-        paddingHorizontal: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
     },
     overlay: {

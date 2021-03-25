@@ -16,8 +16,12 @@ import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
+import {animateLayout} from "../../layoutUtils";
+
+
 
 export const CreateTaskScreen = ({navigation}) => {
+
     const dispatch = useDispatch();
 
     const toShowLoader = useSelector(state => state.GeneralReducer.toShowLoader);
@@ -82,15 +86,18 @@ export const CreateTaskScreen = ({navigation}) => {
         if (subTaskValue) {
             setSubTasks([...subTasks, subTaskValue]);
             setSubTaskValue('');
+            animateLayout();
         }
     };
 
     const deleteSubTaskHandler = (index) => {
         setSubTasks(subTasks.filter((subTask, i) => i !== index));
+        animateLayout();
     };
 
     const deleteImage = (index) => {
         setImages(images.filter((image, i) => i !== index));
+        animateLayout();
     };
 
     const selectType = (taskType) => {
@@ -167,10 +174,12 @@ CreateTaskScreen.navigationOptions = ({navigation}) => ({
 const styles = StyleSheet.create({
     headerTitle: {
         ...layout.boldTextBase,
+
     },
     container: {
         padding: layout.defaultPaddingSize,
         backgroundColor: color.WHITE,
+
     },
     innerContainer: {
         marginVertical: 30,

@@ -14,6 +14,17 @@ export default {
         color: colors.DARK_GREY,
         fontFamily: 'Montserrat-Bold',
     },
+    shadowOfPinnedItem:{
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+
+        elevation: 24,
+    },
     shadowBase: {
         shadowColor: "#000",
         shadowOffset: {

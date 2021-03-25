@@ -14,6 +14,8 @@ import color from '../../constants/colors';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
+import {animateLayout} from "../../layoutUtils";
+
 
 export const EditTaskScreen = ({navigation}) => {
     const dispatch = useDispatch();
@@ -68,15 +70,18 @@ export const EditTaskScreen = ({navigation}) => {
         if (subTaskValue) {
             setSubTasks([...subTasks, subTaskValue]);
             setSubTaskValue('');
+            animateLayout();
         }
     };
 
     const deleteSubTaskHandler = (index) => {
         setSubTasks(subTasks.filter((subTask, i) => i !== index));
+        animateLayout();
     };
 
     const deleteImage = (index) => {
         setImages(images.filter((image, i) => i !== index));
+        animateLayout();
     };
 
     const selectType = (taskType) => {

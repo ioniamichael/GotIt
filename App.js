@@ -1,9 +1,16 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {StyleSheet, View,SafeAreaView, StatusBar} from 'react-native';
+import {StyleSheet, UIManager, View, StatusBar} from 'react-native';
 import store from './src/store';
 import AppNavigator from './src/Router';
 import colors from './src/constants/colors';
+
+
+if (Platform.OS === 'android') {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+        UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+}
 
 const App = () => {
     return (

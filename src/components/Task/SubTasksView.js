@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, TextInput, FlatList, LogBox} from 'react-native';
+import {StyleSheet, View, Text,TouchableOpacity, TextInput, FlatList, LogBox} from 'react-native';
 import {SubTaskItem} from "../SubTaskItem";
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import strings from '../../constants/strings';
 import icons from '../../constants/icons';
+
 
 export const SubTasksView = ({renderedIndex, subTasks, onAddSubTask, subTaskValue, setSubTaskValue, onPressDeleteSubTask}) => {
 
