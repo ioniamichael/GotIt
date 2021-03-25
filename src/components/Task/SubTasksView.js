@@ -52,7 +52,7 @@ export const SubTasksView = ({renderedIndex, subTasks, onAddSubTask, subTaskValu
 const styles = StyleSheet.create({
     mainContainer: {
         width: layout.width - (layout.defaultPaddingSize * 2),
-        marginBottom: 20,
+        marginVertical: 10,
     },
     textInputContainerStyle: {
         marginBottom: 20,
