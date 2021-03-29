@@ -15,10 +15,10 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     let length = 0;
 
     data.forEach(task => {
-        if (sortedData[length - 1] && moment(task.taskEndDate).format(appConfig.DAYS_FORMAT) === sortedData[length - 1].title) {
+        if (sortedData[length - 1] && moment(task.taskEndDate).format('dddd MMMM Do') === sortedData[length - 1].title) {
             sortedData[length - 1].data.push(task);
         } else {
-            sortedData.push({title: moment(task.taskEndDate).format(appConfig.DAYS_FORMAT), data: [task]});
+            sortedData.push({title: moment(task.taskEndDate).format('dddd MMMM Do'), data: [task]});
             ++length;
         }
     });
@@ -28,7 +28,7 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
             return (
                 <View style={{backgroundColor: color.WHITE}}>
                     <Text style={{...layout.boldTextBase, fontSize: 12, marginVertical: 10}}>{
-                        titleToRender === moment().format(appConfig.DAYS_FORMAT)
+                        titleToRender === moment().format('dddd MMMM Do')
                             ? 'Today'
                             : titleToRender}
                     </Text>

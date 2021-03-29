@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, Animated,TouchableOpacity, Easing} from 'react-native'
+import {StyleSheet, View, Text, Animated, TouchableOpacity, Easing} from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import icons from "../constants/icons";
 import color from "../constants/colors";
@@ -23,7 +23,7 @@ export const SubTaskItem = ({subTask, renderedIndex, onPressDeleteButton}) => {
         });
     };
 
-    return(
+    return (
         <Animated.View style={[styles.subTasksContainer,
             {
                 transform: [
@@ -31,9 +31,11 @@ export const SubTaskItem = ({subTask, renderedIndex, onPressDeleteButton}) => {
                 ]
             }]}>
             <Text style={styles.subTaskText}>{subTask}</Text>
-            <TouchableOpacity onPress={() => onDeletePressHandler()} >
+
+            <TouchableOpacity onPress={() => onDeletePressHandler()} style={styles.deleteButtonContainer}>
                 <Ionicons name={icons.ICON_TRASH} size={20} color={color.DARK_GREY}/>
             </TouchableOpacity>
+
         </Animated.View>
     )
 };
@@ -41,7 +43,7 @@ export const SubTaskItem = ({subTask, renderedIndex, onPressDeleteButton}) => {
 const styles = StyleSheet.create({
     subTasksContainer: {
         ...layout.shadowBase,
-        paddingVertical: 20,
+        paddingVertical: 5,
         marginBottom: 10,
         marginHorizontal: 10,
         paddingHorizontal: 20,
@@ -55,4 +57,10 @@ const styles = StyleSheet.create({
         ...layout.regularTextBase,
         width: '85%',
     },
+    deleteButtonContainer:{
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });

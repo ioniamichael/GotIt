@@ -6,24 +6,25 @@ import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import icons from '../../constants/icons';
 
-export const ImagePicker = ({image, onImagePicked}) => {
+export const ImagePicker = ({image, onImagePicked, userName, isDisabled}) => {
 
     const selectPhotoFromLibrary = () => {
         launchImageLibrary({mediaType: 'photo', includeBase64: true, quality: 0.2}, (res) => {
-            // setImage(res.base64);
             onImagePicked(res.base64);
         });
     };
 
     return (
         <View>
-            <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.rootView}
+            <TouchableOpacity disabled={isDisabled} activeOpacity={layout.activeOpacity} style={styles.rootView}
                               onPress={selectPhotoFromLibrary}>
-                {image && <Image source={{uri: `data:image/jpeg;base64,${image}`}} style={styles.imageStyle}/>}
+                {image
+                    ? <Image source={{uri: `data:image/jpeg;base64,${image}`}} style={styles.imageStyle}/>
+                    : <Text style={styles.userName}>{userName.slice(0,2)}</Text>}
             </TouchableOpacity>
-            <View style={styles.uploadIconContainer}>
+            {!isDisabled && <View style={styles.uploadIconContainer}>
                 <Ionicons name={icons.ICON_UPLOAD} size={16} color={color.ORANGE}/>
-            </View>
+            </View>}
         </View>
     );
 };
@@ -55,5 +56,9 @@ const styles = StyleSheet.create({
         height: 110,
         resizeMode: 'cover',
         borderRadius: 100
+    },
+    userName:{
+        ...layout.boldTextBase,
+        fontSize: 30
     }
 });

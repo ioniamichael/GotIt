@@ -58,16 +58,16 @@ HomeScreen.navigationOptions = ({navigation}) => ({
             </View>
         );
     },
-    headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
-            <Item
-                onPress={
-                    () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
-                }
-                title={'NOTIFICATION'}
-                iconName={icons.ICON_NOTIFICATION}/>
-        </HeaderButtons>
-    ),
+    // headerRight: () => (
+    //     <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
+    //         <Item
+    //             onPress={
+    //                 () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
+    //             }
+    //             title={'NOTIFICATION'}
+    //             iconName={icons.ICON_NOTIFICATION}/>
+    //     </HeaderButtons>
+    // ),
 });
 
 const styles = StyleSheet.create({

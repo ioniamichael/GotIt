@@ -16,7 +16,7 @@ export const ProfileScreen = ({navigation}) => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
-                <ImagePicker image={userDetails.image} onImagePicked={() => console.log('picked')} />
+                <ImagePicker isDisabled={true} userName={userDetails.name} image={userDetails.image} onImagePicked={() => console.log('picked')} />
                 <View style={styles.emailAndNameContainer}>
                     <Text style={{...layout.boldTextBase}}>{userDetails.name}</Text>
                     <Text style={{...layout.regularTextBase}}>{userDetails.email}</Text>
@@ -26,7 +26,6 @@ export const ProfileScreen = ({navigation}) => {
     );
 };
 
-
 ProfileScreen.navigationOptions = ({navigation}) => ({
     headerTitle: () => {
         return (
@@ -35,16 +34,16 @@ ProfileScreen.navigationOptions = ({navigation}) => ({
             </View>
         );
     },
-    headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
-            <Item
-                onPress={
-                    () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
-                }
-                title={'EDIT'}
-                iconName={icons.ICON_EDIT}/>
-        </HeaderButtons>
-    ),
+    // headerRight: () => (
+    //     <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
+    //         <Item
+    //             onPress={
+    //                 () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
+    //             }
+    //             title={'EDIT'}
+    //             iconName={icons.ICON_EDIT}/>
+    //     </HeaderButtons>
+    // ),
 });
 
 const styles = StyleSheet.create({

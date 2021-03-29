@@ -16,8 +16,10 @@ export const EntryScreen = ({navigation}) => {
     return (
         <ImageBackground style={styles.container} source={assets.BACKGROUND_IMAGE}>
 
-            <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
-            <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
+            <View style={styles.logoContainer}>
+                <Image source={assets.APP_LOGO} style={styles.logo}/>
+                <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
+            </View>
 
             <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
                 <YellowButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
@@ -55,4 +57,8 @@ const styles = StyleSheet.create({
         color: colors.ORANGE,
         fontSize: 13,
     },
+    logoContainer:{
+        marginTop: 30
+    },
+    logo:{marginStart: -20,width: 90, height: 40}
 });

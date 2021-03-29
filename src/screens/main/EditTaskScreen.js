@@ -144,7 +144,7 @@ export const EditTaskScreen = ({navigation}) => {
     );
 };
 
-EditTaskScreen.navigationOptions = ({navigation}) => ({
+EditTaskScreen.navigationOptions = () => ({
     headerTitle: () => {
         return (
             <View>

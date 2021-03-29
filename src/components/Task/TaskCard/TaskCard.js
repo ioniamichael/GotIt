@@ -36,9 +36,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         Animated.timing(
             scaleAnim,
             {
-                toValue: 0.9,
+                toValue: 1.1,
                 inputRange: [1,0],
-                outputRange: [1, 0.9],
+                outputRange: [1, 1.1],
                 duration: 30,
                 useNativeDriver: true,
                 easing: Easing.linear
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
         marginStart: 5,
     },
     taskContainer: {
+        ...layout.shadowBase,
         marginStart: 10,
         paddingVertical: 20,
         flex: 1,

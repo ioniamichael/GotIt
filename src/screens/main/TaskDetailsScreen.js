@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList,ScrollView} from 'react-native';
 import {getTaskImageByType} from '../../utils';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/AppHeaderButtons';
@@ -7,11 +7,11 @@ import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import {EditTaskScreen} from './EditTaskScreen';
+import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
 import icons from '../../constants/icons';
-import {useDispatch, useSelector} from 'react-redux';
 import appConfig from "../../constants/appConfig";
 
 
@@ -99,7 +99,7 @@ export const TaskDetailsScreen = ({navigation}) => {
     };
 
     return (
-        <View style={styles.mainContainer}>
+        <ScrollView style={styles.mainContainer}>
             <TaskLoader isVisible={toShowLoader}/>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <View>
@@ -129,7 +129,7 @@ export const TaskDetailsScreen = ({navigation}) => {
             <View style={{marginBottom: 30}}>
                 {renderTaskImages()}
             </View>
-        </View>
+        </ScrollView>
     );
 };
 

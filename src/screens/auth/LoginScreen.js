@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image, KeyboardAvoidingView} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {YellowButton} from '../../components/YellowButton';
 import {isValidEmail, isValidPassword} from '../../utils';
@@ -52,15 +52,20 @@ export const LoginScreen = ({navigation}) => {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : null}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+            style={styles.container}>
 
             <TaskLoader isVisible={isLoaderShown}/>
 
 
-            <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
-            <Text style={{...layout.regularTextBase}}>{string.LOGIN_SCREEN_TITLE}</Text>
+            <View style={styles.logoContainer}>
+                <Image source={assets.APP_LOGO} style={styles.logo}/>
+                <Text style={{...layout.regularTextBase}}>{string.LOGIN_SCREEN_TITLE}</Text>
+            </View>
 
-            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+            <View style={styles.innerContainer}>
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
                                 value={state.userEmail}
                                 onChangeText={userEmail => setState((prevState) => ({
@@ -83,7 +88,7 @@ export const LoginScreen = ({navigation}) => {
             </View>
 
 
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 
@@ -93,7 +98,12 @@ const styles = StyleSheet.create({
         width: layout.width,
         height: layout.height,
         backgroundColor: colors.WHITE,
-        flex: 1,
+    },
+    innerContainer: {
+        justifyContent: 'center',
+        backgroundColor: colors.WHITE,
+        alignItems: 'center',
+        flex: 1
     },
     entryTitle: {
         fontFamily: 'Montserrat-Bold',
@@ -104,4 +114,8 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         alignSelf: 'flex-end',
     },
+    logoContainer:{
+        marginTop: 30
+    },
+    logo:{marginStart: -20,width: 90, height: 40}
 });

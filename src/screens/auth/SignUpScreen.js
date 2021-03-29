@@ -45,22 +45,29 @@ export const SignUpScreen = ({navigation}) => {
     };
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "padding"} style={styles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : null}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+            style={styles.container}>
 
             <TaskLoader isVisible={isLoaderShown}/>
 
-            <Image source={assets.APP_LOGO} style={{marginStart: -20,width: 90, height: 40}}/>
-            <Text style={{...layout.regularTextBase}}>{string.SIGN_UP_SCREEN_TITLE}</Text>
+            <View style={styles.logoContainer}>
+                <Image source={assets.APP_LOGO} style={styles.logo}/>
+                <Text style={{...layout.regularTextBase}}>{string.SIGN_UP_SCREEN_TITLE}</Text>
+            </View>
 
-            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+            <View style={styles.innerContainer}>
 
                 <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
-                    <ImagePicker image={state.image} onImagePicked={image => setState((prevState) => ({
-                        ...prevState,
-                        image
-                    }))}/>
+                    <ImagePicker isDisabled={false} userName={state.userName} image={state.image}
+                                 onImagePicked={image => setState((prevState) => ({
+                                     ...prevState,
+                                     image
+                                 }))}/>
 
-                    <Text style={{...layout.regularTextBase, fontSize: 12, marginStart: 20}}>Please upload your avatar{'\n'}(Required)</Text>
+                    <Text style={{...layout.regularTextBase, fontSize: 12, marginStart: 20}}>Please upload your
+                        avatar{'\n'}(Required)</Text>
                 </View>
 
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
@@ -99,10 +106,6 @@ export const SignUpScreen = ({navigation}) => {
 
             </View>
 
-
-
-
-
         </KeyboardAvoidingView>
     );
 };
@@ -113,7 +116,12 @@ const styles = StyleSheet.create({
         width: layout.width,
         height: layout.height,
         backgroundColor: colors.WHITE,
-        flex: 1,
+    },
+    innerContainer: {
+        justifyContent: 'center',
+        backgroundColor: colors.WHITE,
+        alignItems: 'center',
+        flex: 1
     },
     entryTitle: {
         fontFamily: 'Montserrat-Bold',
@@ -124,4 +132,8 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         alignSelf: 'flex-end',
     },
+    logoContainer: {
+        marginTop: 30
+    },
+    logo: {marginStart: -20, width: 90, height: 40}
 });

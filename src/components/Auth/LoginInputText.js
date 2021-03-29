@@ -12,7 +12,6 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
 
             <TextInput
                 style={styles.textInputStyle}
-                autoCapitalize={'none'}
                 autoCompleteType={'off'}
                 autoCorrect={false}
                 secureTextEntry={isSecure}
@@ -39,14 +38,14 @@ const styles = StyleSheet.create({
         height: 70,
     },
     iconStyle: {
-        alignSelf: 'flex-end',
-        marginBottom: 10
+        alignSelf: 'center',
     },
     textInputStyle: {
-        flex: 1,
+        height:'100%',
+        flex:1,
         ...layout.regularTextBase,
         fontSize: 14,
-        alignSelf: 'flex-end',
-
+        alignSelf: 'center',
+        marginStart: 10,
     },
 });

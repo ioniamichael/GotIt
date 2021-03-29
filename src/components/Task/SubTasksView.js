@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Text,TouchableOpacity, TextInput, FlatList, LogBox} from 'react-native';
+import {StyleSheet, View,TouchableOpacity, TextInput, FlatList, LogBox} from 'react-native';
 import {SubTaskItem} from "../SubTaskItem";
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
@@ -29,7 +29,7 @@ export const SubTasksView = ({renderedIndex, subTasks, onAddSubTask, subTaskValu
                     onChangeText={setSubTaskValue}
                 />
 
-                <TouchableOpacity style={styles.addButtonStyle} onPress={onAddSubTask}>
+                <TouchableOpacity onPress={onAddSubTask}>
                     <Ionicons name={icons.ICON_ADD} size={35} color={color.ORANGE}/>
                 </TouchableOpacity>
             </View>
