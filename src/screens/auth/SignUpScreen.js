@@ -66,8 +66,7 @@ export const SignUpScreen = ({navigation}) => {
                                      image
                                  }))}/>
 
-                    <Text style={{...layout.regularTextBase, fontSize: 12, marginStart: 20}}>Please upload your
-                        avatar{'\n'}(Required)</Text>
+                    <Text style={{...layout.regularTextBase, fontSize: 12, marginStart: 20}}>{string.PLEASE_UPLOAD_AVATAR}</Text>
                 </View>
 
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
