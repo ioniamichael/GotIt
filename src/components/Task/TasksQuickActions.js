@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, TouchableOpacity, Animated, Modal} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Animated, Modal, Text} from 'react-native';
 import {deleteTask, fetchTasks, setShowLoader, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {BlurView} from "@react-native-community/blur";
@@ -17,15 +17,15 @@ export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation})
     const expandAnim = new Animated.Value(isQuickActionsShown ? 0 : 1);
 
     useEffect(() => {
-            Animated.spring(
-                expandAnim,
-                {
-                    toValue: isQuickActionsShown ? 1 : 0,
-                    friction: 4,
-                    tension: 140,
-                    useNativeDriver: true
-                }
-            ).start();
+        Animated.spring(
+            expandAnim,
+            {
+                toValue: isQuickActionsShown ? 1 : 0,
+                friction: 4,
+                tension: 140,
+                useNativeDriver: true
+            }
+        ).start();
     }, [isQuickActionsShown]);
 
     const expand = expandAnim.interpolate({
@@ -83,6 +83,10 @@ export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation})
                     reducedTransparencyFallbackColor="white"
                 />
 
+                {task &&
+                <Text style={styles.modalTitle}> You are about to change your{'\n'}
+                    <Text style={{...layout.boldTextBase, fontSize: 12}}>{task.taskTitle}</Text>{'\n'}task!</Text>}
+
                 <Animated.View style={[styles.container, {transform: [{scaleY: expand}]}]}>
                     <TouchableOpacity style={styles.quickAction} onPress={openTaskDetailsScreen}>
                         <Ionicons name={icons.ICON_INFO} size={18} color={color.BLACK}/>
@@ -101,7 +105,8 @@ export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation})
 
 const styles = StyleSheet.create({
     rootView: {
-        height: layout.height * 0.2,
+        ...layout.shadowOfPinnedItem,
+        height: layout.height * 0.22,
         width: layout.width,
         bottom: 0,
         position: 'absolute',
@@ -123,6 +128,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
     },
     absolute: {
+        borderRadius: 30,
         position: 'absolute',
         top: 0,
         bottom: 0,
@@ -130,15 +136,24 @@ const styles = StyleSheet.create({
         end: 0
     },
     exitButtonContainer: {
-        ...layout.shadowBase,
+        ...layout.shadowOfPinnedItem,
         height: 40,
-        bottom: layout.height * 0.22,
+        bottom: layout.height * 0.24,
         width: 40,
         borderRadius: 100,
         backgroundColor: color.ORANGE,
         position: 'absolute',
         alignSelf: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
+    modalTitle: {
+        ...layout.regularTextBase,
+        left: 30,
+        right: 30,
+        textAlign: 'center',
+        position: 'absolute',
+        top: 10,
+        alignSelf: 'center',
+    },
 });

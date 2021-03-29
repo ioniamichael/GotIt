@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
         marginStart: 5,
     },
     taskContainer: {
-        ...layout.shadowBase,
         marginStart: 10,
         paddingVertical: 20,
         flex: 1,
