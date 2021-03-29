@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, ImageBackground, Image} from 'react-native';
-import {YellowButton} from '../../components/YellowButton';
+import {YellowButton} from '../../components/common/YellowButton';
 import colors from '../../constants/colors';
 import string from '../../constants/strings';
 import layout from '../../constants/layout';

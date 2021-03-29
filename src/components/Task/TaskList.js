@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, SectionList, View} from 'react-native';
-import {TaskCard} from './TaskCard/TaskCard';
+import {TaskCard} from '../TaskCard/TaskCard';
 import moment from 'moment';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';

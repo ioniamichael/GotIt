@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, FlatList, Image} from 'react-native';
-import color from "../../../constants/colors";
+import color from "../../constants/colors";
 
 export const ImagesList = ({images, isFinished}) => {
 

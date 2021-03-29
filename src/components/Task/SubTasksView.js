@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View,TouchableOpacity, TextInput, FlatList, LogBox} from 'react-native';
-import {SubTaskItem} from "../SubTaskItem";
+import {SubTaskItem} from "./SubTaskItem";
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';

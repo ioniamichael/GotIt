@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image, Animated, Easing} from 'react-native';
-import {getHoursAndMinutes, getTaskImageByType} from '../../../utils';
+import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import {SubTaskList} from "./SubTasksList";
 import {ImagesList} from "./ImagesList";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import color from '../../../constants/colors';
-import layout from '../../../constants/layout';
-import icon from '../../../constants/icons';
+import color from '../../constants/colors';
+import layout from '../../constants/layout';
+import icon from '../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 

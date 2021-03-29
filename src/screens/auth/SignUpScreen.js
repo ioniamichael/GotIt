@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, KeyboardAvoidingView, Image} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
-import {YellowButton} from '../../components/YellowButton';
+import {YellowButton} from '../../components/common/YellowButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createAccount} from '../../services/userService';
 import {setShowLoader} from '../../store/actions/GeneralActions';

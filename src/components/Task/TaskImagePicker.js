@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text, FlatList} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {ImageItem} from "../ImageItem";
+import {ImageItem} from "./ImageItem";
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';

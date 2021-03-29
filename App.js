@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal,Text} from 'react-native';
 import {Provider} from 'react-redux';
 import {StyleSheet, UIManager, View, StatusBar} from 'react-native';
 import store from './src/store';
@@ -13,6 +14,7 @@ if (Platform.OS === 'android') {
 }
 
 const App = () => {
+    //TODO implement Modal POP UP with error to all try catch methods.
     return (
         <View style={styles.container}>
             <Provider store={store}>

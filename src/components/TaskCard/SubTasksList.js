@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
-import layout from "../../../constants/layout";
+import layout from "../../constants/layout";
 
 export const SubTaskList = ({subTasks}) => {
     return (

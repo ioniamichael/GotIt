@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, Animated, TouchableOpacity, Easing} from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons";
-import icons from "../constants/icons";
-import color from "../constants/colors";
-import layout from "../constants/layout";
+import icons from "../../constants/icons";
+import color from "../../constants/colors";
+import layout from "../../constants/layout";
 
 export const SubTaskItem = ({subTask, renderedIndex, onPressDeleteButton}) => {
 

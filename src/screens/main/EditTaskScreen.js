@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native';
-import {CustomTextInput} from '../../components/Task/CustomTextInput';
-import {YellowButton} from '../../components/YellowButton';
+import {CustomTextInput} from '../../components/common/CustomTextInput';
+import {YellowButton} from '../../components/common/YellowButton';
 import {createNewTask} from '../../services/userService';
 import {fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';

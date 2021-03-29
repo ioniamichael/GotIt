@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList,ScrollView} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 import {getTaskImageByType} from '../../utils';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import {AppHeaderButtons} from '../../components/common/AppHeaderButtons';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
@@ -12,7 +12,8 @@ import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import moment from 'moment';
 import icons from '../../constants/icons';
-import appConfig from "../../constants/appConfig";
+import appConfig from '../../constants/appConfig';
+import {TaskDetailsDateSection} from '../../components/Task/TaskDetailsDateSection';
 
 
 export const TaskDetailsScreen = ({navigation}) => {
@@ -49,12 +50,12 @@ export const TaskDetailsScreen = ({navigation}) => {
     };
 
     const openEditTaskScreenWithTask = () => {
-        navigation.navigate('EditTaskScreen', {task})
+        navigation.navigate('EditTaskScreen', {task});
     };
 
     useEffect(() => {
-       navigation.setParams({navigateToEditScreen: openEditTaskScreenWithTask});
-    },[task]);
+        navigation.setParams({navigateToEditScreen: openEditTaskScreenWithTask});
+    }, [task]);
 
     useEffect(() => {
         navigation.setParams({isTaskFinished: isFinished});
@@ -102,25 +103,14 @@ export const TaskDetailsScreen = ({navigation}) => {
         <ScrollView style={styles.mainContainer}>
             <TaskLoader isVisible={toShowLoader}/>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <View>
-                    <Text style={{
-                        ...layout.boldTextBase,
-                        fontSize: 12,
-                        textAlign: 'center',
-                    }}>{moment(task.taskEndDate).format(appConfig.DAYS_FORMAT)}</Text>
-                    <Text style={{
-                        ...layout.boldTextBase,
-                        fontSize: 12,
-                        textAlign: 'center',
-                    }}>{moment(task.taskEndDate).format('dddd')}</Text>
-                    <Text style={{
-                        ...layout.boldTextBase,
-                        textAlign: 'center',
-                    }}>{moment(task.taskEndDate).format('HH:MM')}</Text>
-                </View>
-                <TouchableOpacity style={styles.taskTypeContainer}>
-                    <Image source={getTaskImageByType(task.taskType)} style={styles.taskTypeImage}/>
-                </TouchableOpacity>
+
+                <TaskDetailsDateSection/>
+
+                    <View style={styles.taskTypeContainer}>
+                        <Image source={getTaskImageByType(task.taskType)} style={styles.taskTypeImage}/>
+                    </View>
+
+
             </View>
             <Text style={{marginBottom: 30, ...layout.boldTextBase, textAlign: 'center'}}>{task.taskTitle}</Text>
             <View style={{marginBottom: 30}}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
-import layout from '../constants/layout';
-import colors from '../constants/colors';
+import layout from '../../constants/layout';
+import colors from '../../constants/colors';
 
 export const YellowButton = ({buttonTitle, onButtonPressed}) => {
 
