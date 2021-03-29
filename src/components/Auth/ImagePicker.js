@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image, Text} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import layout from '../../constants/layout';

@@ -1,15 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import {TaskList} from '../../components/Task/TaskList';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {AppHeaderButtons} from '../../components/AppHeaderButtons';
 import {NoTasksPlaceHolder} from '../../components/Loaders/NoTasksPlaceholder';
 import {setShowQuickActionsModal} from "../../store/actions/GeneralActions";
 import {TasksQuickActions} from "../../components/Task/TasksQuickActions";
 import {useDispatch, useSelector} from "react-redux";
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
-import icons from '../../constants/icons';
 import assets from '../../constants/assets';
 import screens from '../../constants/screens';
 
@@ -39,7 +36,6 @@ export const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
 
-
             <TasksQuickActions isVisible={isQuickActionsModalVisible} task={dataForQuickActions}
                                onClosePressed={closeQuickActions} navigation={navigation}/>
 
@@ -50,24 +46,14 @@ export const HomeScreen = ({navigation}) => {
     );
 };
 
-HomeScreen.navigationOptions = ({navigation}) => ({
+HomeScreen.navigationOptions = () => ({
     headerTitle: () => {
         return (
             <View style={{marginStart: -20}}>
                 <Image source={assets.APP_LOGO} style={{width: 90, height: 40}}/>
             </View>
         );
-    },
-    // headerRight: () => (
-    //     <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
-    //         <Item
-    //             onPress={
-    //                 () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
-    //             }
-    //             title={'NOTIFICATION'}
-    //             iconName={icons.ICON_NOTIFICATION}/>
-    //     </HeaderButtons>
-    // ),
+    }
 });
 
 const styles = StyleSheet.create({
@@ -76,8 +62,8 @@ const styles = StyleSheet.create({
     },
     container: {
         paddingHorizontal: 20,
-        flex: 1,
         backgroundColor: color.WHITE,
+        flex: 1,
     },
     overlay: {
         position: 'absolute',

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Easing, Text, Animated} from 'react-native';
+import {StyleSheet, Easing, Text, Animated} from 'react-native';
 import LottieView from 'lottie-react-native';
 import assets from '../../constants/assets';
 import color from '../../constants/colors';

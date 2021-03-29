@@ -9,14 +9,14 @@ import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
 import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {animateLayout} from "../../layoutUtils";
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
-import strings from '../../constants/strings';
 import screens from '../../constants/screens';
-import {animateLayout} from "../../layoutUtils";
+import strings from '../../constants/strings';
 
 
 
@@ -30,8 +30,8 @@ export const CreateTaskScreen = ({navigation}) => {
     const [taskTitle, setTaskTitle] = useState('');
     const [taskCreationDate, setTaskCreationDate] = useState(() => getCurrentDateInTimestamp().toString());
     const [subTasks, setSubTasks] = useState([]);
-    const [isExpired, setIsExpired] = useState(false);
-    const [isFinished, setIsFinished] = useState(false);
+    const [isExpired] = useState(false);
+    const [isFinished] = useState(false);
     const [subTaskValue, setSubTaskValue] = useState();
     const [taskTypeTitle, setTaskTypeTitle] = useState('Baby');
     const [images, setImages] = useState([]);
@@ -161,7 +161,7 @@ export const CreateTaskScreen = ({navigation}) => {
     );
 };
 
-CreateTaskScreen.navigationOptions = ({navigation}) => ({
+CreateTaskScreen.navigationOptions = () => ({
     headerTitle: () => {
         return (
             <View>

@@ -1,15 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import {AppHeaderButtons} from '../../components/AppHeaderButtons';
+import {View, Text, StyleSheet} from 'react-native';
 import {ImagePicker} from "../../components/Auth/ImagePicker";
 import {useSelector} from 'react-redux';
-import icons from '../../constants/icons';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
-import screens from '../../constants/screens';
 
-export const ProfileScreen = ({navigation}) => {
+export const ProfileScreen = () => {
 
     const userDetails = useSelector(state => state.UserReducer.userDetails);
 
@@ -26,24 +22,14 @@ export const ProfileScreen = ({navigation}) => {
     );
 };
 
-ProfileScreen.navigationOptions = ({navigation}) => ({
+ProfileScreen.navigationOptions = () => ({
     headerTitle: () => {
         return (
             <View>
                 <Text style={styles.headerTitle}>Profile</Text>
             </View>
         );
-    },
-    // headerRight: () => (
-    //     <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
-    //         <Item
-    //             onPress={
-    //                 () => navigation.navigate(screens.NOTIFICATIONS_SCREEN)
-    //             }
-    //             title={'EDIT'}
-    //             iconName={icons.ICON_EDIT}/>
-    //     </HeaderButtons>
-    // ),
+    }
 });
 
 const styles = StyleSheet.create({

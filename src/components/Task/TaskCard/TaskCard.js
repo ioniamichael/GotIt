@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Image, Animated, Easing } from 'react-native';
+import React from 'react';
+import {Text, View, StyleSheet, TouchableOpacity, Image, Animated, Easing} from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../../utils';
 import {SubTaskList} from "./SubTasksList";
 import {ImagesList} from "./ImagesList";
@@ -12,11 +12,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
     const scaleAnim = new Animated.Value(1);
 
-
     const hasSubTasks = data.subTasks;
     const hasImages = data.images;
     const isFinished = data.isFinished;
-
 
     const renderBorderRadiusPosition = () => {
         if (index % 2 === 0) {
@@ -36,9 +34,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         Animated.timing(
             scaleAnim,
             {
-                toValue: 1.1,
-                inputRange: [1,0],
-                outputRange: [1, 1.1],
+                toValue: 0.9,
+                inputRange: [1, 0],
+                outputRange: [1, 0.9],
                 duration: 30,
                 useNativeDriver: true,
                 easing: Easing.linear
@@ -49,8 +47,8 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                 scaleAnim,
                 {
                     toValue: 1,
-                    inputRange: [1,0],
-                    outputRange: [1, 0.9],
+                    inputRange: [1, 0],
+                    outputRange: [1, 0],
                     duration: 50,
                     useNativeDriver: true,
                     easing: Easing.linear
@@ -60,7 +58,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     };
 
     return (
-        <Animated.View key={index} style={[styles.mainContainer, {transform: [{scale: scaleAnim}]}]}>
+        <Animated.View rkey={index} style={[styles.mainContainer, {transform: [{scale: scaleAnim}]}]}>
 
             <View style={{alignItems: 'center', width: 40}}>
                 <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.ORANGE : color.DARK_GREY}/>
@@ -155,7 +153,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
     },
-    subTasksAndImagesContainer:{
+    subTasksAndImagesContainer: {
         paddingStart: 60,
         paddingEnd: 10,
 

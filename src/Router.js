@@ -10,13 +10,13 @@ import {EntryScreen} from './screens/auth/EntryScreen';
 import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 import {ProfileScreen} from './screens/main/ProfileScreen';
 import {CreateTaskScreen} from './screens/main/CreateTaskScreen';
+import {EditTaskScreen} from './screens/main/EditTaskScreen';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
-import {EditTaskScreen} from './screens/main/EditTaskScreen';
 
 const headerDefaultOption = {
     headerShown: true,
@@ -104,7 +104,7 @@ const AppNavigator = createSwitchNavigator(
         SplashScreen,
         AuthStack,
         BottomTabBar,
-    },
+    }
 );
 
 export default createAppContainer(AppNavigator);

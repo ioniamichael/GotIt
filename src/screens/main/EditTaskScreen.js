@@ -8,13 +8,13 @@ import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
 import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {animateLayout} from "../../layoutUtils";
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import DatePicker from 'react-native-date-picker';
 import strings from '../../constants/strings';
 import screens from '../../constants/screens';
-import {animateLayout} from "../../layoutUtils";
 
 
 export const EditTaskScreen = ({navigation}) => {

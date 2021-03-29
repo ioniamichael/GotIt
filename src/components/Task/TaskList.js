@@ -1,10 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, SectionList, View} from 'react-native';
+import {Text, SectionList, View} from 'react-native';
 import {TaskCard} from './TaskCard/TaskCard';
 import moment from 'moment';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
-import appConfig from "../../constants/appConfig";
 
 
 export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
@@ -55,7 +54,3 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     );
 
 };
-
-const styles = StyleSheet.create({
-    container: {},
-});

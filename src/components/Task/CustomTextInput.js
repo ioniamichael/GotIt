@@ -20,7 +20,6 @@ export const CustomTextInput = ({value, onChangeText, placeholder, icon, isSecur
                 placeholder={placeholder}
                 placeholderStyle={styles.textInputStyle}
                 value={value}
-
             />
 
         </View>
