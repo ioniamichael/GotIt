@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image, Animated, Easing} from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import {SubTaskList} from "./SubTasksList";
@@ -9,8 +9,6 @@ import layout from '../../constants/layout';
 import icon from '../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
-
-    const scaleAnim = new Animated.Value(1);
 
     const hasSubTasks = data.subTasks;
     const hasImages = data.images;
@@ -31,34 +29,11 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     };
 
     const onPressHandler = data => {
-        Animated.timing(
-            scaleAnim,
-            {
-                toValue: 0.9,
-                inputRange: [1, 0],
-                outputRange: [1, 0.9],
-                duration: 30,
-                useNativeDriver: true,
-                easing: Easing.linear
-            }
-        ).start(() => {
-            onTaskPress(data);
-            Animated.timing(
-                scaleAnim,
-                {
-                    toValue: 1,
-                    inputRange: [1, 0],
-                    outputRange: [1, 0],
-                    duration: 50,
-                    useNativeDriver: true,
-                    easing: Easing.linear
-                }
-            ).start()
-        });
+        onTaskPress(data);
     };
 
     return (
-        <Animated.View rkey={index} style={[styles.mainContainer, {transform: [{scale: scaleAnim}]}]}>
+        <Animated.View rkey={index} style={styles.mainContainer}>
 
             <View style={{alignItems: 'center', width: 40}}>
                 <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.ORANGE : color.DARK_GREY}/>

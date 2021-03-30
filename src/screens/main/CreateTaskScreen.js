@@ -19,7 +19,6 @@ import screens from '../../constants/screens';
 import strings from '../../constants/strings';
 
 
-
 export const CreateTaskScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
@@ -108,12 +107,14 @@ export const CreateTaskScreen = ({navigation}) => {
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
 
-            <View style={{flex: 1}}>
 
-                <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
+            <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
-                <View style={styles.innerContainer}>
+            <View style={styles.innerContainer}>
 
+                <View style={styles.whiteContainer}>
+
+                    <Text style={styles.pickDateTextStyle}>Add task details:</Text>
                     <CustomTextInput
                         placeholder={strings.PLACEHOLDER_TITLE} value={taskTitle}
                         onChangeText={setTaskTitle}/>
@@ -125,35 +126,30 @@ export const CreateTaskScreen = ({navigation}) => {
                         subTaskValue={subTaskValue}
                         onPressDeleteSubTask={deleteSubTaskHandler}
                     />
-
-                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])}
-                                     onDeleteImage={deleteImage}/>
-
-
-                    <View style={{marginBottom: 20}}>
-
-                        <TouchableOpacity>
-                            <Text style={{
-                                ...layout.regularTextBase,
-                                marginBottom: 15,
-                                marginStart: -15,
-                            }}>{strings.SELECT_END_DATE}</Text>
-                        </TouchableOpacity>
-
-                        <DatePicker
-                            date={selectedDate}
-                            androidVariant={'nativeAndroid'}
-                            onDateChange={setSelectedDate}
-                            minimumDate={new Date()}
-                            minuteInterval={5}
-                        />
-
-                    </View>
-
-                    <YellowButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
-
                 </View>
+
+                <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])}
+                                 onDeleteImage={deleteImage}/>
+
+                <View style={styles.whiteContainer}>
+                    <TouchableOpacity>
+                        <Text style={styles.pickDateTextStyle}>{strings.SELECT_END_DATE}</Text>
+                    </TouchableOpacity>
+
+                    <DatePicker
+                        date={selectedDate}
+                        androidVariant={'nativeAndroid'}
+                        onDateChange={setSelectedDate}
+                        minimumDate={new Date()}
+                    />
+                </View>
+
+                <View style={styles.whiteContainer}>
+                    <YellowButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
+                </View>
+
             </View>
+
 
             <TaskLoader isVisible={toShowLoader}/>
 
@@ -174,15 +170,20 @@ CreateTaskScreen.navigationOptions = () => ({
 const styles = StyleSheet.create({
     headerTitle: {
         ...layout.boldTextBase,
-
     },
-    container: {
-        padding: layout.defaultPaddingSize,
-        backgroundColor: color.WHITE,
-
-    },
-    innerContainer: {
-        marginVertical: 30,
+    whiteContainer: {
         alignItems: 'center',
+        backgroundColor: color.WHITE,
+        padding: 20,
+        marginBottom: 20,
+    },
+    container: {},
+    innerContainer: {
+        marginVertical: 20,
+    },
+    pickDateTextStyle: {
+        ...layout.regularTextBase,
+        marginBottom: 15,
+        width: layout.width - (layout.defaultPaddingSize * 2)
     }
 });

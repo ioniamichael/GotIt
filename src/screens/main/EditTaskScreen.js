@@ -92,12 +92,11 @@ export const EditTaskScreen = ({navigation}) => {
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
 
-            <View style={{flex: 1}}>
+            <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
-                <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
+            <View style={styles.innerContainer}>
 
-                <View style={styles.innerContainer}>
-
+                <View style={styles.whiteContainer}>
                     <CustomTextInput
                         placeholder={strings.PLACEHOLDER_TITLE} value={taskTitle}
                         onChangeText={setTaskTitle}/>
@@ -109,33 +108,31 @@ export const EditTaskScreen = ({navigation}) => {
                         subTaskValue={subTaskValue}
                         onPressDeleteSubTask={deleteSubTaskHandler}
                     />
+                </View>
 
-                    <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])}
-                                     onDeleteImage={deleteImage}/>
+                <TaskImagePicker images={images} onImagePicked={(image) => setImages([...images, image])}
+                                 onDeleteImage={deleteImage}/>
 
 
-                    <View style={{marginBottom: 20}}>
+                <View style={styles.whiteContainer}>
 
-                        <TouchableOpacity>
-                            <Text style={{
-                                ...layout.regularTextBase,
-                                marginBottom: 15,
-                                marginStart: -15,
-                            }}>{strings.SELECT_END_DATE}</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={styles.pickDateTextStyle}>{strings.SELECT_END_DATE}</Text>
+                    </TouchableOpacity>
 
-                        <DatePicker
-                            date={selectedDate}
-                            androidVariant={'nativeAndroid'}
-                            onDateChange={setSelectedDate}
-                            minuteInterval={5}
-                        />
-
-                    </View>
-
-                    <YellowButton buttonTitle={strings.SAVE} onButtonPressed={updateTask}/>
+                    <DatePicker
+                        date={selectedDate}
+                        androidVariant={'nativeAndroid'}
+                        onDateChange={setSelectedDate}
+                        minuteInterval={5}
+                    />
 
                 </View>
+
+                <View style={styles.whiteContainer}>
+                    <YellowButton buttonTitle={strings.SAVE} onButtonPressed={updateTask}/>
+                </View>
+
             </View>
 
             <TaskLoader isVisible={toShowLoader}/>
@@ -158,12 +155,19 @@ const styles = StyleSheet.create({
     headerTitle: {
         ...layout.boldTextBase,
     },
-    container: {
-        padding: layout.defaultPaddingSize,
-        backgroundColor: color.WHITE,
-    },
+    container: {},
     innerContainer: {
         marginVertical: 30,
-        alignItems: 'center',
     },
+    whiteContainer: {
+        alignItems: 'center',
+        backgroundColor: color.WHITE,
+        padding: 20,
+        marginBottom: 20,
+    },
+    pickDateTextStyle: {
+        ...layout.regularTextBase,
+        marginBottom: 15,
+        width: layout.width - (layout.defaultPaddingSize * 2)
+    }
 });

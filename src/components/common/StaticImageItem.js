@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Image, Animated, Easing} from 'react-native';
+import {StyleSheet, Image, Easing,Animated} from 'react-native';
 import layout from "../../constants/layout";
 
 export const StaticImageItem = ({indexToAnimate, item}) => {
@@ -27,7 +27,7 @@ export const StaticImageItem = ({indexToAnimate, item}) => {
 
     const opacity = anim.interpolate({
         inputRange: [0, 1],
-        outputRange: [0, 1]
+        outputRange: [0, 1],
     });
 
     return (

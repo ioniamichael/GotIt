@@ -22,36 +22,39 @@ export const TaskTypePicker = ({onTypeSelect, taskTypeTitle, taskType}) => {
 
     return (
         <View style={styles.typesContainerStyle}>
-            <Text style={{...layout.boldTextBase, marginBottom: 15}}>Pick your task
+            <Text style={{...layout.boldTextBase, marginBottom: 15, marginHorizontal: 20,}}>Pick your task
                 type.</Text>
 
-            <FlatList
-                style={styles.flatListContainer}
-                data={assets.PICKER}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                keyExtractor={(type, index) => 'D' + index.toString()}
-                renderItem={({item}) => {
-                    return (
-                        <TouchableOpacity
-                            onPress={() => onTypeSelect(item)}
-                            style={[styles.pickerContainerStyle, renderSelectedTypeStyle(item.TYPE)]}>
-                            <Image source={item.IMAGE} style={styles.pickerImageStyles}/>
-                        </TouchableOpacity>
-                    );
-                }}
-            />
+                <FlatList
+                    style={styles.flatListContainer}
+                    data={assets.PICKER}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    keyExtractor={(type, index) => 'D' + index.toString()}
+                    renderItem={({item}) => {
+                        return (
+                            <TouchableOpacity
+                                onPress={() => onTypeSelect(item)}
+                                style={[styles.pickerContainerStyle, renderSelectedTypeStyle(item.TYPE)]}>
+                                <Image source={item.IMAGE} style={styles.pickerImageStyles}/>
+                            </TouchableOpacity>
+                        );
+                    }}
+                />
 
-            <Text style={{...layout.regularTextBase}}>Selected type is: {taskTypeTitle}</Text>
+            <Text style={{...layout.regularTextBase,marginHorizontal: 20}}>Selected type is: {taskTypeTitle}</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     typesContainerStyle: {
+        backgroundColor: color.WHITE,
+        paddingVertical:20,
     },
     flatListContainer: {
         marginBottom: 15,
+        paddingStart: 20,
     },
     pickerContainerStyle: {
         width: 70,

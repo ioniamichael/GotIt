@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity, Text, FlatList} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Text, FlatList, Image} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {ImageItem} from "./ImageItem";
 import layout from '../../constants/layout';
@@ -18,7 +18,7 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
             if (!res.didCancel) {
                 if (!images.includes(res.base64)) {
                     onImagePicked(res.base64);
-                }else {
+                } else {
                     const position = images.findIndex((index) => index === res.base64);
                     alert(`Selected image already exist at position ${position + 1} in a list of selected images.`)
                 }
@@ -33,18 +33,20 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
                 <Ionicons name={icons.ICON_UPLOAD} size={30} color={color.ORANGE}/>
             </TouchableOpacity>
 
-            <FlatList
-                data={images}
-                showsHorizontalScrollIndicator={false}
-                keyExtractor={(item, index) => item + index}
-                horizontal
-                renderItem={({item, index}) => {
-                    return (
-                        <ImageItem item={item} onPressDeleteButton={() => onDeletePressHandler(index)}
-                                   renderedIndex={index}/>
-                    );
-                }}
-            />
+                <FlatList
+                    style={{paddingHorizontal: 20}}
+                    data={images}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={(item, index) => item + index}
+                    horizontal
+
+                    renderItem={({item, index}) => {
+                        return (
+                            <ImageItem item={item} onPressDeleteButton={() => onDeletePressHandler(index)}
+                                       renderedIndex={index}/>
+                        );
+                    }}
+                />
 
         </View>
     );
@@ -52,12 +54,19 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
 
 const styles = StyleSheet.create({
     rootView: {
+        backgroundColor: color.WHITE,
         width: '100%',
         marginBottom: 15,
-        borderRadius: 100,
+        paddingVertical: 20,
     },
-    itemRootView: {...layout.shadowBase, marginVertical: 15, marginEnd: 10, borderRadius: 20,},
+    itemRootView: {
+        ...layout.shadowBase,
+        marginVertical: 15,
+        marginEnd: 10,
+        borderRadius: 20
+    },
     uploadIconContainer: {
+        paddingHorizontal: 20,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
