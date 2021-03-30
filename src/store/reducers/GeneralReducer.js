@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     errorMessage: '',
     taskList: [],
     isQuickActionsModalVisible: false,
-    isCreateTaskModalVisible: false
+    isCreateTaskModalVisible: false,
+    data: {}
 };
 
 const GeneralReducer = (state = INITIAL_STATE, action) => {
@@ -49,16 +50,17 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 isCreateTaskModalVisible: action.payload
             };
+        case DELETE_TASK:
+            return {
+                ...state,
+                taskList: state.taskList.filter(t => t.taskID !== action.payload),
+            };
         default:
             return state;
     }
 };
 
-// case REMOVE_TASK:
-//     return {
-//         ...state,
-//         taskList: state.taskList.filter(t => t.taskID !== action.payload),
-//     };
+
 
 
 export default GeneralReducer;

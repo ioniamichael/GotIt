@@ -13,6 +13,8 @@ import screens from '../../constants/screens';
 
 export const HomeScreen = ({navigation}) => {
 
+    console.log('rerender');
+
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.GeneralReducer.taskList);
     const [dataForQuickActions, setDataForQuickActions] = useState(null);
@@ -25,7 +27,7 @@ export const HomeScreen = ({navigation}) => {
 
     const openQuickActionsWithData = (data) => {
         setDataForQuickActions(data);
-        dispatch(setShowQuickActionsModal(true));
+        dispatch(setShowQuickActionsModal(true, data));
     };
 
     const closeQuickActions = () => {
@@ -36,14 +38,11 @@ export const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
 
-            <TasksQuickActions isVisible={isQuickActionsModalVisible} task={dataForQuickActions}
-                               onClosePressed={closeQuickActions} navigation={navigation}/>
+            <TasksQuickActions isVisible={isQuickActionsModalVisible} onClosePressed={closeQuickActions} navigation={navigation} task={dataForQuickActions}/>
 
             {tasks
                 ? <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsWithData}/>
                 : <NoTasksPlaceHolder/>}
-
-
         </View>
     );
 };

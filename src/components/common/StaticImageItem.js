@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useRef} from 'react';
 import {StyleSheet, Image, Easing,Animated} from 'react-native';
 import layout from "../../constants/layout";
 
 export const StaticImageItem = ({indexToAnimate, item}) => {
 
-    const anim = new Animated.Value(0);
+    const anim = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         Animated.spring(

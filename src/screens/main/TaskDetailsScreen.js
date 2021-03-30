@@ -6,8 +6,6 @@ import {
     Image,
     FlatList,
     ScrollView,
-    Animated,
-    Easing,
     LogBox
 } from 'react-native';
 import {getTaskImageByType} from '../../utils';
@@ -22,7 +20,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icons from '../../constants/icons';
-import {ImageItem} from "../../components/Task/ImageItem";
 import {StaticImageItem} from "../../components/common/StaticImageItem";
 
 

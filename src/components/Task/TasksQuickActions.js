@@ -9,7 +9,7 @@ import color from '../../constants/colors';
 import icons from '../../constants/icons';
 import layout from '../../constants/layout';
 
-export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation}) => {
+export const TasksQuickActions = ({isVisible, onClosePressed, navigation, task}) => {
 
     const dispatch = useDispatch();
     const isQuickActionsShown = useSelector(state => state.GeneralReducer.isQuickActionsModalVisible);
@@ -45,10 +45,11 @@ export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation})
             await removeTaskFromDB(task.taskCreationDate);
             await dispatch(deleteTask(task.taskCreationDate));
             await dispatch(fetchTasks());
+            dispatch(setShowLoader(false));
         } catch (e) {
             console.log(e);
+            dispatch(setShowLoader(false));
         }
-        dispatch(setShowLoader(false));
     };
 
     const checkThisTaskAsFinished = async () => {
@@ -57,10 +58,11 @@ export const TasksQuickActions = ({task, isVisible, onClosePressed, navigation})
         try {
             await setTaskAsFinished(task);
             await dispatch(fetchTasks());
+            dispatch(setShowLoader(false));
         } catch (e) {
-            console.log(e)
+            console.log(e);
+            dispatch(setShowLoader(false));
         }
-        dispatch(setShowLoader(false));
     };
 
     return (

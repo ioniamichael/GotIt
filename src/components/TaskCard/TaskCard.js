@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image, Animated, Easing} from 'react-native';
 import {getHoursAndMinutes, getTaskImageByType} from '../../utils';
 import {SubTaskList} from "./SubTasksList";
@@ -10,9 +10,34 @@ import icon from '../../constants/icons';
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
+    const entryAnimation = useRef(new Animated.Value(0)).current;
     const hasSubTasks = data.subTasks;
     const hasImages = data.images;
     const isFinished = data.isFinished;
+
+    useEffect(() => {
+        Animated.spring(
+            entryAnimation,
+            {
+                toValue: 1,
+                friction: 6,
+                tension: 60,
+                delay: index * 60,
+                useNativeDriver: true,
+                easing: Easing.linear
+            }
+        ).start();
+    });
+
+    const scaleAnim = entryAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+    });
+
+    const opacity = entryAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+    });
 
     const renderBorderRadiusPosition = () => {
         if (index % 2 === 0) {
@@ -28,14 +53,10 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         }
     };
 
-    const onPressHandler = data => {
-        onTaskPress(data);
-    };
-
     return (
-        <Animated.View rkey={index} style={styles.mainContainer}>
+        <Animated.View key={index} style={[styles.mainContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
 
-            <View style={{alignItems: 'center', width: 40}}>
+            <View style={styles.taskStatusIconContainer}>
                 <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.ORANGE : color.DARK_GREY}/>
             </View>
 
@@ -49,7 +70,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                     },
                     renderBorderRadiusPosition(),
                 ]}
-                onPress={() => onPressHandler(data)}
+                onPress={() => onTaskPress(data)}
                 onLongPress={() => onTaskLongPress(data)}>
 
                 <View style={styles.titleContainer}>
@@ -62,14 +83,9 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
                         <View style={styles.titleContainer}>
 
-                            <Text numberOfLines={1}
-                                  style={[{...layout.boldTextBase}, {
-                                      fontSize: 12,
-                                      width: '69%',
-                                  }]}>{data.taskTitle}</Text>
+                            <Text numberOfLines={1} style={styles.title}>{data.taskTitle}</Text>
 
-                            <Text numberOfLines={1}
-                                  style={[{...layout.boldTextBase}, {fontSize: 11}]}>{getHoursAndMinutes(data.taskEndDate)}</Text>
+                            <Text numberOfLines={1} style={styles.endDate}>{getHoursAndMinutes(data.taskEndDate)}</Text>
 
                         </View>
 
@@ -121,6 +137,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
+    title: {
+        ...layout.boldTextBase,
+        fontSize: 12,
+        width: '69%',
+    },
+    endDate: {...layout.boldTextBase, fontSize: 11},
     taskImageTypeContainer: {
         alignSelf: 'flex-start',
         backgroundColor: color.GREY,
@@ -130,6 +152,6 @@ const styles = StyleSheet.create({
     subTasksAndImagesContainer: {
         paddingStart: 60,
         paddingEnd: 10,
-
-    }
+    },
+    taskStatusIconContainer: {alignItems: 'center', width: 40}
 });
