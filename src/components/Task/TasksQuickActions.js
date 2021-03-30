@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, TouchableOpacity, Animated, Modal, Text} from 'react-native';
+import {BlurView} from "@react-native-community/blur";
 import {deleteTask, fetchTasks, setShowLoader, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
-import {BlurView} from "@react-native-community/blur";
 import {useDispatch, useSelector} from "react-redux";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';

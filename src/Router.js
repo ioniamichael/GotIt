@@ -18,6 +18,8 @@ import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
 
+
+
 const headerDefaultOption = {
     headerShown: true,
     headerStyle: {

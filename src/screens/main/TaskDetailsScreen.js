@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity, FlatList, ScrollView} from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text,
+    Image,
+    FlatList,
+    ScrollView,
+    Animated,
+    Easing,
+    LogBox
+} from 'react-native';
 import {getTaskImageByType} from '../../utils';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/common/AppHeaderButtons';
@@ -7,16 +17,18 @@ import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import {EditTaskScreen} from './EditTaskScreen';
+import {TaskDetailsDateSection} from '../../components/Task/TaskDetailsDateSection';
 import {useDispatch, useSelector} from 'react-redux';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
-import moment from 'moment';
 import icons from '../../constants/icons';
-import appConfig from '../../constants/appConfig';
-import {TaskDetailsDateSection} from '../../components/Task/TaskDetailsDateSection';
+import {ImageItem} from "../../components/Task/ImageItem";
+import {StaticImageItem} from "../../components/common/StaticImageItem";
 
 
 export const TaskDetailsScreen = ({navigation}) => {
+
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
     const dispatch = useDispatch();
     const toShowLoader = useSelector(state => state.GeneralReducer.toShowLoader);
@@ -68,12 +80,16 @@ export const TaskDetailsScreen = ({navigation}) => {
     const renderSubTasks = () => {
         if (task.subTasks) {
             return (
-                task.subTasks.map((subTask, index) => {
-                    return (
-                        <Text key={index.toString()}
-                              style={{...layout.regularTextBase, color: color.DARK_GREY}}>{index + 1}- {subTask}</Text>
-                    );
-                })
+                <FlatList
+                    scrollEnabled={false}
+                    keyExtractor={(item, index) => item + index}
+                    data={task.subTasks}
+                    renderItem={({item, index}) => {
+                        return (
+                            <Text style={{...layout.regularTextBase, color: color.DARK_GREY}}>{index + 1}- {item}</Text>
+                        )
+                    }}
+                />
             );
         }
     };
@@ -81,20 +97,19 @@ export const TaskDetailsScreen = ({navigation}) => {
     const renderTaskImages = () => {
         if (task.images) {
             return (
-                <FlatList
-                    data={task.images}
-                    keyExtractor={(item, index) => item + index}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({item}) => {
-                        return (
-                            <View
-                                style={{...layout.shadowBase, marginVertical: 15, marginEnd: 10, borderRadius: 20}}>
-                                <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
-                            </View>
-                        );
-                    }}
-                />
+                    <FlatList
+                        style={styles.imageContainer}
+                        scrollEnabled={false}
+                        numColumns={2}
+                        data={task.images}
+                        keyExtractor={(item, index) => item + index}
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({item, index}) => {
+                            return (
+                                <StaticImageItem indexToAnimate={index} item={item}/>
+                            );
+                        }}
+                    />
             );
         }
     };
@@ -106,9 +121,9 @@ export const TaskDetailsScreen = ({navigation}) => {
 
                 <TaskDetailsDateSection/>
 
-                    <View style={styles.taskTypeContainer}>
-                        <Image source={getTaskImageByType(task.taskType)} style={styles.taskTypeImage}/>
-                    </View>
+                <View style={styles.taskTypeContainer}>
+                    <Image source={getTaskImageByType(task.taskType)} style={styles.taskTypeImage}/>
+                </View>
 
 
             </View>
@@ -174,9 +189,7 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
-    imageStyle: {
-        width: layout.width * 0.4,
-        height: layout.height * 0.12,
-        borderRadius: 20,
+    imageContainer: {
+        alignSelf:'center'
     },
 });

@@ -42,6 +42,8 @@ export const HomeScreen = ({navigation}) => {
             {tasks
                 ? <TaskList data={tasks} onTaskPress={onTaskPressHandler} onTaskLongPress={openQuickActionsWithData}/>
                 : <NoTasksPlaceHolder/>}
+
+
         </View>
     );
 };
