@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, KeyboardAvoidingView, Image} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {YellowButton} from '../../components/common/YellowButton';
-import {getCurrentDateInTimestamp} from '../../utils';
+import {getCurrentDateInTimestamp, isPasswordRepeatedRight, isValidEmail, isValidPassword} from '../../utils';
 import {createAccount} from '../../services/userService';
-import {setShowLoader} from '../../store/actions/GeneralActions';
+import {setShowLoader, setShowPopUp} from '../../store/actions/GeneralActions';
 import {ImagePicker} from '../../components/Auth/ImagePicker';
 import {TaskLoader} from '../../components/Loaders/TaskLoader';
 import string from '../../constants/strings';
@@ -22,32 +22,64 @@ const INITIAL_STATE = {
     userRepeatPassword: '',
     accountCreationDate: getCurrentDateInTimestamp(),
     userName: '',
-    image: null
-
+    image: null,
 };
 
 export const SignUpScreen = ({navigation}) => {
+
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [passwordRepeatedRightError, setPasswordRepeatedRightError] = useState('');
 
     const [state, setState] = useState(INITIAL_STATE);
     const dispatch = useDispatch();
     const isLoaderShown = useSelector(state => state.GeneralReducer.toShowLoader);
 
     const onSignUpButtonPressed = async () => {
-        dispatch(setShowLoader(true));
-        try {
-            await createAccount(state.userEmail, state.userPassword, state.userName, state.image);
-            dispatch(setShowLoader(false));
-            navigation.navigate(screens.SPLASH_SCREEN);
-        } catch (e) {
-            console.log(e);
-            dispatch(setShowLoader(false));
+        if (isValidEmail(state.userEmail) && isValidPassword(state.userPassword) && state.userName  && isPasswordRepeatedRight(state.userPassword, state.userRepeatPassword)) {
+            dispatch(setShowLoader(true));
+            try {
+                await createAccount(state.userEmail, state.userPassword, state.userName, state.image);
+                dispatch(setShowLoader(false));
+                navigation.navigate(screens.SPLASH_SCREEN);
+            } catch (e) {
+                console.log(e);
+                dispatch(setShowLoader(false));
+                dispatch(setShowPopUp(true, e.toString()));
+            }
+        }else {
+            if (!isValidEmail(state.userEmail)) {
+                setEmailError('Invalid email format');
+                setTimeout(() => {
+                    setEmailError('');
+                }, 3000);
+            }
+            if (!isValidPassword(state.userPassword)) {
+                setPasswordError('Password should be at least 6 chars');
+                setTimeout(() => {
+                    setPasswordError('');
+                }, 3000);
+            }
+            if (!state.userName){
+                setNameError('Please add you name');
+                setTimeout(() => {
+                    setNameError('');
+                }, 3000);
+            }
+            if (!isPasswordRepeatedRight(state.userPassword, state.userRepeatPassword)){
+                setPasswordRepeatedRightError('Password not match');
+                setTimeout(() => {
+                    setPasswordRepeatedRightError('');
+                }, 3000);
+            }
         }
     };
 
     return (
         <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : null}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+            behavior={Platform.OS === 'ios' ? 'padding' : null}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
             style={styles.container}>
 
             <TaskLoader isVisible={isLoaderShown}/>
@@ -59,14 +91,18 @@ export const SignUpScreen = ({navigation}) => {
 
             <View style={styles.innerContainer}>
 
-                <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
+                <View style={styles.imagePickerContainer}>
                     <ImagePicker isDisabled={false} userName={state.userName} image={state.image}
                                  onImagePicked={image => setState((prevState) => ({
                                      ...prevState,
-                                     image
+                                     image,
                                  }))}/>
 
-                    <Text style={{...layout.regularTextBase, fontSize: 12, marginStart: 20}}>{string.PLEASE_UPLOAD_AVATAR}</Text>
+                    <Text style={{
+                        ...layout.regularTextBase,
+                        fontSize: 12,
+                        marginStart: 20,
+                    }}>{string.PLEASE_UPLOAD_AVATAR}</Text>
                 </View>
 
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
@@ -75,7 +111,7 @@ export const SignUpScreen = ({navigation}) => {
                                     ...prevState,
                                     userEmail,
                                 }))}
-                                placeholder={string.PLACEHOLDER_EMAIL}/>
+                                placeholder={string.PLACEHOLDER_EMAIL} errorMessage={emailError}/>
 
                 <LoginInputText icon={icon.ICON_NAME} isSecure={false} keyboardType={'default'}
                                 value={state.userName}
@@ -83,7 +119,7 @@ export const SignUpScreen = ({navigation}) => {
                                     ...prevState,
                                     userName,
                                 }))}
-                                placeholder={string.PLACEHOLDER_NAME}/>
+                                placeholder={string.PLACEHOLDER_NAME} errorMessage={nameError}/>
 
                 <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
                                 value={state.userPassword}
@@ -91,7 +127,7 @@ export const SignUpScreen = ({navigation}) => {
                                     ...prevState,
                                     userPassword,
                                 }))}
-                                placeholder={string.PLACEHOLDER_PASSWORD}/>
+                                placeholder={string.PLACEHOLDER_PASSWORD} errorMessage={passwordError}/>
 
                 <LoginInputText icon={icon.ICON_PASSWORD} isSecure={true} keyboardType={'default'}
                                 value={state.userRepeatPassword}
@@ -99,9 +135,11 @@ export const SignUpScreen = ({navigation}) => {
                                     ...prevState,
                                     userRepeatPassword,
                                 }))}
-                                placeholder={string.PLACEHOLDER_REPEAT_PASSWORD}/>
+                                placeholder={string.PLACEHOLDER_REPEAT_PASSWORD} errorMessage={passwordRepeatedRightError}/>
 
-                <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
+                <View style={{marginTop:20}}>
+                    <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
+                </View>
 
             </View>
 
@@ -120,7 +158,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: colors.WHITE,
         alignItems: 'center',
-        flex: 1
+        flex: 1,
     },
     entryTitle: {
         fontFamily: 'Montserrat-Bold',
@@ -132,7 +170,8 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     logoContainer: {
-        marginTop: 30
+        marginTop: 30,
     },
-    logo: {marginStart: -20, width: 90, height: 40}
+    logo: {marginStart: -20, width: 90, height: 40},
+    imagePickerContainer:{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',bottom: 10}
 });

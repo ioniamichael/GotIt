@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     },
     haveAccountContainer: {
         flexDirection: 'row',
+        marginVertical: 20,
     },
     loginButton: {
         ...layout.boldTextBase,

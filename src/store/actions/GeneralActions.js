@@ -32,7 +32,7 @@ export const setShowCreateTaskModal = (toShowModal) => (dispatch) => {
 export const setShowPopUp = (toShowPopUp, messageText) => (dispatch) => {
     dispatch({
         type: SHOW_POPUP,
-        payload: toShowPopUp, messageText,
+        payload: {toShowPopUp, messageText}
     });
 };
 

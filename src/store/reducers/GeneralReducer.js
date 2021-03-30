@@ -28,7 +28,7 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 toShowPopUp: action.payload.toShowPopUp,
-                errorMessage: action.payload.errorMessage,
+                errorMessage: action.payload.messageText
             };
         case FETCH_TASKS:
             return {
@@ -49,11 +49,6 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 isCreateTaskModalVisible: action.payload
-            };
-        case DELETE_TASK:
-            return {
-                ...state,
-                taskList: state.taskList.filter(t => t.taskID !== action.payload),
             };
         default:
             return state;

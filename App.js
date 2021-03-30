@@ -1,10 +1,10 @@
 import React from 'react';
-import {Modal,Text} from 'react-native';
-import {Provider} from 'react-redux';
+import {Provider, useSelector} from 'react-redux';
 import {StyleSheet, UIManager, View, StatusBar} from 'react-native';
 import store from './src/store';
 import AppNavigator from './src/Router';
 import colors from './src/constants/colors';
+import {ErrorsPopUp} from './src/components/common/ErrorsPopUp';
 
 
 if (Platform.OS === 'android') {
@@ -18,6 +18,7 @@ const App = () => {
     return (
         <View style={styles.container}>
             <Provider store={store}>
+                <ErrorsPopUp/>
                 <StatusBar barStyle={'dark-content'} backgroundColor={colors.WHITE}/>
                 <AppNavigator/>
             </Provider>
