@@ -1,7 +1,8 @@
-import {FETCH_USER_DETAILS} from '../types';
+import {FETCH_USER_DETAILS, SEARCH_USER} from '../types';
 
 const initialState = {
     userDetails: {},
+    allUsers: [],
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userDetails: action.payload,
+            };
+        case SEARCH_USER:
+            return{
+                ...state,
+                allUsers: action.payload,
             };
         default:
             return state;

@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ImagePicker} from "../../components/Auth/ImagePicker";
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
+import {fetchAllUsers} from "../../store/actions/UserAction";
 
 export const ProfileScreen = () => {
 
+    const dispatch = useDispatch();
+    const searchUsers = useSelector(state => state.UserReducer.searchUsers);
     const userDetails = useSelector(state => state.UserReducer.userDetails);
+
+    useEffect(() => {
+        dispatch(fetchAllUsers())
+    }, [dispatch]);
+
+    if(searchUsers){
+        searchUsers.map(user => {
+            console.log(user);
+        })
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -18,6 +31,7 @@ export const ProfileScreen = () => {
                     <Text style={{...layout.regularTextBase}}>{userDetails.email}</Text>
                 </View>
             </View>
+
         </View>
     );
 };

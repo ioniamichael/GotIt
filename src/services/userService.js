@@ -81,6 +81,25 @@ export const fetchAllTasksFromDB = () => new Promise(async (resolve, reject) => 
     }
 });
 
+export const allUsers = () => new Promise(async (resolve, reject) => {
+    try{
+        const snapshot = await database().ref('users').once('value');
+        if (snapshot.exists){
+            const data = snapshot.val();
+            if (data){
+                const users = Object.keys(data).map(key => ({...data[key], id: key}))
+                resolve(users)
+            } else {
+                resolve();
+            }
+        }else {
+            resolve(snapshot)
+        }
+    }catch (e) {
+        reject();
+    }
+});
+
 export const setTaskAsFinished = (task) => new Promise(async (resolve, reject) => {
     try {
         await database().ref('tasks').child(auth().currentUser.uid).child(task.taskCreationDate.toString()).child('isFinished').set(!task.isFinished);

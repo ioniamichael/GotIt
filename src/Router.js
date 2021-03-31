@@ -17,15 +17,14 @@ import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
-
+import {SearchScreen} from "./screens/main/SearchScreen";
 
 
 const headerDefaultOption = {
     headerShown: true,
     headerStyle: {
         backgroundColor: colors.WHITE,
-        elevation: 0,
-        borderBottomWidth: 0.5,
+        ...layout.shadowBase
     },
     ...TransitionPresets.SlideFromRightIOS,
 };
@@ -59,24 +58,30 @@ const CreateStack = createStackNavigator({
     CreateTaskScreen,
 }, {defaultNavigationOptions: headerDefaultOption});
 
+const SearchStack = createStackNavigator({
+        SearchScreen,
+    },
+    {
+        defaultNavigationOptions: headerDefaultOption
+    });
 
 const BottomTabBar = createBottomTabNavigator({
+        Create: {
+            screen: CreateStack,
+            navigationOptions: {
+                tabBarLabel: 'Create',
+                tabBarIcon: () => (
+                    <Image style={{width: 55, height: 55}}
+                           source={assets.ADD_TASK_BUTTON}/>
+                ),
+            },
+        },
         Home: {
             screen: HomeStack,
             navigationOptions: {
                 tabBarLabel: 'Home',
                 tabBarIcon: info => (
                     <Ionicons name={icons.ICON_HOME} size={layout.defaultIconSize} color={info.tintColor}/>
-                ),
-            },
-        },
-        Create: {
-            screen: CreateStack,
-            navigationOptions: {
-                tabBarLabel: 'Create',
-                tabBarIcon: () => (
-                    <Image style={{width: 80, height: 80}}
-                           source={assets.ADD_TASK_BUTTON}/>
                 ),
             },
         },
@@ -89,6 +94,15 @@ const BottomTabBar = createBottomTabNavigator({
                 ),
             },
         },
+        Search: {
+            screen: SearchStack,
+            navigationOptions: {
+                tabBarLabel: 'Search',
+                tabBarIcon: info => (
+                    <Ionicons name={icons.ICON_SEARCH} size={layout.defaultIconSize} color={info.tintColor}/>
+                ),
+            },
+        },
     },
     {
         tabBarOptions: {
@@ -98,6 +112,9 @@ const BottomTabBar = createBottomTabNavigator({
             labelStyle: {
                 ...layout.boldTextBase,
             },
+            style: {
+                ...layout.shadowBase
+            }
         },
     });
 

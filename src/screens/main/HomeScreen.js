@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View, Image, Text} from 'react-native';
 import {TaskList} from '../../components/Task/TaskList';
 import {NoTasksPlaceHolder} from '../../components/Loaders/NoTasksPlaceholder';
 import {setShowQuickActionsModal} from "../../store/actions/GeneralActions";
@@ -12,8 +12,6 @@ import screens from '../../constants/screens';
 
 
 export const HomeScreen = ({navigation}) => {
-
-    console.log('rerender');
 
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.GeneralReducer.taskList);
@@ -36,7 +34,7 @@ export const HomeScreen = ({navigation}) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={styles.mainContainer}>
 
             <TasksQuickActions isVisible={isQuickActionsModalVisible} onClosePressed={closeQuickActions} navigation={navigation} task={dataForQuickActions}/>
 
@@ -50,8 +48,8 @@ export const HomeScreen = ({navigation}) => {
 HomeScreen.navigationOptions = () => ({
     headerTitle: () => {
         return (
-            <View style={{marginStart: -20}}>
-                <Image source={assets.APP_LOGO} style={{width: 90, height: 40}}/>
+            <View>
+                <Text style={styles.headerTitle}>Gotit</Text>
             </View>
         );
     }
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
     headerTitle: {
         ...layout.boldTextBase,
     },
-    container: {
+    mainContainer: {
         paddingHorizontal: 20,
         backgroundColor: color.WHITE,
         flex: 1,

@@ -8,7 +8,7 @@ import color from '../../constants/colors';
 
 export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
 
-    data.sort((a, b) => (a.taskEndDate > b.taskEndDate) ? 1 : ((b.taskEndDate > a.taskEndDate) ? -1 : 0));
+    data.sort((a, b) => (a.taskEndDate > b.taskEndDate) ? 1 : ((b.taskEndDate > a.taskEndDate) ? -1 : 0))
 
     let sortedData = [];
     let length = 0;
@@ -37,6 +37,7 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     };
     return (
         <SectionList
+            stickySectionHeadersEnabled={false}
             showsVerticalScrollIndicator={false}
             sections={sortedData}
             keyExtractor={(item, index) => item + index}

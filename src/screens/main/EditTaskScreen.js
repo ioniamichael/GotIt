@@ -90,7 +90,7 @@ export const EditTaskScreen = ({navigation}) => {
     };
 
     return (
-        <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
+        <ScrollView style={styles.mainContainer} keyboardShouldPersistTaps={'handled'}>
 
             <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     headerTitle: {
         ...layout.boldTextBase,
     },
-    container: {},
+    mainContainer: {},
     innerContainer: {
         marginVertical: 30,
     },
