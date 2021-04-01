@@ -42,7 +42,7 @@ export const setUserDataToDB = (name, email, image) => new Promise(async (resolv
 
 export const fetchUserDetailsFromDB = () => new Promise(async (resolve, reject) => {
     try {
-        const snapshot = await database().ref('users').child(auth().currentUser.uid).child('userDetails').once('value');
+        const snapshot = await database().ref('users').child(auth().currentUser.uid).once('value');
         if (snapshot.exists) {
             const data = snapshot.val();
             resolve(data);
@@ -60,6 +60,15 @@ export const createNewTask = (task) => new Promise(async (resolve, reject) => {
         resolve();
     } catch (e) {
         reject(e);
+    }
+});
+
+export const addToFriends = (userToAdd) => new Promise(async (resolve, reject) => {
+    try {
+        await database().ref('users').child(auth().currentUser.uid).child('friends').child(userToAdd.userDetails.id).child('friendDetails').set(userToAdd.userDetails);
+        resolve();
+    }catch (e) {
+        reject(e)
     }
 });
 

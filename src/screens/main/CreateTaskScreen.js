@@ -116,6 +116,7 @@ export const CreateTaskScreen = ({navigation}) => {
                 <View style={styles.whiteContainer}>
 
                     <Text style={styles.pickDateTextStyle}>Add task details:</Text>
+
                     <CustomTextInput
                         icon={icons.ICON_TASKS}
                         placeholder={strings.PLACEHOLDER_TITLE} value={taskTitle}

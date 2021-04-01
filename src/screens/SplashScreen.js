@@ -6,8 +6,8 @@ import LottieView from 'lottie-react-native';
 import {useDispatch} from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import assets from '../constants/assets';
-import color from '../constants/colors';
 import screens from '../constants/screens';
+import layout from '../constants/layout';
 
 
 export const SplashScreen = ({navigation}) => {
@@ -49,9 +49,11 @@ export const SplashScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: color.GREEN,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    lottie: {},
+    lottie: {
+        width:layout.width * 0.4,
+        height:layout.width * 0.4,
+    },
 });

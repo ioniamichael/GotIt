@@ -1,16 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet, Modal, TouchableOpacity,Button} from 'react-native';
-import {ImagePicker} from "../../components/Auth/ImagePicker";
+import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native';
 import {BlurView} from "@react-native-community/blur";
+import {ImagePicker} from "../../components/Auth/ImagePicker";
+import {showSearchedUserProfileModal} from "../../store/actions/GeneralActions";
+import {SafeAreaView} from "react-native-safe-area-context";
 import layout from '../../constants/layout';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from "../../constants/icons";
 import color from "../../constants/colors";
 import {useDispatch} from "react-redux";
-import {showSearchedUserProfileModal} from "../../store/actions/GeneralActions";
-import {SafeAreaView} from "react-native-safe-area-context";
-import assets from "../../constants/assets";
-import LottieView from "lottie-react-native";
+import {addToFriends} from "../../services/userService";
 
 export const SearchedUserProfileScreen = ({visible, searchedUser}) => {
 
@@ -18,6 +17,14 @@ export const SearchedUserProfileScreen = ({visible, searchedUser}) => {
 
     const closeModal = () => {
         dispatch(showSearchedUserProfileModal(false))
+    };
+
+    const addUserToFriend = async () => {
+        try {
+            await addToFriends(searchedUser);
+        }catch (e) {
+            console.log(':::Not added')
+        }
     };
 
     return (
@@ -50,14 +57,11 @@ export const SearchedUserProfileScreen = ({visible, searchedUser}) => {
 
                 </View>
 
-                <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.addToFriedButton}>
+                <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.addToFriedButton} onPress={addUserToFriend}>
                     <Text style={{...layout.regularTextBase}}>Add to friends</Text>
                 </TouchableOpacity>
 
             </SafeAreaView>
-
-
-
         </Modal>
     );
 };

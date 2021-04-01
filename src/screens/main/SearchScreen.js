@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, Text, StyleSheet, FlatList, ActivityIndicator, Platform} from 'react-native';
 import {fetchAllUsers} from "../../store/actions/UserAction";
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
@@ -14,7 +14,7 @@ export const SearchScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.UserReducer.allUsers);
-    const currentUser = useSelector(state => state.UserReducer.userDetails);
+    const currentUser = useSelector(state => state.UserReducer.currentUser);
     const toShowSearchUserProfileModal = useSelector(state => state.GeneralReducer.showSearchedUserProfileModal);
     const [searchText, setSearchText] = useState('');
     const [searchedUserForModal, setSearchedUserForModal] = useState(null);
@@ -23,18 +23,18 @@ export const SearchScreen = ({navigation}) => {
         dispatch(fetchAllUsers())
     }, [dispatch]);
 
-    const searchedUser = allUsers.filter(user => user.userDetails.name.includes(searchText) && user.userDetails.id !== currentUser.id)
+    const searchedUser = allUsers.filter(user => user.userDetails.name.includes(searchText) && user.userDetails.id !== currentUser.userDetails.id)
+        .sort((a, b) => (a.userDetails.name > b.userDetails.name) ? 1 : ((b.userDetails.name > a.userDetails.name) ? -1 : 0));
 
     const onSearchedUserPress=(user) => {
         setSearchedUserForModal(user);
         dispatch(showSearchedUserProfileModal(true));
-
     };
-
-    console.log(currentUser);
 
     return (
         <View style={styles.mainContainer}>
+
+            {!allUsers.length && <ActivityIndicator style={styles.loadingIndicator} size={'large'} color={color.GREEN}/>}
 
             {searchedUserForModal && <SearchedUserProfileScreen visible={toShowSearchUserProfileModal} searchedUser={searchedUserForModal} />}
 
@@ -45,6 +45,7 @@ export const SearchScreen = ({navigation}) => {
                 <Text style={styles.usersTitle}>{`${searchedUser.length} peoples was found!`}</Text>
 
                 <FlatList
+                    style={styles.usersListContainer}
                     scrollEnabled={false}
                     data={searchedUser}
                     keyExtractor={(item, index) => item + 'd' + index.toString()}
@@ -54,8 +55,8 @@ export const SearchScreen = ({navigation}) => {
                         )
                     }}
                 />
-            </View>
 
+            </View>
 
         </View>
     );
@@ -84,5 +85,15 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
         ...layout.regularTextBase
+    },
+    usersListContainer:{
+        marginHorizontal: - layout.defaultPaddingSize
+    },
+    loadingIndicator:{
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        position:'absolute'
     }
 });

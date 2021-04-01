@@ -45,11 +45,6 @@ const HomeStack = createStackNavigator({
     HomeScreen,
     TaskDetailsScreen,
     EditTaskScreen,
-}, {
-    defaultNavigationOptions: headerDefaultOption,
-});
-
-const ProfileStack = createStackNavigator({
     ProfileScreen,
 }, {
     defaultNavigationOptions: headerDefaultOption,
@@ -68,16 +63,7 @@ const SearchStack = createStackNavigator({
     });
 
 const BottomTabBar = createBottomTabNavigator({
-        Create: {
-            screen: CreateStack,
-            navigationOptions: {
-                tabBarLabel: 'Create',
-                tabBarIcon: () => (
-                    <Image style={{width: 55, height: 55}}
-                           source={assets.ADD_TASK_BUTTON}/>
-                ),
-            },
-        },
+
         Home: {
             screen: HomeStack,
             navigationOptions: {
@@ -87,12 +73,13 @@ const BottomTabBar = createBottomTabNavigator({
                 ),
             },
         },
-        Profile: {
-            screen: ProfileStack,
+        Create: {
+            screen: CreateStack,
             navigationOptions: {
-                tabBarLabel: 'Profile',
-                tabBarIcon: info => (
-                    <Ionicons name={icons.ICON_PROFILE} size={layout.defaultIconSize} color={info.tintColor}/>
+                tabBarLabel: 'Create',
+                tabBarIcon: () => (
+                    <Image style={{width: 55, height: 55}}
+                           source={assets.ADD_TASK_BUTTON}/>
                 ),
             },
         },

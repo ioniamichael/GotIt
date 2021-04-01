@@ -39,7 +39,6 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(item, index) => item + index}
                     horizontal
-
                     renderItem={({item, index}) => {
                         return (
                             <ImageItem item={item} onPressDeleteButton={() => onDeletePressHandler(index)}

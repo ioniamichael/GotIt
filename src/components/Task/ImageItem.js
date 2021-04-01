@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import {StyleSheet, Animated, TouchableOpacity, Easing, Image} from 'react-native'
 import Ionicons from "react-native-vector-icons/Ionicons";
 import icons from "../../constants/icons";
@@ -7,7 +7,7 @@ import layout from "../../constants/layout";
 
 export const ImageItem = ({item, renderedIndex, onPressDeleteButton}) => {
 
-    let removeAnim = new Animated.Value(1);
+    const removeAnim = new Animated.Value(1);
 
     const onDeletePressHandler = () => {
         Animated.timing(

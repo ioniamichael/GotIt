@@ -1,7 +1,7 @@
 import {FETCH_USER_DETAILS, SEARCH_USER} from '../types';
 
 const initialState = {
-    userDetails: {},
+    currentUser: {},
     allUsers: [],
 };
 
@@ -10,7 +10,7 @@ const UserReducer = (state = initialState, action) => {
         case FETCH_USER_DETAILS:
             return {
                 ...state,
-                userDetails: action.payload,
+                currentUser: action.payload,
             };
         case SEARCH_USER:
             return{

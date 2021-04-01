@@ -8,20 +8,23 @@ export const YellowButton = ({buttonTitle, onButtonPressed}) => {
     return (
         <TouchableOpacity style={styles.yellowButton}
                           onPress={onButtonPressed} activeOpacity={layout.activeOpacity}>
-            <Text style={{...layout.boldTextBase}}>{buttonTitle}</Text>
+            <Text style={{...layout.regularTextBase}}>{buttonTitle}</Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     yellowButton: {
-        backgroundColor: colors.GREEN,
-        height: 50,
-        width: layout.width * 0.8,
-        justifyContent: 'center',
-        alignItems: 'center',
+        borderRadius:30,
+        alignSelf:'center',
+        alignItems:'center',
+        paddingVertical:10,
+        paddingHorizontal:20,
+        width: 150,
         ...layout.shadowBase,
-        borderRadius: 50,
+        backgroundColor:colors.GREEN,
+        justifyContent: 'center',
+        ...layout.shadowBase,
     },
     textInButton: {
         fontWeight: 'bold',

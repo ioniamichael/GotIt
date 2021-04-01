@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import React, {useState,useEffect} from 'react';
+import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 import {TaskList} from '../../components/Task/TaskList';
 import {NoTasksPlaceHolder} from '../../components/Loaders/NoTasksPlaceholder';
 import {setShowQuickActionsModal} from "../../store/actions/GeneralActions";
@@ -7,8 +7,10 @@ import {TasksQuickActions} from "../../components/Task/TasksQuickActions";
 import {useDispatch, useSelector} from "react-redux";
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
-import assets from '../../constants/assets';
 import screens from '../../constants/screens';
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import {AppHeaderButtons} from "../../components/common/AppHeaderButtons";
+import {UserAvatar} from "../../components/UserAvatar";
 
 
 export const HomeScreen = ({navigation}) => {
@@ -45,14 +47,21 @@ export const HomeScreen = ({navigation}) => {
     );
 };
 
-HomeScreen.navigationOptions = () => ({
+HomeScreen.navigationOptions = ({navigation}) => ({
     headerTitle: () => {
         return (
-            <View>
+            <TouchableOpacity>
                 <Text style={styles.headerTitle}>Gotit</Text>
-            </View>
+            </TouchableOpacity>
         );
-    }
+    },
+    headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={AppHeaderButtons}>
+           <TouchableOpacity style={styles.imageContainerStyle} onPress={() => navigation.navigate(screens.PROFILE_SCREEN)}>
+               <UserAvatar/>
+           </TouchableOpacity>
+        </HeaderButtons>
+    ),
 });
 
 const styles = StyleSheet.create({
@@ -69,5 +78,11 @@ const styles = StyleSheet.create({
         width: layout.width,
         height: layout.height,
         backgroundColor: '#00000099',
+    },
+    imageContainerStyle: {
+        width: 30,
+        height: 30,
+        resizeMode: 'cover',
+        borderRadius: 100
     },
 });

@@ -1,10 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, Animated} from 'react-native';
-import color from "../../constants/colors";
-import layout from "../../constants/layout";
-import assets from "../../constants/assets";
+import color from "../constants/colors";
+import layout from "../constants/layout";
+import assets from "../constants/assets";
 
-export const SearchedUserItem = ({user, indexToAnimate, onUserPressed}) => {
+export const FriendItem = ({user, indexToAnimate, onUserPressed}) => {
+
+    console.log(user);
 
     const anim = useRef(new Animated.Value(0)).current;
 
@@ -36,12 +38,12 @@ export const SearchedUserItem = ({user, indexToAnimate, onUserPressed}) => {
             <TouchableOpacity activeOpacity={layout.activeOpacity} style={{flex:1, flexDirection:'row'}} onPress={() => onUserPressed(user)}>
 
                 <View style={styles.rootView}>
-                    <Image source={user.userDetails.image ? {uri: `data:image/jpeg;base64,${user.userDetails.image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.userImage}/>
+                    <Image source={user.image ? {uri: `data:image/jpeg;base64,${user.image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.userImage}/>
                 </View>
 
                 <View style={styles.emailAndNameContainer}>
-                    <Text style={{...layout.boldTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.userDetails.name}</Text>
-                    <Text style={{...layout.regularTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.userDetails.email}</Text>
+                    <Text style={{...layout.boldTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.name}</Text>
+                    <Text style={{...layout.regularTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.email}</Text>
                 </View>
 
             </TouchableOpacity>

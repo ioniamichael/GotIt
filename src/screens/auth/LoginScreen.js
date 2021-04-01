@@ -29,8 +29,6 @@ export const LoginScreen = ({navigation}) => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    console.log('::::EMAIL VALIDATION, '+ emailError);
-
     const onLoginButtonPressed = async () => {
         if (isValidEmail(state.userEmail) && isValidPassword(state.userPassword)) {
             dispatch(setShowLoader(true));
