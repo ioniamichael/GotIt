@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         height: layout.width * 0.8,
         width: layout.width * 0.8,
         ...layout.shadowOfPinnedItem,
-        backgroundColor: color.ORANGE,
+        backgroundColor: color.GREEN,
     },
     absolute: {
         position: 'absolute',
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         end: 0,
     },
     errorImageContainer: {
-        backgroundColor: color.ORANGE,
+        backgroundColor: color.GREEN,
         position: 'absolute',
         top: -40,
         width: 80,

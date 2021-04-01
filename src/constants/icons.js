@@ -18,4 +18,5 @@ export default {
     ICON_UPLOAD: 'cloud-upload-outline',
     ICON_EDIT: 'create-outline',
     ICON_CLOSE: 'close-outline',
+    ICON_SUB_TASKS: 'albums-outline',
 };

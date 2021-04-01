@@ -129,7 +129,7 @@ export const EditTaskScreen = ({navigation}) => {
 
                 </View>
 
-                <View style={styles.whiteContainer}>
+                <View style={[styles.whiteContainer, {marginBottom:-20}]}>
                     <YellowButton buttonTitle={strings.SAVE} onButtonPressed={updateTask}/>
                 </View>
 
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {},
     innerContainer: {
-        marginVertical: 30,
+        marginVertical: 20,
     },
     whiteContainer: {
         alignItems: 'center',

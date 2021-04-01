@@ -5,8 +5,9 @@ import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import icons from '../../constants/icons';
+import assets from "../../constants/assets";
 
-export const ImagePicker = ({image, onImagePicked, userName, isDisabled}) => {
+export const ImagePicker = ({image, onImagePicked, isDisabled}) => {
 
     const selectPhotoFromLibrary = () => {
         launchImageLibrary({mediaType: 'photo', includeBase64: true, quality: 0.2}, (res) => {
@@ -18,12 +19,12 @@ export const ImagePicker = ({image, onImagePicked, userName, isDisabled}) => {
         <View>
             <TouchableOpacity disabled={isDisabled} activeOpacity={layout.activeOpacity} style={styles.rootView}
                               onPress={selectPhotoFromLibrary}>
-                {image
-                    ? <Image source={{uri: `data:image/jpeg;base64,${image}`}} style={styles.imageStyle}/>
-                    : <Text style={styles.userName}>{userName.slice(0,2)}</Text>}
+
+                <Image source={image ? {uri: `data:image/jpeg;base64,${image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.imageStyle} />
+
             </TouchableOpacity>
             {!isDisabled && <View style={styles.uploadIconContainer}>
-                <Ionicons name={icons.ICON_UPLOAD} size={16} color={color.ORANGE}/>
+                <Ionicons name={icons.ICON_UPLOAD} size={16} color={color.GREEN}/>
             </View>}
         </View>
     );
@@ -34,14 +35,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 120,
-        backgroundColor: color.GREY,
+        backgroundColor:color.GREEN,
         height: 120,
         borderRadius: 100,
         ...layout.shadowBase,
     },
     uploadIconContainer: {
         position: 'absolute',
-        elevation: 5,
+        elevation: 4,
         bottom: 5,
         left: 5,
         zIndex: 5,
@@ -57,8 +58,14 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         borderRadius: 100
     },
-    userName:{
-        ...layout.boldTextBase,
-        fontSize: 30
+    animationContainer:{
+        width:120,
+        height:120,
+        borderRadius:100,
+        overflow:'hidden'
+    },
+    avatarPlaceholder:{
+        width:120,
+        height:120,
     }
 });

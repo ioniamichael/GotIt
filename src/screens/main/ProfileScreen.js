@@ -1,31 +1,18 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ImagePicker} from "../../components/Auth/ImagePicker";
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
-import {fetchAllUsers} from "../../store/actions/UserAction";
 
 export const ProfileScreen = () => {
 
-    const dispatch = useDispatch();
-    const searchUsers = useSelector(state => state.UserReducer.searchUsers);
     const userDetails = useSelector(state => state.UserReducer.userDetails);
-
-    useEffect(() => {
-        dispatch(fetchAllUsers())
-    }, [dispatch]);
-
-    if(searchUsers){
-        searchUsers.map(user => {
-            console.log(user);
-        })
-    }
 
     return (
         <View style={styles.mainContainer}>
             <View style={styles.headerContainer}>
-                <ImagePicker isDisabled={true} userName={userDetails.name} image={userDetails.image} onImagePicked={() => console.log('picked')} />
+                <ImagePicker isDisabled={true} image={userDetails.image} onImagePicked={() => console.log('picked')} />
                 <View style={styles.emailAndNameContainer}>
                     <Text style={{...layout.boldTextBase}}>{userDetails.name}</Text>
                     <Text style={{...layout.regularTextBase}}>{userDetails.email}</Text>

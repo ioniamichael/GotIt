@@ -5,6 +5,7 @@ export default {
     LOGIN_BACKGROUND_IMAGE: require('../assets/loginBackground.jpg'),
     APP_LOADER: require('../assets/loader.json'),
     NO_TASK_PLACEHOLDER_ANIM: require('../assets/noTask'),
+    USER_AVATAR_PLACEHOLDER: require('../assets/avatar-placeholder.png'),
     TASK_LOADER: require('../assets/app_loader_orange'),
     ADD_TASK_BUTTON: require('../assets/plus.png'),
     IMAGE_UPLOAD: require('../assets/image_upload.png'),

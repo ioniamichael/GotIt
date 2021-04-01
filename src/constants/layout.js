@@ -36,6 +36,6 @@ export default {
         elevation: 3,
     },
     activeOpacity: 0.8,
-    defaultIconSize: 24,
+    defaultIconSize: 20,
     defaultPaddingSize:20,
 };

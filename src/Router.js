@@ -18,6 +18,7 @@ import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
 import {SearchScreen} from "./screens/main/SearchScreen";
+import {SearchedUserProfileScreen} from "./screens/main/SearchedUserProfileScreen";
 
 
 const headerDefaultOption = {
@@ -60,6 +61,7 @@ const CreateStack = createStackNavigator({
 
 const SearchStack = createStackNavigator({
         SearchScreen,
+
     },
     {
         defaultNavigationOptions: headerDefaultOption

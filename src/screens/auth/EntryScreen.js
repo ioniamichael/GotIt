@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     loginButton: {
         ...layout.boldTextBase,
-        color: colors.ORANGE,
+        color: colors.GREEN,
         fontSize: 13,
     },
     logoContainer:{

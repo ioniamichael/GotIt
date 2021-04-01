@@ -4,7 +4,7 @@ import {
     FETCH_TASKS,
     DELETE_TASK,
     SET_SHOW_CREATE_TASK_MODAL,
-    SET_SHOW_QUICK_ACTIONS_TASK_MODAL,
+    SET_SHOW_QUICK_ACTIONS_TASK_MODAL, SHOW_SEARCHED_USER_PROFILE_MODAL,
 } from '../types';
 import {fetchAllTasksFromDB} from '../../services/userService';
 
@@ -47,6 +47,13 @@ export const deleteTask = (task) => (dispatch) => {
     dispatch({
         type: DELETE_TASK,
         payload: task
+    })
+};
+
+export const showSearchedUserProfileModal = (toShowSearchedUserProfileModal) => (dispatch) => {
+    dispatch({
+        type: SHOW_SEARCHED_USER_PROFILE_MODAL,
+        payload: toShowSearchedUserProfileModal
     })
 };
 

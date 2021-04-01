@@ -92,7 +92,7 @@ export const SignUpScreen = ({navigation}) => {
             <View style={styles.innerContainer}>
 
                 <View style={styles.imagePickerContainer}>
-                    <ImagePicker isDisabled={false} userName={state.userName} image={state.image}
+                    <ImagePicker isDisabled={false} image={state.image}
                                  onImagePicked={image => setState((prevState) => ({
                                      ...prevState,
                                      image,

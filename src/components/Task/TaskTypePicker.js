@@ -9,7 +9,7 @@ export const TaskTypePicker = ({onTypeSelect, taskTypeTitle, taskType}) => {
     const renderSelectedTypeStyle = (type) => {
         if (type === taskType) {
             return {
-                backgroundColor: color.ORANGE,
+                backgroundColor: color.GREEN,
                 borderRadius: 10,
                 ...layout.shadowBase
             };

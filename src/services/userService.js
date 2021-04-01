@@ -32,6 +32,7 @@ export const setUserDataToDB = (name, email, image) => new Promise(async (resolv
             name,
             email,
             image,
+            id: auth().currentUser.uid
         });
         resolve();
     } catch (e) {

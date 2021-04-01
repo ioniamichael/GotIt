@@ -17,7 +17,7 @@ export const ImagesList = ({images, isFinished}) => {
                     return (
                         <View
                             style={[styles.imageContainer, {
-                                borderColor: isFinished ? color.ORANGE : color.GREY,
+                                borderColor: isFinished ? color.GREEN : color.GREY,
                                 marginStart: index !== 0 ? -10 : 0,
                             }]}>
                             <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>

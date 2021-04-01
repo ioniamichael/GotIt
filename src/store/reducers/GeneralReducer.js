@@ -4,7 +4,7 @@ import {
     SET_SHOW_CREATE_TASK_MODAL,
     SET_SHOW_QUICK_ACTIONS_TASK_MODAL,
     SHOW_LOADER,
-    SHOW_POPUP,
+    SHOW_POPUP, SHOW_SEARCHED_USER_PROFILE_MODAL,
 } from '../types';
 
 const INITIAL_STATE = {
@@ -14,7 +14,8 @@ const INITIAL_STATE = {
     taskList: [],
     isQuickActionsModalVisible: false,
     isCreateTaskModalVisible: false,
-    data: {}
+    data: {},
+    showSearchedUserProfileModal: false
 };
 
 const GeneralReducer = (state = INITIAL_STATE, action) => {
@@ -49,6 +50,11 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
             return{
                 ...state,
                 isCreateTaskModalVisible: action.payload
+            };
+        case SHOW_SEARCHED_USER_PROFILE_MODAL:
+            return{
+                ...state,
+                showSearchedUserProfileModal: action.payload
             };
         default:
             return state;

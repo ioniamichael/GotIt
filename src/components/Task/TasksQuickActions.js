@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         bottom: layout.height * 0.24,
         width: 40,
         borderRadius: 100,
-        backgroundColor: color.ORANGE,
+        backgroundColor: color.GREEN,
         position: 'absolute',
         alignSelf: 'center',
         alignItems: 'center',

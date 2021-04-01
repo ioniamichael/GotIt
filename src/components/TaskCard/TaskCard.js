@@ -57,7 +57,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
         <Animated.View key={index} style={[styles.mainContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
 
             <View style={styles.taskStatusIconContainer}>
-                <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.ORANGE : color.DARK_GREY}/>
+                <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.GREEN : color.DARK_GREY}/>
             </View>
 
             <TouchableOpacity
@@ -66,7 +66,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
                 style={[
                     styles.taskContainer,
                     {
-                        backgroundColor: isFinished ? color.ORANGE : color.GREY,
+                        backgroundColor: isFinished ? color.GREEN : color.GREY,
                     },
                     renderBorderRadiusPosition(),
                 ]}
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         marginStart: 10,
         paddingVertical: 20,
         flex: 1,
-        backgroundColor: color.ORANGE,
+        backgroundColor: color.GREEN,
     },
     titleContainer: {
         marginHorizontal: 10,

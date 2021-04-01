@@ -17,6 +17,7 @@ import {BABY} from '../../pickerTypes';
 import DatePicker from 'react-native-date-picker';
 import screens from '../../constants/screens';
 import strings from '../../constants/strings';
+import icons from "../../constants/icons";
 
 
 export const CreateTaskScreen = ({navigation}) => {
@@ -116,6 +117,7 @@ export const CreateTaskScreen = ({navigation}) => {
 
                     <Text style={styles.pickDateTextStyle}>Add task details:</Text>
                     <CustomTextInput
+                        icon={icons.ICON_TASKS}
                         placeholder={strings.PLACEHOLDER_TITLE} value={taskTitle}
                         onChangeText={setTaskTitle}/>
 
@@ -144,7 +146,7 @@ export const CreateTaskScreen = ({navigation}) => {
                     />
                 </View>
 
-                <View style={styles.whiteContainer}>
+                <View style={[styles.whiteContainer, {marginBottom:-20}]}>
                     <YellowButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
                 </View>
 

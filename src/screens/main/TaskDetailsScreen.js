@@ -152,7 +152,7 @@ TaskDetailsScreen.navigationOptions = ({navigation}) => ({
             <Item
                 onPress={navigation.getParam('checkAsFinished')}
                 title={'DELETE'}
-                color={navigation.getParam('isTaskFinished') ? color.ORANGE : color.DARK_GREY}
+                color={navigation.getParam('isTaskFinished') ? color.GREEN : color.DARK_GREY}
                 iconName={icons.ICON_TASK_DONE}/>
             <Item
                 onPress={navigation.getParam('navigateToEditScreen')}

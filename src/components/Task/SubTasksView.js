@@ -22,6 +22,7 @@ export const SubTasksView = ({renderedIndex, subTasks, onAddSubTask, subTaskValu
     return (
         <View style={styles.mainContainer}>
             <View style={styles.textInputContainerStyle}>
+                <Ionicons style={styles.iconStyle} name={icons.ICON_SUB_TASKS} size={layout.defaultIconSize} color={color.GREEN}/>
                 <TextInput
                     style={styles.textInputStyle}
                     placeholder={strings.PLACEHOLDER_SUB_TASK}
@@ -30,7 +31,7 @@ export const SubTasksView = ({renderedIndex, subTasks, onAddSubTask, subTaskValu
                 />
 
                 <TouchableOpacity onPress={onAddSubTask}>
-                    <Ionicons name={icons.ICON_ADD} size={35} color={color.ORANGE}/>
+                    <Ionicons name={icons.ICON_ADD} size={35} color={color.GREEN}/>
                 </TouchableOpacity>
             </View>
 
@@ -60,12 +61,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderColor: color.ORANGE,
+        borderColor: color.GREY,
         borderRadius: 100,
         borderWidth: 1,
-        backgroundColor: color.TRANSPARENT_WHITE,
+        ...layout.shadowBase,
+        backgroundColor: color.WHITE,
     },
     textInputStyle: {
+        marginStart:10,
         ...layout.regularTextBase,
         width: '85%',
         height: 50,

@@ -6,5 +6,6 @@ export default {
     PROFILE_SCREEN: 'ProfileScreen',
     TASK_DETAILS_SCREEN: 'TaskDetailsScreen',
     SPLASH_SCREEN: 'SplashScreen',
-    NOTIFICATIONS_SCREEN: 'NotificationsScreen'
+    NOTIFICATIONS_SCREEN: 'NotificationsScreen',
+    SEARCHED_USER_PROFILE_SCREEN: 'SearchedUserProfileScreen',
 }

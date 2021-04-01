@@ -21,7 +21,7 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
 
            <View style={styles.container}>
 
-               <Ionicons style={styles.iconStyle} name={icon} size={layout.defaultIconSize} color={color.ORANGE}/>
+               <Ionicons style={styles.iconStyle} name={icon} size={layout.defaultIconSize} color={color.GREEN}/>
 
                <TextInput
                    style={styles.textInputStyle}

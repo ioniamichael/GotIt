@@ -2,8 +2,9 @@ import React, {useEffect, useRef} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, Animated, Easing} from 'react-native';
 import color from "../../constants/colors";
 import layout from "../../constants/layout";
+import assets from "../../constants/assets";
 
-export const SearchedUserItem = ({user, indexToAnimate}) => {
+export const SearchedUserItem = ({user, indexToAnimate, onUserPressed}) => {
 
     const anim = useRef(new Animated.Value(0)).current;
 
@@ -32,11 +33,18 @@ export const SearchedUserItem = ({user, indexToAnimate}) => {
     });
 
     return (
-        <Animated.View style={{opacity, transform: [{scale: scaleAnim}]}}>
-            <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.rootView}>
-                {user.userDetails.image ?
-                    <Image source={{uri: `data:image/jpeg;base64,${user.userDetails.image}`}} style={styles.userImage}/>
-                    : <Text style={styles.userNameOnPic}>{user.userDetails.name.slice(0, 2)}</Text>}
+        <Animated.View style={[styles.mainContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
+            <TouchableOpacity activeOpacity={layout.activeOpacity} style={{flex:1, flexDirection:'row'}} onPress={() => onUserPressed(user)}>
+
+                <View style={styles.rootView}>
+                    <Image source={user.userDetails.image ? {uri: `data:image/jpeg;base64,${user.userDetails.image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.userImage}/>
+                </View>
+
+                <View style={styles.emailAndNameContainer}>
+                    <Text style={{...layout.boldTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.userDetails.name}</Text>
+                    <Text style={{...layout.regularTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.userDetails.email}</Text>
+                </View>
+
             </TouchableOpacity>
         </Animated.View>
     )
@@ -44,9 +52,16 @@ export const SearchedUserItem = ({user, indexToAnimate}) => {
 
 
 const styles = StyleSheet.create({
+    mainContainer:{
+
+    },
+    emailAndNameContainer:{
+        justifyContent: 'center',
+        marginStart: 10,
+    },
     rootView: {
-        width: layout.width * 0.18,
-        height: layout.width * 0.18,
+        width: 50,
+        height: 50,
         justifyContent: 'center',
         alignItems: 'center',
         marginVertical: 5,
@@ -60,8 +75,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     userImage: {
-        width: layout.width * 0.18,
-        height: layout.width * 0.18,
+        width: 50,
+        height: 50,
         borderRadius: 100,
     }
 });

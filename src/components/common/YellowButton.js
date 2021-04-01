@@ -15,7 +15,7 @@ export const YellowButton = ({buttonTitle, onButtonPressed}) => {
 
 const styles = StyleSheet.create({
     yellowButton: {
-        backgroundColor: colors.ORANGE,
+        backgroundColor: colors.GREEN,
         height: 50,
         width: layout.width * 0.8,
         justifyContent: 'center',
