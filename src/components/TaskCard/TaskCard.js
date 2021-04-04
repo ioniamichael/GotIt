@@ -33,50 +33,52 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     return (
         <ScaleAnimatedView indexToAnimate={index}>
 
-            <View style={styles.taskStatusIconContainer}>
-                <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.GREEN : color.DARK_GREY}/>
-            </View>
+            <View style={styles.mainContainer}>
+                <View style={styles.taskStatusIconContainer}>
+                    <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.GREEN : color.DARK_GREY}/>
+                </View>
 
-            <TouchableOpacity
-                index={index}
-                activeOpacity={layout.activeOpacity}
-                style={[
-                    styles.taskContainer,
-                    {
-                        backgroundColor: isFinished ? color.GREEN : color.GREY,
-                    },
-                    renderBorderRadiusPosition(),
-                ]}
-                onPress={() => onTaskPress(data)}
-                onLongPress={() => onTaskLongPress(data)}>
+                <TouchableOpacity
+                    index={index}
+                    activeOpacity={layout.activeOpacity}
+                    style={[
+                        styles.taskContainer,
+                        {
+                            backgroundColor: isFinished ? color.GREEN : color.GREY,
+                        },
+                        renderBorderRadiusPosition(),
+                    ]}
+                    onPress={() => onTaskPress(data)}
+                    onLongPress={() => onTaskLongPress(data)}>
 
-                <View style={styles.titleContainer}>
+                    <View style={styles.titleContainer}>
 
-                    <View style={styles.taskImageTypeContainer}>
-                        <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
-                    </View>
+                        <View style={styles.taskImageTypeContainer}>
+                            <Image source={getTaskImageByType(data.taskType)} style={styles.typeImageStyle}/>
+                        </View>
 
-                    <View style={styles.innerTaskContainer}>
+                        <View style={styles.innerTaskContainer}>
 
-                        <View style={styles.titleContainer}>
+                            <View style={styles.titleContainer}>
 
-                            <Text numberOfLines={1} style={styles.title}>{data.taskTitle}</Text>
+                                <Text numberOfLines={1} style={styles.title}>{data.taskTitle}</Text>
 
-                            <Text numberOfLines={1} style={styles.endDate}>{getHoursAndMinutes(data.taskEndDate)}</Text>
+                                <Text numberOfLines={1} style={styles.endDate}>{getHoursAndMinutes(data.taskEndDate)}</Text>
+
+                            </View>
+
 
                         </View>
 
-
                     </View>
 
-                </View>
+                    <View style={styles.subTasksAndImagesContainer}>
+                        {hasSubTasks && <SubTaskList subTasks={data.subTasks}/>}
+                        {hasImages && <ImagesList images={data.images} isFinished={isFinished}/>}
+                    </View>
 
-                <View style={styles.subTasksAndImagesContainer}>
-                    {hasSubTasks && <SubTaskList subTasks={data.subTasks}/>}
-                    {hasImages && <ImagesList images={data.images} isFinished={isFinished}/>}
-                </View>
-
-            </TouchableOpacity>
+                </TouchableOpacity>
+            </View>
 
         </ScaleAnimatedView>
     );
