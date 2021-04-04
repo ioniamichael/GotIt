@@ -7,37 +7,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import icon from '../../constants/icons';
+import {ScaleAnimatedView} from "../common/ScaleAnimatedView";
 
 export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
-    const entryAnimation = useRef(new Animated.Value(0)).current;
+
     const hasSubTasks = data.subTasks;
     const hasImages = data.images;
     const isFinished = data.isFinished;
-
-    useEffect(() => {
-        Animated.spring(
-            entryAnimation,
-            {
-                toValue: 1,
-                friction: 6,
-                tension: 60,
-                delay: index * 60,
-                useNativeDriver: true,
-                easing: Easing.linear
-            }
-        ).start();
-    });
-
-    const scaleAnim = entryAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-    });
-
-    const opacity = entryAnimation.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-    });
 
     const renderBorderRadiusPosition = () => {
         if (index % 2 === 0) {
@@ -54,7 +31,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
     };
 
     return (
-        <Animated.View key={index} style={[styles.mainContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
+        <ScaleAnimatedView indexToAnimate={index}>
 
             <View style={styles.taskStatusIconContainer}>
                 <Ionicons name={icon.ICON_TASK_STATUS} size={22} color={isFinished ? color.GREEN : color.DARK_GREY}/>
@@ -101,7 +78,7 @@ export const TaskCard = ({data, index, onTaskPress, onTaskLongPress}) => {
 
             </TouchableOpacity>
 
-        </Animated.View>
+        </ScaleAnimatedView>
     );
 };
 

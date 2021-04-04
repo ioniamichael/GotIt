@@ -1,10 +1,10 @@
 import React from 'react';
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import {StyleSheet, UIManager, View, StatusBar} from 'react-native';
 import store from './src/store';
 import AppNavigator from './src/Router';
 import colors from './src/constants/colors';
-import {ErrorsPopUp} from './src/components/common/ErrorsPopUp';
+import {ErrorsPopUp} from './src/components/Modals/ErrorsPopUp';
 
 
 if (Platform.OS === 'android') {

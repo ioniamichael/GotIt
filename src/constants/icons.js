@@ -19,4 +19,5 @@ export default {
     ICON_EDIT: 'create-outline',
     ICON_CLOSE: 'close-outline',
     ICON_SUB_TASKS: 'albums-outline',
+    ICON_FRIENDS: 'people-circle-outline',
 };

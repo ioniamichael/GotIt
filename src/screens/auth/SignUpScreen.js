@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, KeyboardAvoidingView, Image} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
-import {YellowButton} from '../../components/common/YellowButton';
+import {AcceptButton} from '../../components/common/AcceptButton';
 import {getCurrentDateInTimestamp, isPasswordRepeatedRight, isValidEmail, isValidPassword} from '../../utils';
 import {createAccount} from '../../services/userService';
 import {setShowLoader, setShowPopUp} from '../../store/actions/GeneralActions';
 import {ImagePicker} from '../../components/Auth/ImagePicker';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {MainLoader} from '../../components/Loaders/MainLoader';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import layout from '../../constants/layout';
@@ -82,7 +82,7 @@ export const SignUpScreen = ({navigation}) => {
             keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
             style={styles.container}>
 
-            <TaskLoader isVisible={isLoaderShown}/>
+            <MainLoader isVisible={isLoaderShown}/>
 
             <View style={styles.logoContainer}>
                 <Image source={assets.APP_LOGO} style={styles.logo}/>
@@ -138,7 +138,7 @@ export const SignUpScreen = ({navigation}) => {
                                 placeholder={string.PLACEHOLDER_REPEAT_PASSWORD} errorMessage={passwordRepeatedRightError}/>
 
                 <View style={{marginTop:20}}>
-                    <YellowButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
+                    <AcceptButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
                 </View>
 
             </View>

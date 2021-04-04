@@ -17,5 +17,6 @@ export default {
     CREATE: 'Create',
     SELECT_END_DATE: 'Please choose end date',
     SAVE: 'Save',
+    CANCEL: 'Cancel',
     PLEASE_UPLOAD_AVATAR: 'Please upload your avatar.',
 };

@@ -6,8 +6,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import {showFriendProfileModal} from '../../store/actions/GeneralActions';
-import {FriendProfileScreen} from './FriendProfileScreen';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {FriendProfileScreen} from '../../components/Modals/FriendProfileScreen';
+import {MainLoader} from '../../components/Loaders/MainLoader';
 
 export const ProfileScreen = () => {
 
@@ -24,7 +24,7 @@ export const ProfileScreen = () => {
     return (
         <View style={styles.mainContainer}>
 
-            {toShowFriendProfileModal && <FriendProfileScreen toShowFriendProfileModal={toShowFriendProfileModal} />}
+            <FriendProfileScreen toShowFriendProfileModal={toShowFriendProfileModal} />
 
             <View style={styles.headerContainer}>
                 <ImagePicker isDisabled={true} image={currentUser.userDetails.image}/>

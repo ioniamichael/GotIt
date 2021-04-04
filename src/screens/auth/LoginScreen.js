@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, KeyboardAvoidingView} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
-import {YellowButton} from '../../components/common/YellowButton';
+import {AcceptButton} from '../../components/common/AcceptButton';
 import {isValidEmail, isValidPassword} from '../../utils';
 import {login} from '../../services/userService';
 import {setShowLoader, setShowPopUp} from '../../store/actions/GeneralActions';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {MainLoader} from '../../components/Loaders/MainLoader';
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
@@ -71,7 +71,7 @@ export const LoginScreen = ({navigation}) => {
             keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
             style={styles.container}>
 
-            <TaskLoader isVisible={isLoaderShown}/>
+            <MainLoader isVisible={isLoaderShown}/>
 
 
             <View style={styles.logoContainer}>
@@ -101,7 +101,7 @@ export const LoginScreen = ({navigation}) => {
                                   onPress={onForgotPasswordPressed}>
                     <Text style={{...layout.regularTextBase}}>{string.FORGOT_PASSWORD}</Text>
                 </TouchableOpacity>
-                <YellowButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
+                <AcceptButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
             </View>
 
 

@@ -5,7 +5,8 @@ import assets from '../../constants/assets';
 import layout from '../../constants/layout';
 import {BlurView} from "@react-native-community/blur";
 
-export const TaskLoader = ({isVisible}) => {
+export const MainLoader = ({isVisible}) => {
+
     return (
         <Modal
             visible={isVisible}

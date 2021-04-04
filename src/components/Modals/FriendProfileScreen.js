@@ -1,17 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
-import {ImagePicker} from '../../components/Auth/ImagePicker';
+import {ImagePicker} from '../Auth/ImagePicker';
 import {setShowLoader, showFriendProfileModal} from '../../store/actions/GeneralActions';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {fetchUserDetails} from '../../store/actions/UserAction';
 import {removeFriendFromDB} from '../../services/userService';
+import {MainLoader} from '../Loaders/MainLoader';
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from '../../constants/icons';
 import color from '../../constants/colors';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {ScaleAnimatedView} from "../common/ScaleAnimatedView";
 
 export const FriendProfileScreen = ({toShowFriendProfileModal}) => {
 
@@ -27,7 +28,6 @@ export const FriendProfileScreen = ({toShowFriendProfileModal}) => {
         dispatch(setShowLoader(true));
         try {
             await removeFriendFromDB(friend.id);
-            console.log(friend.id);
             await dispatch(fetchUserDetails());
             closeModal();
         } catch (e) {
@@ -49,7 +49,7 @@ export const FriendProfileScreen = ({toShowFriendProfileModal}) => {
                 reducedTransparencyFallbackColor="white"
             />
 
-            <TaskLoader isVisible={isLoaderShown}/>
+            <MainLoader isVisible={isLoaderShown}/>
 
             <SafeAreaView style={styles.mainContainer}>
 

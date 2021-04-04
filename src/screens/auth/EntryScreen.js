@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, ImageBackground, Image} from 'react-native';
-import {YellowButton} from '../../components/common/YellowButton';
+import {AcceptButton} from '../../components/common/AcceptButton';
 import colors from '../../constants/colors';
 import string from '../../constants/strings';
 import layout from '../../constants/layout';
@@ -22,7 +22,7 @@ export const EntryScreen = ({navigation}) => {
             </View>
 
             <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-                <YellowButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
+                <AcceptButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
                 <View style={styles.haveAccountContainer}>
                     <Text style={[{...layout.boldTextBase}, {fontSize: 13}]}>{string.HAVE_ACCOUNT}</Text>
                     <TouchableOpacity activeOpacity={layout.activeOpacity} onPress={navigateToLoginScreen}>

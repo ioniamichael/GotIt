@@ -42,9 +42,11 @@ export const setUserDataToDB = (name, email, image) => new Promise(async (resolv
 
 export const fetchUserDetailsFromDB = () => new Promise(async (resolve, reject) => {
     try {
+        console.log(':::fetchUserDetailsFromDB - START');
         const snapshot = await database().ref('users').child(auth().currentUser.uid).once('value');
         if (snapshot.exists) {
             const data = snapshot.val();
+            console.log(':::fetchUserDetailsFromDB - SUCCESS');
             resolve(data);
         } else {
             resolve(snapshot.val());
@@ -65,7 +67,9 @@ export const createNewTask = (task) => new Promise(async (resolve, reject) => {
 
 export const addToFriends = (userToAdd) => new Promise(async (resolve, reject) => {
     try {
+        console.log(':::addToFriends - START');
         await database().ref('users').child(auth().currentUser.uid).child('friends').child(userToAdd.id).child('friendDetails').set(userToAdd);
+        console.log(':::addToFriends - SUCCESS');
         resolve();
     } catch (e) {
         reject(e);
@@ -93,11 +97,13 @@ export const fetchAllTasksFromDB = () => new Promise(async (resolve, reject) => 
 
 export const allUsers = () => new Promise(async (resolve, reject) => {
     try {
+        console.log(':::allUsers - START');
         const snapshot = await database().ref('users').once('value');
         if (snapshot.exists) {
             const data = snapshot.val();
             if (data) {
                 const users = Object.keys(data).map(key => ({...data[key], id: key}));
+                console.log(':::allUsers - SUCCESS');
                 resolve(users);
             } else {
                 resolve();
@@ -112,6 +118,7 @@ export const allUsers = () => new Promise(async (resolve, reject) => {
 
 export const setTaskAsFinished = (task) => new Promise(async (resolve, reject) => {
     try {
+        console.log('::: is finished => ', task.isFinished);
         await database().ref('tasks').child(auth().currentUser.uid).child(task.taskCreationDate.toString()).child('isFinished').set(!task.isFinished);
         resolve();
     } catch (e) {
@@ -130,9 +137,11 @@ export const removeTaskFromDB = (taskID) => new Promise(async (resolve, reject) 
 
 export const removeFriendFromDB = (friendID) => new Promise(async (resolve, reject) => {
     try {
+        console.log(':::removeFriendFromDB - START');
         await database().ref('users').child(auth().currentUser.uid).child('friends').child(friendID).remove();
+        console.log(':::removeFriendFromDB - SUCCESS');
         resolve();
-    }catch (e) {
+    } catch (e) {
         reject(e);
     }
 });

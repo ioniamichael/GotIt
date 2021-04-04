@@ -13,7 +13,7 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/common/AppHeaderButtons';
 import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {MainLoader} from '../../components/Loaders/MainLoader';
 import {EditTaskScreen} from './EditTaskScreen';
 import {TaskDetailsDateSection} from '../../components/Task/TaskDetailsDateSection';
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,6 +31,7 @@ export const TaskDetailsScreen = ({navigation}) => {
     const toShowLoader = useSelector(state => state.GeneralReducer.toShowLoader);
 
     const task = navigation.getParam('task');
+
     const [isFinished, setIsFinished] = useState(task.isFinished);
 
     const checkThisTaskAsFinished = async () => {
@@ -113,7 +114,7 @@ export const TaskDetailsScreen = ({navigation}) => {
 
     return (
         <ScrollView style={styles.mainContainer}>
-            <TaskLoader isVisible={toShowLoader}/>
+            <MainLoader isVisible={toShowLoader}/>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
 
                 <TaskDetailsDateSection/>

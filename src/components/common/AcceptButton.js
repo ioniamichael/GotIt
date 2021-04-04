@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import layout from '../../constants/layout';
 import colors from '../../constants/colors';
 
-export const YellowButton = ({buttonTitle, onButtonPressed}) => {
+export const AcceptButton = ({buttonTitle, onButtonPressed}) => {
 
     return (
         <TouchableOpacity style={styles.yellowButton}

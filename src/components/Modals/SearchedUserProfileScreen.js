@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native';
 import {BlurView} from "@react-native-community/blur";
-import {ImagePicker} from "../../components/Auth/ImagePicker";
+import {ImagePicker} from "../Auth/ImagePicker";
 import {setShowLoader, showSearchedUserProfileModal} from '../../store/actions/GeneralActions';
 import {SafeAreaView} from "react-native-safe-area-context";
 import {addToFriends} from '../../services/userService';
@@ -11,7 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from "../../constants/icons";
 import color from "../../constants/colors";
 import {useDispatch, useSelector} from 'react-redux';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {MainLoader} from '../Loaders/MainLoader';
 
 export const SearchedUserProfileScreen = ({toShowSearchedUserProfileModal}) => {
 
@@ -28,7 +28,6 @@ export const SearchedUserProfileScreen = ({toShowSearchedUserProfileModal}) => {
         dispatch(setShowLoader(true));
         try {
             await addToFriends(searchedUser);
-            await dispatch(fetchAllUsers());
             await dispatch(fetchUserDetails());
             closeModal();
         }catch (e) {
@@ -52,7 +51,7 @@ export const SearchedUserProfileScreen = ({toShowSearchedUserProfileModal}) => {
 
             <SafeAreaView style={styles.mainContainer}>
 
-                <TaskLoader isVisible={isLoaderShown}/>
+                <MainLoader isVisible={isLoaderShown}/>
 
                 <TouchableOpacity onPress={() => closeModal()} >
                     <Ionicons name={icons.ICON_CLOSE} size={34} color={color.DARK_GREY}/>

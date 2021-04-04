@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
 import {fetchAllUsers} from '../../store/actions/UserAction';
 import {SearchedUserItem} from '../../components/search/SearchedUserItem';
-import {SearchedUserProfileScreen} from './SearchedUserProfileScreen';
+import {SearchedUserProfileScreen} from '../../components/Modals/SearchedUserProfileScreen';
 import {showFriendProfileModal, showSearchedUserProfileModal} from '../../store/actions/GeneralActions';
 import {CustomTextInput} from '../../components/common/CustomTextInput';
+import {FriendProfileScreen} from '../../components/Modals/FriendProfileScreen';
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
 import icons from '../../constants/icons';
-import {FriendProfileScreen} from './FriendProfileScreen';
 
 export const SearchScreen = ({navigation}) => {
 
@@ -30,17 +30,20 @@ export const SearchScreen = ({navigation}) => {
 
     const searchedUser = allUsers.filter(user => user.userDetails.name.includes(searchText) && user.userDetails.id !== currentUser.userDetails.id);
 
-
     const onSearchedUserPressed = (searchedUser) => {
         if (friends) {
-            friends.forEach(friend => {
-                console.log('=======FRIEND IS', friend.id === searchedUser.id);
-                if (friend.id === searchedUser.id) {
-                    dispatch(showFriendProfileModal(true, friend));
-                } else {
-                    dispatch(showSearchedUserProfileModal(true, searchedUser));
+            let isFriend = false;
+            for (let i = 0; i < friends.length; i++) {
+                if (friends[i].friendDetails.id === searchedUser.id) {
+                    isFriend = true;
+                    break;
                 }
-            });
+            }
+            if (isFriend) {
+                dispatch(showFriendProfileModal(true, searchedUser));
+            } else {
+                dispatch(showSearchedUserProfileModal(true, searchedUser));
+            }
         } else {
             dispatch(showSearchedUserProfileModal(true, searchedUser));
         }
@@ -52,13 +55,11 @@ export const SearchScreen = ({navigation}) => {
             {!allUsers.length &&
             <ActivityIndicator style={styles.loadingIndicator} size={'large'} color={color.GREEN}/>}
 
-            {toShowSearchedUserProfileModal &&
-            <SearchedUserProfileScreen toShowSearchedUserProfileModal={toShowSearchedUserProfileModal}/>}
+            <SearchedUserProfileScreen toShowSearchedUserProfileModal={toShowSearchedUserProfileModal}/>
 
-            {toShowFriendProfileModal &&
-            <FriendProfileScreen toShowFriendProfileModal={toShowFriendProfileModal}/>}
+            <FriendProfileScreen toShowFriendProfileModal={toShowFriendProfileModal}/>
 
-            <CustomTextInput icon={icons.ICON_SEARCH} placeholder={'Search term here'} value={searchText}
+            <CustomTextInput icon={icons.ICON_SEARCH} placeholder={'Search peoples'} value={searchText}
                              onChangeText={setSearchText}/>
             <View>
 
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
         ...layout.regularTextBase,
     },
     usersListContainer: {
+        height: '100%',
         marginHorizontal: -layout.defaultPaddingSize,
     },
     loadingIndicator: {

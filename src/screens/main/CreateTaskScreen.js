@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native';
 import {CustomTextInput} from '../../components/common/CustomTextInput';
-import {YellowButton} from '../../components/common/YellowButton';
+import {AcceptButton} from '../../components/common/AcceptButton';
 import {getCurrentDateInTimestamp} from '../../utils';
 import {createNewTask} from '../../services/userService';
 import {fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
 import {TaskImagePicker} from '../../components/Task/TaskImagePicker';
-import {TaskLoader} from '../../components/Loaders/TaskLoader';
+import {MainLoader} from '../../components/Loaders/MainLoader';
 import {animateLayout} from "../../layoutUtils";
+import {DeclineButton} from "../../components/common/DeclineButton";
 import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
@@ -105,6 +106,11 @@ export const CreateTaskScreen = ({navigation}) => {
         setTaskTypeTitle(taskType.title);
     };
 
+    const onCancelPressed = () => {
+        cleanState();
+        navigation.navigate(screens.HOME_SCREEN);
+    };
+
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
 
@@ -147,14 +153,14 @@ export const CreateTaskScreen = ({navigation}) => {
                     />
                 </View>
 
-                <View style={[styles.whiteContainer, {marginBottom:-20}]}>
-                    <YellowButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
+                <View style={styles.cancelAcceptButtonsContainer}>
+                    <DeclineButton buttonTitle={strings.CANCEL} onButtonPressed={onCancelPressed}/>
+                    <AcceptButton buttonTitle={strings.CREATE} onButtonPressed={createTask}/>
                 </View>
 
             </View>
 
-
-            <TaskLoader isVisible={toShowLoader}/>
+            <MainLoader isVisible={toShowLoader}/>
 
         </ScrollView>
     );
@@ -188,5 +194,12 @@ const styles = StyleSheet.create({
         ...layout.regularTextBase,
         marginBottom: 15,
         width: layout.width - (layout.defaultPaddingSize * 2)
+    },
+    cancelAcceptButtonsContainer:{
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor: color.WHITE,
+        padding: 20,
     }
 });

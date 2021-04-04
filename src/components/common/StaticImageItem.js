@@ -1,39 +1,14 @@
 import React, {useEffect,useRef} from 'react';
 import {StyleSheet, Image, Easing,Animated} from 'react-native';
 import layout from "../../constants/layout";
+import {ScaleAnimatedView} from "./ScaleAnimatedView";
 
 export const StaticImageItem = ({indexToAnimate, item}) => {
 
-    const anim = useRef(new Animated.Value(0)).current;
-
-    useEffect(() => {
-        Animated.spring(
-            anim,
-            {
-                toValue: 1,
-                friction: 6,
-                tension: 60,
-                delay: indexToAnimate * 50,
-                useNativeDriver: true,
-                easing: Easing.linear
-            }
-        ).start();
-    });
-
-    const scaleAnim = anim.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-    });
-
-    const opacity = anim.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1],
-    });
-
     return (
-        <Animated.View style={[styles.imageContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
+        <ScaleAnimatedView style={styles.imageContainer} indexToAnimate={indexToAnimate}>
             <Image source={{uri: `data:image/jpeg;base64,${item}`}} style={styles.imageStyle}/>
-        </Animated.View>
+        </ScaleAnimatedView>
     );
 
 };
