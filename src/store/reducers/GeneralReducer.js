@@ -2,7 +2,7 @@ import {
     DELETE_TASK,
     FETCH_TASKS,
     SET_SHOW_CREATE_TASK_MODAL,
-    SET_SHOW_QUICK_ACTIONS_TASK_MODAL,
+    SET_SHOW_QUICK_ACTIONS_TASK_MODAL, SHOW_FRIEND_PROFILE_MODAL,
     SHOW_LOADER,
     SHOW_POPUP, SHOW_SEARCHED_USER_PROFILE_MODAL,
 } from '../types';
@@ -15,7 +15,10 @@ const INITIAL_STATE = {
     isQuickActionsModalVisible: false,
     isCreateTaskModalVisible: false,
     data: {},
-    showSearchedUserProfileModal: false
+    showSearchedUserProfileModal: false,
+    searchedUser: {},
+    showFriendProfileModal: false,
+    friend: {},
 };
 
 const GeneralReducer = (state = INITIAL_STATE, action) => {
@@ -54,7 +57,14 @@ const GeneralReducer = (state = INITIAL_STATE, action) => {
         case SHOW_SEARCHED_USER_PROFILE_MODAL:
             return{
                 ...state,
-                showSearchedUserProfileModal: action.payload
+                showSearchedUserProfileModal: action.payload.toShowSearchedUserProfileModal,
+                searchedUser: action.payload.user
+            };
+        case SHOW_FRIEND_PROFILE_MODAL:
+            return{
+                ...state,
+                showFriendProfileModal: action.payload.toShowFriendProfileModal,
+                friend: action.payload.friendToShow
             };
         default:
             return state;

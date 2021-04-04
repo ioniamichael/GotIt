@@ -2,34 +2,44 @@ import React from 'react';
 import {View, Text, StyleSheet, Modal, TouchableOpacity} from 'react-native';
 import {BlurView} from "@react-native-community/blur";
 import {ImagePicker} from "../../components/Auth/ImagePicker";
-import {showSearchedUserProfileModal} from "../../store/actions/GeneralActions";
+import {setShowLoader, showSearchedUserProfileModal} from '../../store/actions/GeneralActions';
 import {SafeAreaView} from "react-native-safe-area-context";
+import {addToFriends} from '../../services/userService';
+import {fetchAllUsers, fetchUserDetails} from '../../store/actions/UserAction';
 import layout from '../../constants/layout';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from "../../constants/icons";
 import color from "../../constants/colors";
-import {useDispatch} from "react-redux";
-import {addToFriends} from "../../services/userService";
+import {useDispatch, useSelector} from 'react-redux';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 
-export const SearchedUserProfileScreen = ({visible, searchedUser}) => {
+export const SearchedUserProfileScreen = ({toShowSearchedUserProfileModal}) => {
 
     const dispatch = useDispatch();
+    const searchedUser = useSelector(state => state.GeneralReducer.searchedUser);
+    const isLoaderShown = useSelector(state => state.GeneralReducer.toShowLoader);
+
 
     const closeModal = () => {
-        dispatch(showSearchedUserProfileModal(false))
+        dispatch(showSearchedUserProfileModal(false, {}));
     };
 
     const addUserToFriend = async () => {
+        dispatch(setShowLoader(true));
         try {
             await addToFriends(searchedUser);
+            await dispatch(fetchAllUsers());
+            await dispatch(fetchUserDetails());
+            closeModal();
         }catch (e) {
-            console.log(':::Not added')
+            console.log(':::Not added', e)
         }
+        dispatch(setShowLoader(false));
     };
 
     return (
         <Modal
-            visible={visible}
+            visible={toShowSearchedUserProfileModal}
             animationType="fade"
             transparent={true}>
 
@@ -42,17 +52,19 @@ export const SearchedUserProfileScreen = ({visible, searchedUser}) => {
 
             <SafeAreaView style={styles.mainContainer}>
 
+                <TaskLoader isVisible={isLoaderShown}/>
+
                 <TouchableOpacity onPress={() => closeModal()} >
                     <Ionicons name={icons.ICON_CLOSE} size={34} color={color.DARK_GREY}/>
                 </TouchableOpacity>
 
                 <View style={styles.headerContainer}>
                     <ImagePicker isDisabled={true}
-                                 image={searchedUser.userDetails.image}/>
+                                 image={searchedUser.image}/>
 
                     <View style={styles.emailAndNameContainer}>
-                        <Text style={{...layout.boldTextBase}}>{searchedUser.userDetails.name}</Text>
-                        <Text style={{...layout.regularTextBase}}>{searchedUser.userDetails.email}</Text>
+                        <Text style={{...layout.boldTextBase}}>{searchedUser.name}</Text>
+                        <Text style={{...layout.regularTextBase}}>{searchedUser.email}</Text>
                     </View>
 
                 </View>

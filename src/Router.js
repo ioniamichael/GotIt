@@ -11,21 +11,20 @@ import {TaskDetailsScreen} from './screens/main/TaskDetailsScreen';
 import {ProfileScreen} from './screens/main/ProfileScreen';
 import {CreateTaskScreen} from './screens/main/CreateTaskScreen';
 import {EditTaskScreen} from './screens/main/EditTaskScreen';
+import {SearchScreen} from './screens/main/SearchScreen';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import icons from './constants/icons';
 import layout from './constants/layout';
 import assets from './constants/assets';
 import colors from './constants/colors';
-import {SearchScreen} from "./screens/main/SearchScreen";
-import {SearchedUserProfileScreen} from "./screens/main/SearchedUserProfileScreen";
 
 
 const headerDefaultOption = {
     headerShown: true,
     headerStyle: {
         backgroundColor: colors.WHITE,
-        ...layout.shadowBase
+        ...layout.shadowBase,
     },
     ...TransitionPresets.SlideFromRightIOS,
 };
@@ -55,12 +54,8 @@ const CreateStack = createStackNavigator({
 }, {defaultNavigationOptions: headerDefaultOption});
 
 const SearchStack = createStackNavigator({
-        SearchScreen,
-
-    },
-    {
-        defaultNavigationOptions: headerDefaultOption
-    });
+    SearchScreen,
+}, {defaultNavigationOptions: headerDefaultOption});
 
 const BottomTabBar = createBottomTabNavigator({
 
@@ -102,8 +97,8 @@ const BottomTabBar = createBottomTabNavigator({
                 ...layout.boldTextBase,
             },
             style: {
-                ...layout.shadowBase
-            }
+                ...layout.shadowBase,
+            },
         },
     });
 
@@ -112,7 +107,7 @@ const AppNavigator = createSwitchNavigator(
         SplashScreen,
         AuthStack,
         BottomTabBar,
-    }
+    },
 );
 
 export default createAppContainer(AppNavigator);

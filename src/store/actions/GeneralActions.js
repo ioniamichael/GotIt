@@ -4,7 +4,7 @@ import {
     FETCH_TASKS,
     DELETE_TASK,
     SET_SHOW_CREATE_TASK_MODAL,
-    SET_SHOW_QUICK_ACTIONS_TASK_MODAL, SHOW_SEARCHED_USER_PROFILE_MODAL,
+    SET_SHOW_QUICK_ACTIONS_TASK_MODAL, SHOW_SEARCHED_USER_PROFILE_MODAL, SHOW_FRIEND_PROFILE_MODAL,
 } from '../types';
 import {fetchAllTasksFromDB} from '../../services/userService';
 
@@ -50,10 +50,17 @@ export const deleteTask = (task) => (dispatch) => {
     })
 };
 
-export const showSearchedUserProfileModal = (toShowSearchedUserProfileModal) => (dispatch) => {
+export const showSearchedUserProfileModal = (toShowSearchedUserProfileModal, user) => (dispatch) => {
     dispatch({
         type: SHOW_SEARCHED_USER_PROFILE_MODAL,
-        payload: toShowSearchedUserProfileModal
+        payload: {toShowSearchedUserProfileModal, user}
+    })
+};
+
+export const showFriendProfileModal = (toShowFriendProfileModal, friendToShow) => (dispatch) => {
+    dispatch({
+        type: SHOW_FRIEND_PROFILE_MODAL,
+        payload: {toShowFriendProfileModal, friendToShow}
     })
 };
 

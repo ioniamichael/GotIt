@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Image, Animated} from 'react-native';
-import color from "../../constants/colors";
-import layout from "../../constants/layout";
-import assets from "../../constants/assets";
+import color from '../../constants/colors';
+import layout from '../../constants/layout';
+import assets from '../../constants/assets';
 
-export const SearchedUserItem = ({user, indexToAnimate, onUserPressed}) => {
+export const SearchedUserItem = ({searchedUser, indexToAnimate, onUserPressed}) => {
 
     const anim = useRef(new Animated.Value(0)).current;
 
@@ -17,7 +17,7 @@ export const SearchedUserItem = ({user, indexToAnimate, onUserPressed}) => {
                 tension: 60,
                 delay: indexToAnimate * 50,
                 useNativeDriver: true,
-            }
+            },
         ).start();
     });
 
@@ -33,28 +33,39 @@ export const SearchedUserItem = ({user, indexToAnimate, onUserPressed}) => {
 
     return (
         <Animated.View style={[styles.mainContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
-            <TouchableOpacity activeOpacity={layout.activeOpacity} style={{flex:1, flexDirection:'row'}} onPress={() => onUserPressed(user)}>
+            <TouchableOpacity activeOpacity={layout.activeOpacity} style={{flex: 1, flexDirection: 'row'}}
+                              onPress={() => onUserPressed(searchedUser)}>
 
                 <View style={styles.rootView}>
-                    <Image source={user.userDetails.image ? {uri: `data:image/jpeg;base64,${user.userDetails.image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.userImage}/>
+                    <Image
+                        source={searchedUser.image ? {uri: `data:image/jpeg;base64,${searchedUser.image}`} : assets.USER_AVATAR_PLACEHOLDER}
+                        style={styles.userImage}/>
                 </View>
 
                 <View style={styles.emailAndNameContainer}>
-                    <Text style={{...layout.boldTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.userDetails.name}</Text>
-                    <Text style={{...layout.regularTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.userDetails.email}</Text>
+                    <Text style={{
+                        ...layout.boldTextBase,
+                        fontSize: 12,
+                        color: color.DARK_GREY,
+                    }}>{searchedUser.name}</Text>
+                    <Text style={{
+                        ...layout.regularTextBase,
+                        fontSize: 12,
+                        color: color.DARK_GREY,
+                    }}>{searchedUser.email}</Text>
                 </View>
 
             </TouchableOpacity>
         </Animated.View>
-    )
+    );
 };
 
 
 const styles = StyleSheet.create({
-    mainContainer:{
-        marginHorizontal: layout.defaultPaddingSize
+    mainContainer: {
+        marginHorizontal: layout.defaultPaddingSize,
     },
-    emailAndNameContainer:{
+    emailAndNameContainer: {
         justifyContent: 'center',
         marginStart: 10,
     },
@@ -77,5 +88,5 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 100,
-    }
+    },
 });

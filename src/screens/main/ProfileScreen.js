@@ -1,20 +1,31 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {ImagePicker} from "../../components/Auth/ImagePicker";
-import { useSelector} from 'react-redux';
+import {FriendItem} from "../../components/FriendItem";
+import {useDispatch, useSelector} from 'react-redux';
 import layout from '../../constants/layout';
 import color from '../../constants/colors';
-import {FriendItem} from "../../components/FriendItem";
+import {showFriendProfileModal} from '../../store/actions/GeneralActions';
+import {FriendProfileScreen} from './FriendProfileScreen';
+import {TaskLoader} from '../../components/Loaders/TaskLoader';
 
 export const ProfileScreen = () => {
 
+    const dispatch = useDispatch();
     const currentUser = useSelector(state => state.UserReducer.currentUser);
-    const friends = Object.keys(currentUser.friends).map(key => ({...currentUser.friends[key], id: key}));
+    const toShowFriendProfileModal = useSelector(state=>state.GeneralReducer.showFriendProfileModal);
 
+    const friends = currentUser.friends && Object.keys(currentUser.friends).map(key => ({...currentUser.friends[key], id: key}));
 
+    const onFriendPressed=(friend) => {
+        dispatch(showFriendProfileModal(true, friend));
+    };
 
     return (
         <View style={styles.mainContainer}>
+
+            {toShowFriendProfileModal && <FriendProfileScreen toShowFriendProfileModal={toShowFriendProfileModal} />}
+
             <View style={styles.headerContainer}>
                 <ImagePicker isDisabled={true} image={currentUser.userDetails.image}/>
                 <View style={styles.emailAndNameContainer}>
@@ -23,7 +34,7 @@ export const ProfileScreen = () => {
                 </View>
             </View>
 
-            <View style={{marginTop: 20}}>
+            {friends && <View style={{marginTop: 20}}>
 
                 <Text style={{...layout.regularTextBase}}>Friends - {friends.length} Peoples</Text>
 
@@ -33,11 +44,11 @@ export const ProfileScreen = () => {
                     keyExtractor={(item, index) => item + 'd' + index.toString()}
                     renderItem={({item, index}) => {
                         return(
-                            <FriendItem indexToAnimate={index} user={item.friendDetails} onUserPressed={()=>console.log('pressed in user')} />
+                            <FriendItem indexToAnimate={index} friend={item.friendDetails} onFriendPress={(friend) => onFriendPressed(friend)} />
                         )
                     }}
                 />
-            </View>
+            </View>}
 
         </View>
     );

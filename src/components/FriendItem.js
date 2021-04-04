@@ -4,9 +4,7 @@ import color from "../constants/colors";
 import layout from "../constants/layout";
 import assets from "../constants/assets";
 
-export const FriendItem = ({user, indexToAnimate, onUserPressed}) => {
-
-    console.log(user);
+export const FriendItem = ({friend, indexToAnimate, onFriendPress}) => {
 
     const anim = useRef(new Animated.Value(0)).current;
 
@@ -35,15 +33,15 @@ export const FriendItem = ({user, indexToAnimate, onUserPressed}) => {
 
     return (
         <Animated.View style={[styles.mainContainer, {opacity, transform: [{scale: scaleAnim}]}]}>
-            <TouchableOpacity activeOpacity={layout.activeOpacity} style={{flex:1, flexDirection:'row'}} onPress={() => onUserPressed(user)}>
+            <TouchableOpacity activeOpacity={layout.activeOpacity} style={{flex:1, flexDirection:'row'}} onPress={() => onFriendPress(friend)}>
 
                 <View style={styles.rootView}>
-                    <Image source={user.image ? {uri: `data:image/jpeg;base64,${user.image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.userImage}/>
+                    <Image source={friend.image ? {uri: `data:image/jpeg;base64,${friend.image}`} : assets.USER_AVATAR_PLACEHOLDER} style={styles.userImage}/>
                 </View>
 
                 <View style={styles.emailAndNameContainer}>
-                    <Text style={{...layout.boldTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.name}</Text>
-                    <Text style={{...layout.regularTextBase,fontSize: 12, color: color.DARK_GREY}}>{user.email}</Text>
+                    <Text style={{...layout.boldTextBase,fontSize: 12, color: color.DARK_GREY}}>{friend.name}</Text>
+                    <Text style={{...layout.regularTextBase,fontSize: 12, color: color.DARK_GREY}}>{friend.email}</Text>
                 </View>
 
             </TouchableOpacity>

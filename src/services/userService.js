@@ -32,7 +32,7 @@ export const setUserDataToDB = (name, email, image) => new Promise(async (resolv
             name,
             email,
             image,
-            id: auth().currentUser.uid
+            id: auth().currentUser.uid,
         });
         resolve();
     } catch (e) {
@@ -65,10 +65,10 @@ export const createNewTask = (task) => new Promise(async (resolve, reject) => {
 
 export const addToFriends = (userToAdd) => new Promise(async (resolve, reject) => {
     try {
-        await database().ref('users').child(auth().currentUser.uid).child('friends').child(userToAdd.userDetails.id).child('friendDetails').set(userToAdd.userDetails);
+        await database().ref('users').child(auth().currentUser.uid).child('friends').child(userToAdd.id).child('friendDetails').set(userToAdd);
         resolve();
-    }catch (e) {
-        reject(e)
+    } catch (e) {
+        reject(e);
     }
 });
 
@@ -92,20 +92,20 @@ export const fetchAllTasksFromDB = () => new Promise(async (resolve, reject) => 
 });
 
 export const allUsers = () => new Promise(async (resolve, reject) => {
-    try{
+    try {
         const snapshot = await database().ref('users').once('value');
-        if (snapshot.exists){
+        if (snapshot.exists) {
             const data = snapshot.val();
-            if (data){
-                const users = Object.keys(data).map(key => ({...data[key], id: key}))
-                resolve(users)
+            if (data) {
+                const users = Object.keys(data).map(key => ({...data[key], id: key}));
+                resolve(users);
             } else {
                 resolve();
             }
-        }else {
-            resolve(snapshot)
+        } else {
+            resolve(snapshot);
         }
-    }catch (e) {
+    } catch (e) {
         reject();
     }
 });
@@ -124,6 +124,15 @@ export const removeTaskFromDB = (taskID) => new Promise(async (resolve, reject) 
         await database().ref('tasks').child(auth().currentUser.uid).child(taskID).remove();
         resolve();
     } catch (e) {
+        reject(e);
+    }
+});
+
+export const removeFriendFromDB = (friendID) => new Promise(async (resolve, reject) => {
+    try {
+        await database().ref('users').child(auth().currentUser.uid).child('friends').child(friendID).remove();
+        resolve();
+    }catch (e) {
         reject(e);
     }
 });
