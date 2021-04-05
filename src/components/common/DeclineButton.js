@@ -8,7 +8,7 @@ export const DeclineButton = ({buttonTitle, onButtonPressed}) => {
     return (
         <TouchableOpacity style={styles.yellowButton}
                           onPress={onButtonPressed} activeOpacity={layout.activeOpacity}>
-            <Text style={{...layout.regularTextBase}}>{buttonTitle}</Text>
+            <Text style={styles.regularText}>{buttonTitle}</Text>
         </TouchableOpacity>
     );
 };
@@ -29,4 +29,5 @@ const styles = StyleSheet.create({
     textInButton: {
         fontWeight: 'bold',
     },
+    regularText: {...layout.regularTextBase}
 });

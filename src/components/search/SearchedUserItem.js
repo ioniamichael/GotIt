@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image, Animated} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import color from '../../constants/colors';
 import layout from '../../constants/layout';
 import assets from '../../constants/assets';
@@ -23,7 +23,6 @@ export const SearchedUserItem = ({searchedUser, indexToAnimate, onUserPressed}) 
                     return (
                         <View style={styles.friendIcon}>
                             <Ionicons name={icons.ICON_FRIENDS} size={layout.defaultIconSize} color={color.GREEN}/>
-                            <Text style={{...layout.regularTextBase, fontSize: 8}}>Friend</Text>
                         </View>
                     )
                 }
@@ -36,7 +35,7 @@ export const SearchedUserItem = ({searchedUser, indexToAnimate, onUserPressed}) 
             <TouchableOpacity activeOpacity={layout.activeOpacity}
                               onPress={() => onUserPressed(searchedUser)} style={styles.mainContainer}>
 
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={styles.rowContainer}>
                     <View style={styles.rootView}>
                         <Image
                             source={searchedUser.image ? {uri: `data:image/jpeg;base64,${searchedUser.image}`} : assets.USER_AVATAR_PLACEHOLDER}
@@ -44,16 +43,8 @@ export const SearchedUserItem = ({searchedUser, indexToAnimate, onUserPressed}) 
                     </View>
 
                     <View style={styles.emailAndNameContainer}>
-                        <Text style={{
-                            ...layout.boldTextBase,
-                            fontSize: 12,
-                            color: color.DARK_GREY,
-                        }}>{searchedUser.name}</Text>
-                        <Text style={{
-                            ...layout.regularTextBase,
-                            fontSize: 12,
-                            color: color.DARK_GREY,
-                        }}>{searchedUser.email}</Text>
+                        <Text style={styles.nameTextStyle}>{searchedUser.name}</Text>
+                        <Text style={styles.emailTextStyle}>{searchedUser.email}</Text>
                     </View>
                 </View>
 
@@ -97,5 +88,17 @@ const styles = StyleSheet.create({
     friendIcon: {
         alignSelf: 'center',
         alignItems: 'center',
-    }
+    },
+    nameTextStyle:{
+        ...layout.boldTextBase,
+        fontSize: 12,
+        color: color.DARK_GREY,
+    },
+    emailTextStyle:{
+        ...layout.regularTextBase,
+        fontSize: 12,
+        color: color.DARK_GREY,
+    },
+    rowContainer:{flex: 1, flexDirection: 'row'}
+
 });

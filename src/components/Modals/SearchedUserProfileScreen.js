@@ -62,14 +62,14 @@ export const SearchedUserProfileScreen = ({toShowSearchedUserProfileModal}) => {
                                  image={searchedUser.image}/>
 
                     <View style={styles.emailAndNameContainer}>
-                        <Text style={{...layout.boldTextBase}}>{searchedUser.name}</Text>
-                        <Text style={{...layout.regularTextBase}}>{searchedUser.email}</Text>
+                        <Text style={styles.boldText}>{searchedUser.name}</Text>
+                        <Text style={styles.regularText}>{searchedUser.email}</Text>
                     </View>
 
                 </View>
 
                 <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.addToFriedButton} onPress={addUserToFriend}>
-                    <Text style={{...layout.regularTextBase}}>Add to friends</Text>
+                    <Text style={styles.regularText}>Add to friends</Text>
                 </TouchableOpacity>
 
             </SafeAreaView>
@@ -115,5 +115,7 @@ const styles = StyleSheet.create({
         width: 150,
         ...layout.shadowBase,
         backgroundColor:color.GREEN
-    }
+    },
+    regularText:{...layout.regularTextBase},
+    boldText:{...layout.boldTextBase}
 });

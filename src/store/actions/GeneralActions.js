@@ -6,7 +6,7 @@ import {
     SET_SHOW_CREATE_TASK_MODAL,
     SET_SHOW_QUICK_ACTIONS_TASK_MODAL, SHOW_SEARCHED_USER_PROFILE_MODAL, SHOW_FRIEND_PROFILE_MODAL,
 } from '../types';
-import {fetchAllTasksFromDB} from '../../services/userService';
+import {fetchAllTasksFromDB} from '../../services/generalServices';
 
 export const setShowLoader = (toShowLoader) => (dispatch) => {
     dispatch({

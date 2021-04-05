@@ -30,8 +30,8 @@ export const NoTasksPlaceHolder = () => {
     return (
         <Animated.View style={[styles.container, {opacity}]}>
             <LottieView style={styles.lottie} source={assets.NO_TASK_PLACEHOLDER_ANIM} autoPlay loop/>
-            <Text style={{...layout.boldTextBase, color: color.DARK_GREY}}>No tasks on the horizon!</Text>
-            <Text style={{...layout.regularTextBase, color: color.DARK_GREY}}>Add a task or enjoy your day off.</Text>
+            <Text style={styles.titleTextStyle}>No tasks on the horizon!</Text>
+            <Text style={styles.subTitleTextStyle}>Add a task or enjoy your day off.</Text>
         </Animated.View>
     );
 };
@@ -46,4 +46,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
     },
+    titleTextStyle:{...layout.boldTextBase, color: color.DARK_GREY},
+    subTitleTextStyle:{...layout.regularTextBase, color: color.DARK_GREY}
+
 });

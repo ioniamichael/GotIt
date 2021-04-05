@@ -11,7 +11,7 @@ export const ImagesList = ({images, isFinished}) => {
                 showsHorizontalScrollIndicator={false}
                 scrollEnabled={false}
                 data={images}
-                style={{marginTop: 10}}
+                style={styles.flatListContainer}
                 keyExtractor={(subTask, index) => 'D' + index.toString()}
                 renderItem={({item, index}) => {
                     return (
@@ -39,4 +39,5 @@ const styles = StyleSheet.create({
         height: 35,
         borderRadius: 100,
     },
+    flatListContainer: {marginTop: 10}
 });

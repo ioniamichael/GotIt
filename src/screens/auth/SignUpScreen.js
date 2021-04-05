@@ -86,7 +86,7 @@ export const SignUpScreen = ({navigation}) => {
 
             <View style={styles.logoContainer}>
                 <Image source={assets.APP_LOGO} style={styles.logo}/>
-                <Text style={{...layout.regularTextBase}}>{string.SIGN_UP_SCREEN_TITLE}</Text>
+                <Text style={styles.regularText}>{string.SIGN_UP_SCREEN_TITLE}</Text>
             </View>
 
             <View style={styles.innerContainer}>
@@ -98,11 +98,7 @@ export const SignUpScreen = ({navigation}) => {
                                      image,
                                  }))}/>
 
-                    <Text style={{
-                        ...layout.regularTextBase,
-                        fontSize: 12,
-                        marginStart: 20,
-                    }}>{string.PLEASE_UPLOAD_AVATAR}</Text>
+                    <Text style={styles.uploadAvatarTextStyle}>{string.PLEASE_UPLOAD_AVATAR}</Text>
                 </View>
 
                 <LoginInputText icon={icon.ICON_EMAIL} isSecure={false} keyboardType={'default'}
@@ -137,7 +133,7 @@ export const SignUpScreen = ({navigation}) => {
                                 }))}
                                 placeholder={string.PLACEHOLDER_REPEAT_PASSWORD} errorMessage={passwordRepeatedRightError}/>
 
-                <View style={{marginTop:20}}>
+                <View style={styles.buttonContainer}>
                     <AcceptButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
                 </View>
 
@@ -173,5 +169,12 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     logo: {marginStart: -20, width: 90, height: 40},
-    imagePickerContainer:{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',bottom: 10}
+    imagePickerContainer:{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',bottom: 10},
+    buttonContainer: {marginTop:20},
+    uploadAvatarTextStyle:{
+        ...layout.regularTextBase,
+        fontSize: 12,
+        marginStart: 20,
+    },
+    regularText:{...layout.regularTextBase}
 });

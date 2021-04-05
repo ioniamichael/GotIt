@@ -22,7 +22,7 @@ export const TaskTypePicker = ({onTypeSelect, taskTypeTitle, taskType}) => {
 
     return (
         <View style={styles.typesContainerStyle}>
-            <Text style={{...layout.boldTextBase, marginBottom: 15, marginHorizontal: 20,}}>Pick your task
+            <Text style={styles.titleStyle}>Pick your task
                 type.</Text>
 
                 <FlatList
@@ -42,7 +42,7 @@ export const TaskTypePicker = ({onTypeSelect, taskTypeTitle, taskType}) => {
                     }}
                 />
 
-            <Text style={{...layout.regularTextBase,marginHorizontal: 20}}>Selected type is: {taskTypeTitle}</Text>
+            <Text style={styles.subTitleTextStyle}>Selected type is: {taskTypeTitle}</Text>
         </View>
     );
 };
@@ -67,4 +67,6 @@ const styles = StyleSheet.create({
         width: 45,
         height: 45,
     },
+    titleStyle:{...layout.boldTextBase, marginBottom: 15, marginHorizontal: 20},
+    subTitleTextStyle: {...layout.regularTextBase,marginHorizontal: 20}
 });

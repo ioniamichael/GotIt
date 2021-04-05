@@ -26,6 +26,15 @@ export const createAccount = (email, password, name, image) => new Promise(async
     }
 });
 
+export const signOut = () => new Promise(async (resolve,reject) => {
+    try {
+        await auth().signOut();
+        resolve();
+    }catch (e) {
+        reject(e)
+    }
+});
+
 export const setUserDataToDB = (name, email, image) => new Promise(async (resolve, reject) => {
     try {
         await database().ref(firebaseRefs.USERS_REF).child(auth().currentUser.uid).child(firebaseRefs.CURRENT_USER_DETAILS).set({
@@ -56,40 +65,12 @@ export const fetchUserDetailsFromDB = () => new Promise(async (resolve, reject) 
     }
 });
 
-export const createNewTask = (task) => new Promise(async (resolve, reject) => {
-    try {
-        await database().ref('tasks').child(auth().currentUser.uid).child(task.taskCreationDate.toString()).set(task);
-        resolve();
-    } catch (e) {
-        reject(e);
-    }
-});
-
 export const addToFriends = (userToAdd) => new Promise(async (resolve, reject) => {
     try {
         console.log(':::addToFriends - START');
         await database().ref('users').child(auth().currentUser.uid).child('friends').child(userToAdd.id).child('friendDetails').set(userToAdd);
         console.log(':::addToFriends - SUCCESS');
         resolve();
-    } catch (e) {
-        reject(e);
-    }
-});
-
-export const fetchAllTasksFromDB = () => new Promise(async (resolve, reject) => {
-    try {
-        const snapshot = await database().ref('tasks').child(auth().currentUser.uid).once('value');
-        if (snapshot.exists) {
-            const data = snapshot.val();
-            if (data) {
-                const tasks = Object.keys(data).map(key => ({...data[key], id: key}));
-                resolve(tasks);
-            } else {
-                resolve();
-            }
-        } else {
-            resolve(snapshot);
-        }
     } catch (e) {
         reject(e);
     }
@@ -113,25 +94,6 @@ export const allUsers = () => new Promise(async (resolve, reject) => {
         }
     } catch (e) {
         reject();
-    }
-});
-
-export const setTaskAsFinished = (task) => new Promise(async (resolve, reject) => {
-    try {
-        console.log('::: is finished => ', task.isFinished);
-        await database().ref('tasks').child(auth().currentUser.uid).child(task.taskCreationDate.toString()).child('isFinished').set(!task.isFinished);
-        resolve();
-    } catch (e) {
-        reject(e);
-    }
-});
-
-export const removeTaskFromDB = (taskID) => new Promise(async (resolve, reject) => {
-    try {
-        await database().ref('tasks').child(auth().currentUser.uid).child(taskID).remove();
-        resolve();
-    } catch (e) {
-        reject(e);
     }
 });
 

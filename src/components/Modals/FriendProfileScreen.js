@@ -62,15 +62,15 @@ export const FriendProfileScreen = ({toShowFriendProfileModal}) => {
                                  image={friend.image}/>
 
                     <View style={styles.emailAndNameContainer}>
-                        <Text style={{...layout.boldTextBase}}>{friend.name}</Text>
-                        <Text style={{...layout.regularTextBase}}>{friend.email}</Text>
+                        <Text style={styles.boldText}>{friend.name}</Text>
+                        <Text style={styles.regularText}>{friend.email}</Text>
                     </View>
 
                 </View>
 
                 <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.addToFriedButton}
                                   onPress={removeFriend}>
-                    <Text style={{...layout.regularTextBase}}>Remove friend</Text>
+                    <Text style={styles.regularText}>Remove friend</Text>
                 </TouchableOpacity>
 
             </SafeAreaView>
@@ -117,4 +117,6 @@ const styles = StyleSheet.create({
         ...layout.shadowBase,
         backgroundColor: color.GREEN,
     },
+    regularText: {...layout.regularTextBase},
+    boldText: {...layout.boldTextBase},
 });

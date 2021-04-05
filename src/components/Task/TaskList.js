@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, SectionList, View} from 'react-native';
+import {Text, SectionList, View,StyleSheet} from 'react-native';
 import {TaskCard} from '../TaskCard/TaskCard';
 import moment from 'moment';
 import layout from '../../constants/layout';
@@ -25,8 +25,8 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     const renderTitleIfHasData = (dataToRender, titleToRender) => {
         if (dataToRender.length) {
             return (
-                <View style={{backgroundColor: color.WHITE}}>
-                    <Text style={{...layout.boldTextBase, fontSize: 12, marginVertical: 10}}>{
+                <View style={styles.taskSectionTitleContainer}>
+                    <Text style={styles.titleStyle}>{
                         titleToRender === moment().format('dddd MMMM Do')
                             ? 'Today'
                             : titleToRender}
@@ -55,3 +55,8 @@ export const TaskList = ({data, onTaskPress, onTaskLongPress}) => {
     );
 
 };
+
+const styles = StyleSheet.create({
+    taskSectionTitleContainer:{backgroundColor: color.WHITE},
+    titleStyle:{...layout.boldTextBase, fontSize: 12, marginVertical: 10}
+});

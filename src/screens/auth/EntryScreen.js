@@ -18,13 +18,13 @@ export const EntryScreen = ({navigation}) => {
 
             <View style={styles.logoContainer}>
                 <Image source={assets.APP_LOGO} style={styles.logo}/>
-                <Text style={{...layout.regularTextBase}}>{string.ENTRY_SUBTITLE}</Text>
+                <Text style={styles.regularText}>{string.ENTRY_SUBTITLE}</Text>
             </View>
 
-            <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+            <View style={styles.centerContainer}>
                 <AcceptButton buttonTitle={string.START_BUTTON} onButtonPressed={navigateToSignUpScreen}/>
                 <View style={styles.haveAccountContainer}>
-                    <Text style={[{...layout.boldTextBase}, {fontSize: 13}]}>{string.HAVE_ACCOUNT}</Text>
+                    <Text style={styles.haveAccTextStyle}>{string.HAVE_ACCOUNT}</Text>
                     <TouchableOpacity activeOpacity={layout.activeOpacity} onPress={navigateToLoginScreen}>
                         <Text style={styles.loginButton}>{string.LOGIN}</Text>
                     </TouchableOpacity>
@@ -54,12 +54,16 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     loginButton: {
+        marginStart:10,
         ...layout.boldTextBase,
         color: colors.GREEN,
         fontSize: 13,
     },
-    logoContainer:{
+    logoContainer: {
         marginTop: 30
     },
-    logo:{marginStart: -20,width: 90, height: 40}
+    logo: {marginStart: -20, width: 90, height: 40},
+    regularText: {...layout.regularTextBase},
+    centerContainer: {justifyContent: 'center', alignItems: 'center', flex: 1},
+    haveAccTextStyle: {...layout.boldTextBase, fontSize: 13,},
 });

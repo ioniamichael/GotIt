@@ -3,7 +3,7 @@ import {StyleSheet, View, ScrollView, Text, TouchableOpacity} from 'react-native
 import {CustomTextInput} from '../../components/common/CustomTextInput';
 import {AcceptButton} from '../../components/common/AcceptButton';
 import {getCurrentDateInTimestamp} from '../../utils';
-import {createNewTask} from '../../services/userService';
+import {createNewTask} from '../../services/generalServices';
 import {fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {SubTasksView} from '../../components/Task/SubTasksView';
 import {TaskTypePicker} from '../../components/Task/TaskTypePicker';
@@ -113,7 +113,6 @@ export const CreateTaskScreen = ({navigation}) => {
 
     return (
         <ScrollView style={styles.container} keyboardShouldPersistTaps={'handled'}>
-
 
             <TaskTypePicker taskType={taskType} taskTypeTitle={taskTypeTitle} onTypeSelect={selectType}/>
 

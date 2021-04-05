@@ -9,7 +9,7 @@ export const LoginInputText = ({value, onChangeText, placeholder, icon, isSecure
     const renderError = () => {
         if (errorMessage){
             return(
-                <Text style={{...layout.regularTextBase, fontSize: 12, color: 'red', position: 'absolute', paddingHorizontal: 10}}>{errorMessage}</Text>
+                <Text style={styles.errorMessageStyle}>{errorMessage}</Text>
             )
         }
     };
@@ -61,4 +61,5 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginStart: 10,
     },
+    errorMessageStyle:{...layout.regularTextBase, fontSize: 12, color: 'red', position: 'absolute', paddingHorizontal: 10}
 });

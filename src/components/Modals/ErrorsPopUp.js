@@ -36,10 +36,10 @@ export const ErrorsPopUp = () => {
                 <View style={styles.errorFrame}>
 
                     <TouchableOpacity activeOpacity={layout.activeOpacity} style={styles.errorImageContainer}>
-                        <Image source={assets.IMAGE_UPLOAD} style={{width: 50, height: 50}}/>
+                        <Image source={assets.IMAGE_UPLOAD} style={styles.uploadImageStyle}/>
                     </TouchableOpacity>
 
-                    <Text style={{...layout.regularTextBase, fontSize: 14}}>{errorMessage}</Text>
+                    <Text style={styles.errorMessageText}>{errorMessage}</Text>
                 </View>
             </View>
 
@@ -82,5 +82,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    uploadImageStyle:{width: 50, height: 50},
+    errorMessageText:{...layout.regularTextBase, fontSize: 14}
+
 
 });

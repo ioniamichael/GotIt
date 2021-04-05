@@ -18,9 +18,8 @@ export const FriendItem = ({friend, indexToAnimate, onFriendPress}) => {
                 </View>
 
                 <View style={styles.emailAndNameContainer}>
-                    <Text style={{...layout.boldTextBase, fontSize: 12, color: color.DARK_GREY}}>{friend.name}</Text>
-                    <Text
-                        style={{...layout.regularTextBase, fontSize: 12, color: color.DARK_GREY}}>{friend.email}</Text>
+                    <Text style={styles.nameTextStyle}>{friend.name}</Text>
+                    <Text style={styles.emailTextStyle}>{friend.email}</Text>
                 </View>
 
             </TouchableOpacity>
@@ -58,5 +57,16 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 100,
-    }
+    },
+    nameTextStyle:{
+        ...layout.boldTextBase,
+        fontSize: 12,
+        color: color.DARK_GREY,
+    },
+    emailTextStyle:{
+        ...layout.regularTextBase,
+        fontSize: 12,
+        color: color.DARK_GREY,
+    },
+    rowContainer:{flex: 1, flexDirection: 'row'}
 });

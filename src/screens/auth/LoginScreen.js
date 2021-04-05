@@ -76,7 +76,7 @@ export const LoginScreen = ({navigation}) => {
 
             <View style={styles.logoContainer}>
                 <Image source={assets.APP_LOGO} style={styles.logo}/>
-                <Text style={{...layout.regularTextBase}}>{string.LOGIN_SCREEN_TITLE}</Text>
+                <Text style={styles.regularText}>{string.LOGIN_SCREEN_TITLE}</Text>
             </View>
 
             <View style={styles.innerContainer}>
@@ -99,7 +99,7 @@ export const LoginScreen = ({navigation}) => {
 
                 <TouchableOpacity style={styles.forgotPasswordContainer} activeOpacity={layout.activeOpacity}
                                   onPress={onForgotPasswordPressed}>
-                    <Text style={{...layout.regularTextBase}}>{string.FORGOT_PASSWORD}</Text>
+                    <Text style={styles.regularText}>{string.FORGOT_PASSWORD}</Text>
                 </TouchableOpacity>
                 <AcceptButton buttonTitle={string.LOGIN} onButtonPressed={onLoginButtonPressed}/>
             </View>
@@ -135,4 +135,5 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     logo: {marginStart: -20, width: 90, height: 40},
+    regularText:{...layout.regularTextBase}
 });

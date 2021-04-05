@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View, TouchableOpacity, Animated, Modal, Text} from 'react-native';
 import {BlurView} from "@react-native-community/blur";
 import {deleteTask, fetchTasks, setShowLoader, setShowQuickActionsModal} from '../../store/actions/GeneralActions';
-import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
+import {removeTaskFromDB, setTaskAsFinished} from '../../services/generalServices';
 import {useDispatch, useSelector} from "react-redux";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import color from '../../constants/colors';
@@ -87,7 +87,7 @@ export const TasksQuickActions = ({isVisible, onClosePressed, navigation, task})
 
                 {task &&
                 <Text style={styles.modalTitle}> You are about to change your{'\n'}
-                    <Text style={{...layout.boldTextBase, fontSize: 12}}>{task.taskTitle}</Text>{'\n'}task!</Text>}
+                    <Text style={styles.taskTitleStyle}>{task.taskTitle}</Text>{'\n'}task!</Text>}
 
                 <Animated.View style={[styles.container, {transform: [{scaleY: expand}]}]}>
                     <TouchableOpacity style={styles.quickAction} onPress={openTaskDetailsScreen}>
@@ -158,4 +158,5 @@ const styles = StyleSheet.create({
         top: 10,
         alignSelf: 'center',
     },
+    taskTitleStyle: {...layout.boldTextBase, fontSize: 12}
 });

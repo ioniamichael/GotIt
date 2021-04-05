@@ -29,12 +29,12 @@ export const TaskImagePicker = ({images, onImagePicked, onDeleteImage}) => {
     return (
         <View style={styles.rootView}>
             <TouchableOpacity style={styles.uploadIconContainer} onPress={selectPhotoFromLibrary}>
-                <Text style={{...layout.regularTextBase}}>Upload images.</Text>
+                <Text style={styles.uploadTextStyle}>Upload images.</Text>
                 <Ionicons name={icons.ICON_UPLOAD} size={30} color={color.GREEN}/>
             </TouchableOpacity>
 
                 <FlatList
-                    style={{paddingHorizontal: 20}}
+                    style={styles.imagesListStyle}
                     data={images}
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(item, index) => item + index}
@@ -69,5 +69,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-    }
+    },
+    uploadTextStyle:{...layout.regularTextBase},
+    imagesListStyle:{paddingHorizontal: 20}
 });

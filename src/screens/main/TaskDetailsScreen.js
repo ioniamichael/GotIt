@@ -11,7 +11,7 @@ import {
 import {getTaskImageByType} from '../../utils';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import {AppHeaderButtons} from '../../components/common/AppHeaderButtons';
-import {removeTaskFromDB, setTaskAsFinished} from '../../services/userService';
+import {removeTaskFromDB, setTaskAsFinished} from '../../services/generalServices';
 import {deleteTask, fetchTasks, setShowLoader} from '../../store/actions/GeneralActions';
 import {MainLoader} from '../../components/Loaders/MainLoader';
 import {EditTaskScreen} from './EditTaskScreen';
@@ -84,7 +84,7 @@ export const TaskDetailsScreen = ({navigation}) => {
                     data={task.subTasks}
                     renderItem={({item, index}) => {
                         return (
-                            <Text style={{...layout.regularTextBase, color: color.DARK_GREY}}>{index + 1}- {item}</Text>
+                            <Text style={styles.subTaskTextStyle}>{index + 1}- {item}</Text>
                         )
                     }}
                 />
@@ -115,7 +115,7 @@ export const TaskDetailsScreen = ({navigation}) => {
     return (
         <ScrollView style={styles.mainContainer}>
             <MainLoader isVisible={toShowLoader}/>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <View style={styles.headerSectionStyle}>
 
                 <TaskDetailsDateSection/>
 
@@ -125,11 +125,11 @@ export const TaskDetailsScreen = ({navigation}) => {
 
 
             </View>
-            <Text style={{marginBottom: 30, ...layout.boldTextBase, textAlign: 'center'}}>{task.taskTitle}</Text>
-            <View style={{marginBottom: 30}}>
+            <Text style={styles.taskTitleStyle}>{task.taskTitle}</Text>
+            <View style={styles.marginBottomContainer}>
                 {renderSubTasks()}
             </View>
-            <View style={{marginBottom: 30}}>
+            <View style={styles.marginBottomContainer}>
                 {renderTaskImages()}
             </View>
         </ScrollView>
@@ -190,4 +190,8 @@ const styles = StyleSheet.create({
     imageContainer: {
         alignSelf:'center'
     },
+    subTaskTextStyle:{...layout.regularTextBase, color: color.DARK_GREY},
+    headerSectionStyle:{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'},
+    taskTitleStyle:{marginBottom: 30, ...layout.boldTextBase, textAlign: 'center'},
+    marginBottomContainer:{marginBottom: 30}
 });
