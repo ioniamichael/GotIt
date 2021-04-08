@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, KeyboardAvoidingView, Image} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import {LoginInputText} from '../../components/Auth/LoginInputText';
 import {AcceptButton} from '../../components/common/AcceptButton';
 import {getCurrentDateInTimestamp, isPasswordRepeatedRight, isValidEmail, isValidPassword} from '../../utils';
@@ -7,6 +7,7 @@ import {createAccount} from '../../services/userService';
 import {setShowLoader, setShowPopUp} from '../../store/actions/GeneralActions';
 import {ImagePicker} from '../../components/Auth/ImagePicker';
 import {MainLoader} from '../../components/Loaders/MainLoader';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import layout from '../../constants/layout';
@@ -37,7 +38,7 @@ export const SignUpScreen = ({navigation}) => {
     const isLoaderShown = useSelector(state => state.GeneralReducer.toShowLoader);
 
     const onSignUpButtonPressed = async () => {
-        if (isValidEmail(state.userEmail) && isValidPassword(state.userPassword) && state.userName  && isPasswordRepeatedRight(state.userPassword, state.userRepeatPassword)) {
+        if (isValidEmail(state.userEmail) && isValidPassword(state.userPassword) && state.userName && isPasswordRepeatedRight(state.userPassword, state.userRepeatPassword)) {
             dispatch(setShowLoader(true));
             try {
                 await createAccount(state.userEmail, state.userPassword, state.userName, state.image);
@@ -48,7 +49,7 @@ export const SignUpScreen = ({navigation}) => {
                 dispatch(setShowLoader(false));
                 dispatch(setShowPopUp(true, e.toString()));
             }
-        }else {
+        } else {
             if (!isValidEmail(state.userEmail)) {
                 setEmailError('Invalid email format');
                 setTimeout(() => {
@@ -61,13 +62,13 @@ export const SignUpScreen = ({navigation}) => {
                     setPasswordError('');
                 }, 3000);
             }
-            if (!state.userName){
+            if (!state.userName) {
                 setNameError('Please add you name');
                 setTimeout(() => {
                     setNameError('');
                 }, 3000);
             }
-            if (!isPasswordRepeatedRight(state.userPassword, state.userRepeatPassword)){
+            if (!isPasswordRepeatedRight(state.userPassword, state.userRepeatPassword)) {
                 setPasswordRepeatedRightError('Password not match');
                 setTimeout(() => {
                     setPasswordRepeatedRightError('');
@@ -77,10 +78,10 @@ export const SignUpScreen = ({navigation}) => {
     };
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : null}
-            keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
-            style={styles.container}>
+        <KeyboardAwareScrollView
+            resetScrollToCoords={{x: 0, y: 0}}
+            scrollEnabled={false}
+            contentContainerStyle={styles.container}>
 
             <MainLoader isVisible={isLoaderShown}/>
 
@@ -131,7 +132,8 @@ export const SignUpScreen = ({navigation}) => {
                                     ...prevState,
                                     userRepeatPassword,
                                 }))}
-                                placeholder={string.PLACEHOLDER_REPEAT_PASSWORD} errorMessage={passwordRepeatedRightError}/>
+                                placeholder={string.PLACEHOLDER_REPEAT_PASSWORD}
+                                errorMessage={passwordRepeatedRightError}/>
 
                 <View style={styles.buttonContainer}>
                     <AcceptButton buttonTitle={string.SIGN_UP_BUTTON} onButtonPressed={onSignUpButtonPressed}/>
@@ -139,7 +141,7 @@ export const SignUpScreen = ({navigation}) => {
 
             </View>
 
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
     );
 };
 
@@ -169,12 +171,12 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     logo: {marginStart: -20, width: 90, height: 40},
-    imagePickerContainer:{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start',bottom: 10},
-    buttonContainer: {marginTop:20},
-    uploadAvatarTextStyle:{
+    imagePickerContainer: {flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', bottom: 10},
+    buttonContainer: {marginTop: 20},
+    uploadAvatarTextStyle: {
         ...layout.regularTextBase,
         fontSize: 12,
         marginStart: 20,
     },
-    regularText:{...layout.regularTextBase}
+    regularText: {...layout.regularTextBase}
 });

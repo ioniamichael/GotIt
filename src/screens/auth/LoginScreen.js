@@ -6,6 +6,7 @@ import {isValidEmail, isValidPassword} from '../../utils';
 import {login} from '../../services/userService';
 import {setShowLoader, setShowPopUp} from '../../store/actions/GeneralActions';
 import {MainLoader} from '../../components/Loaders/MainLoader';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import string from '../../constants/strings';
 import icon from '../../constants/icons';
 import assets from '../../constants/assets';
@@ -66,10 +67,10 @@ export const LoginScreen = ({navigation}) => {
     };
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : null}
-            keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
-            style={styles.container}>
+        <KeyboardAwareScrollView
+            resetScrollToCoords={{x: 0, y: 0}}
+            scrollEnabled={false}
+            contentContainerStyle={styles.container}>
 
             <MainLoader isVisible={isLoaderShown}/>
 
@@ -105,7 +106,7 @@ export const LoginScreen = ({navigation}) => {
             </View>
 
 
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
     );
 };
 
